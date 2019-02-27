@@ -1,6 +1,5 @@
 import { Gun } from "./Gun";
 import { Bullet } from "./Bullet";
-//import { Knockback } from "./Knockback";
 
 const SPEED = 3;
 const CLIP_SIZE = 20;
@@ -54,13 +53,10 @@ class Hero extends Dna.Component {
       speed: 2,
       maxDistance: 20,
       callback: () => {
-        //console.log("removing component");
         this.gameObject.removeComponent(knockbackPhysics);
       }
     });
     this.gameObject.addComponent(knockbackPhysics);
-    //let knockback = new Knockback(knockbackPhysics, 20);
-    //this.gameObject.addComponent(knockback);
 
     this.invulnerable = 0.5;
   }

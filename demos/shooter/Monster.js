@@ -1,5 +1,3 @@
-//import { Knockback } from "./Knockback";
-
 class Movement extends Dna.Component {
   constructor(physics, angle) {
     super();
@@ -73,8 +71,6 @@ class Monster extends Dna.Component {
       }
     });
     this.gameObject.addComponent(knockbackPhysics);
-    //let knockback = new Knockback(knockbackPhysics, 20);
-    //this.gameObject.addComponent(knockback);
   }
 }
 

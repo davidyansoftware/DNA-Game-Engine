@@ -208,13 +208,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -222,43 +216,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 var SPEED = 5;
 var RADIUS = 2; //const MAX_DISTANCE = 500;
 
 var DAMAGE = 10;
 var audio = new Dna.Components.Audio({
   volume: 0.05
-}); //TODO this should just be a physics tween
-
-var BulletComponent =
-/*#__PURE__*/
-function (_Dna$Component) {
-  _inherits(BulletComponent, _Dna$Component);
-
-  function BulletComponent(physics, maxDistance) {
-    var _this;
-
-    _classCallCheck(this, BulletComponent);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(BulletComponent).call(this));
-    _this.physics = physics; //this.distanceTraveled = 0;
-
-    _this.maxDistance = maxDistance;
-    _this.damage = DAMAGE;
-    return _this;
-  }
-
-  _createClass(BulletComponent, [{
-    key: "update",
-    value: function update(deltaTime) {//this.distanceTraveled += this.physics.distanceTraveled.total;
-      //if (this.distanceTraveled > this.maxDistance) {
-      //  this.gameObject.destroy();
-      //}
-    }
-  }]);
-
-  return BulletComponent;
-}(Dna.Component);
+});
 
 var Bullet =
 /*#__PURE__*/
@@ -266,17 +232,13 @@ function (_Dna$GameObject) {
   _inherits(Bullet, _Dna$GameObject);
 
   function Bullet(parent, position, image, angle, hurtboxes, maxDistance) {
-    var _this2;
+    var _this;
 
     _classCallCheck(this, Bullet);
 
-    //position.rotation = angle.addRadians(-Math.PI / 2);
-    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Bullet).call(this, parent, position, [//new Dna.Components.Polygon({ radius: RADIUS, fillStyle: color })
-      //new Dna.Components.Image({ image: image })
-      //image
-    ]));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Bullet).call(this, parent, position, [])); // this is a nested object to handle rotation seperate from physics
 
-    _this2.addGameObject(new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this2)), {
+    _this.addGameObject(new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this)), {
       rotation: new Dna.Utilities.Radians(angle.radians - Math.PI / 2)
     }, [image]));
 
@@ -285,31 +247,27 @@ function (_Dna$GameObject) {
       angle: angle,
       maxDistance: maxDistance,
       callback: function callback() {
-        _this2.destroy();
+        _this.destroy();
       }
     });
 
-    _this2.addComponent(physics);
-
-    var bullet = new BulletComponent(physics, maxDistance);
-
-    _this2.addComponent(bullet); //TODO reverse this logic, keep track of bullet array in hero
+    _this.addComponent(physics); //TODO reverse this logic, keep track of bullet array in hero
 
 
-    _this2.addComponent(new Dna.Components.Hitcircle({
+    _this.addComponent(new Dna.Components.Hitcircle({
       radius: RADIUS,
       hurtboxes: hurtboxes,
       onCollisionEnter: function onCollisionEnter(hurtbox) {
-        _this2.destroy(); //audio.play(gunHit);
+        _this.destroy(); //audio.play(gunHit);
 
 
         hurtbox.gameObject.audio.play(_gun_hit.default);
-        hurtbox.gameObject.unit.takeDamage(bullet.damage);
-        hurtbox.gameObject.unit.knockback(_this2.transform.getCurrentDirection());
+        hurtbox.gameObject.unit.takeDamage(DAMAGE);
+        hurtbox.gameObject.unit.knockback(_this.transform.getCurrentDirection());
       }
     }));
 
-    return _this2;
+    return _this;
   }
 
   return Bullet;
@@ -849,7 +807,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-//import { Knockback } from "./Knockback";
 var SPEED = 3;
 var CLIP_SIZE = 20;
 var TOTAL_AMMO = 100;
@@ -898,13 +855,10 @@ function (_Dna$Component) {
         speed: 2,
         maxDistance: 20,
         callback: function callback() {
-          //console.log("removing component");
           _this2.gameObject.removeComponent(knockbackPhysics);
         }
       });
-      this.gameObject.addComponent(knockbackPhysics); //let knockback = new Knockback(knockbackPhysics, 20);
-      //this.gameObject.addComponent(knockback);
-
+      this.gameObject.addComponent(knockbackPhysics);
       this.invulnerable = 0.5;
     } //TODO update this to use regular physics class
 
@@ -1264,7 +1218,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-//import { Knockback } from "./Knockback";
 var Movement =
 /*#__PURE__*/
 function (_Dna$Component) {
@@ -1377,8 +1330,7 @@ function (_Dna$Component3) {
           _this4.gameObject.removeComponent(knockbackPhysics);
         }
       });
-      this.gameObject.addComponent(knockbackPhysics); //let knockback = new Knockback(knockbackPhysics, 20);
-      //this.gameObject.addComponent(knockback);
+      this.gameObject.addComponent(knockbackPhysics);
     }
   }]);
 
@@ -1834,7 +1786,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63705" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64281" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
