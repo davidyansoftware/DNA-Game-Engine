@@ -2,6 +2,7 @@ import { HeroPrefab } from "./HeroPrefab";
 import { Boundary, Alignments } from "./Boundary";
 import { Slime } from "./Slime";
 import { Crosshair } from "./Crosshair";
+import { gunAssets } from "./GunData";
 
 import tileSet from "./assets/tileset.png";
 
@@ -190,5 +191,12 @@ function start() {
   );
 }
 
-let scene = new Dna.Scene([canvas], new Dna.Assets({}), start);
+//TODO load hero and slime images this way
+let scene = new Dna.Scene(
+  [canvas],
+  new Dna.Assets({
+    guns: gunAssets
+  }),
+  start
+);
 scene.load();

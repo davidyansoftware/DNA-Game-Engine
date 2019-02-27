@@ -1037,6 +1037,9 @@ function () {
       var assets = [];
 
       for (var asset in _this2.assets) {
+        console.log(asset);
+        console.log(_this2.assets); //TODO get function?
+
         assets.push(_this2.assets[asset].load);
       }
 
@@ -1044,7 +1047,7 @@ function () {
     });
   }
   /*
-  async load() {
+  load() {
     return new Promise(resolve => {
       let assets = [];
       for (let asset in this.assets) {
@@ -1557,7 +1560,6 @@ function (_Component) {
       this.gameObject.transform.y += yv; // this wont account for boundaries or other forces
 
       this.distanceTraveled += this.speed;
-      console.log(this.distanceTraveled + ">=" + this.maxDistance);
 
       if (this.distanceTraveled >= this.maxDistance) {
         this.callback();
@@ -2638,7 +2640,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65302" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53262" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

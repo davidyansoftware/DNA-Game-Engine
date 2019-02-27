@@ -27,7 +27,6 @@ class Physics extends Component {
 
     // this wont account for boundaries or other forces
     this.distanceTraveled += this.speed;
-    console.log(this.distanceTraveled + ">=" + this.maxDistance);
     if (this.distanceTraveled >= this.maxDistance) {
       this.callback();
     }

@@ -41,6 +41,9 @@ class Assets {
     this.load = new Promise(resolve => {
       let assets = [];
       for (let asset in this.assets) {
+        console.log(asset);
+        console.log(this.assets);
+        //TODO get function?
         assets.push(this.assets[asset].load);
       }
       Promise.all(assets).then(resolve);
@@ -48,7 +51,7 @@ class Assets {
   }
 
   /*
-  async load() {
+  load() {
     return new Promise(resolve => {
       let assets = [];
       for (let asset in this.assets) {

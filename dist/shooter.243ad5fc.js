@@ -274,8 +274,174 @@ function (_Dna$GameObject) {
 }(Dna.GameObject);
 
 exports.Bullet = Bullet;
-},{"./assets/sounds/gun_hit.wav":"demos/shooter/assets/sounds/gun_hit.wav"}],"demos/shooter/assets/bullets/bullet.png":[function(require,module,exports) {
+},{"./assets/sounds/gun_hit.wav":"demos/shooter/assets/sounds/gun_hit.wav"}],"src/Scene.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Assets = exports.Scene = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Scene =
+/*#__PURE__*/
+function () {
+  function Scene(canvases, assets, start) {
+    _classCallCheck(this, Scene);
+
+    //this.canvases = canvases || [];
+    this.canvases = [];
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = canvases[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var canvas = _step.value;
+        this.addCanvas(canvas);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    this.assets = assets || new Assets();
+    this.start = start;
+  }
+
+  _createClass(Scene, [{
+    key: "addAssets",
+    value: function addAssets(key, asset) {
+      this.assets.key = asset;
+    }
+  }, {
+    key: "addCanvas",
+    value: function addCanvas(canvas) {
+      canvas.scene = this;
+      this.canvases.push(canvas);
+    } //TODO handle gameloop from here
+
+  }, {
+    key: "load",
+    value: function load() {
+      var _this = this;
+
+      this.assets.load.then(function () {
+        console.log(_this);
+
+        _this.start();
+
+        window.requestAnimationFrame(function (currTime) {
+          var _iteratorNormalCompletion2 = true;
+          var _didIteratorError2 = false;
+          var _iteratorError2 = undefined;
+
+          try {
+            for (var _iterator2 = _this.canvases[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+              var canvas = _step2.value;
+              canvas.gameLoop(currTime);
+            }
+          } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                _iterator2.return();
+              }
+            } finally {
+              if (_didIteratorError2) {
+                throw _iteratorError2;
+              }
+            }
+          }
+        });
+      });
+    }
+  }]);
+
+  return Scene;
+}();
+
+exports.Scene = Scene;
+
+var Assets =
+/*#__PURE__*/
+function () {
+  function Assets() {
+    var _this2 = this;
+
+    var assets = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, Assets);
+
+    this.assets = assets;
+    this.load = new Promise(function (resolve) {
+      var assets = [];
+
+      for (var asset in _this2.assets) {
+        console.log(asset);
+        console.log(_this2.assets); //TODO get function?
+
+        assets.push(_this2.assets[asset].load);
+      }
+
+      Promise.all(assets).then(resolve);
+    });
+  }
+  /*
+  load() {
+    return new Promise(resolve => {
+      let assets = [];
+      for (let asset in this.assets) {
+        assets.push(this.assets[asset].load);
+      }
+      Promise.all(assets).then(resolve);
+    });
+  }
+  */
+
+
+  _createClass(Assets, [{
+    key: "get",
+    value: function get(key) {
+      return this.assets[key];
+    }
+  }]);
+
+  return Assets;
+}();
+
+exports.Assets = Assets;
+},{}],"demos/shooter/assets/sounds/pistol_shoot.wav":[function(require,module,exports) {
+module.exports = "/pistol_shoot.91dab88e.wav";
+},{}],"demos/shooter/assets/sounds/shotgun_shoot.wav":[function(require,module,exports) {
+module.exports = "/shotgun_shoot.5d4f8750.wav";
+},{}],"demos/shooter/assets/sounds/flamethrower_shoot.wav":[function(require,module,exports) {
+module.exports = "/flamethrower_shoot.257377a2.wav";
+},{}],"demos/shooter/assets/sounds/gun_empty.wav":[function(require,module,exports) {
+module.exports = "/gun_empty.df7523a4.wav";
+},{}],"demos/shooter/assets/sounds/gun_reload.mp3":[function(require,module,exports) {
+module.exports = "/gun_reload.1dec945f.mp3";
+},{}],"demos/shooter/assets/bullets/bullet.png":[function(require,module,exports) {
 module.exports = "/bullet.8736c3be.png";
+},{}],"demos/shooter/assets/bullets/flame.png":[function(require,module,exports) {
+module.exports = "/flame.c149e728.png";
 },{}],"demos/shooter/assets/pistol/up.png":[function(require,module,exports) {
 module.exports = "/up.c0307eb4.png";
 },{}],"demos/shooter/assets/pistol/diagup.png":[function(require,module,exports) {
@@ -286,12 +452,6 @@ module.exports = "/side.7bae048a.png";
 module.exports = "/diagdown.cae1d8aa.png";
 },{}],"demos/shooter/assets/pistol/down.png":[function(require,module,exports) {
 module.exports = "/down.dd067c04.png";
-},{}],"demos/shooter/assets/sounds/pistol_shoot.wav":[function(require,module,exports) {
-module.exports = "/pistol_shoot.91dab88e.wav";
-},{}],"demos/shooter/assets/sounds/gun_empty.wav":[function(require,module,exports) {
-module.exports = "/gun_empty.df7523a4.wav";
-},{}],"demos/shooter/assets/sounds/gun_reload.mp3":[function(require,module,exports) {
-module.exports = "/gun_reload.1dec945f.mp3";
 },{}],"demos/shooter/assets/shotgun/up.png":[function(require,module,exports) {
 module.exports = "/up.9a65feca.png";
 },{}],"demos/shooter/assets/shotgun/diagup.png":[function(require,module,exports) {
@@ -302,8 +462,6 @@ module.exports = "/side.72748257.png";
 module.exports = "/diagdown.96dad600.png";
 },{}],"demos/shooter/assets/shotgun/down.png":[function(require,module,exports) {
 module.exports = "/down.f0ea63d7.png";
-},{}],"demos/shooter/assets/sounds/shotgun_shoot.wav":[function(require,module,exports) {
-module.exports = "/shotgun_shoot.5d4f8750.wav";
 },{}],"demos/shooter/assets/flamethrower/up.png":[function(require,module,exports) {
 module.exports = "/up.c53e8f0e.png";
 },{}],"demos/shooter/assets/flamethrower/diagup.png":[function(require,module,exports) {
@@ -314,21 +472,31 @@ module.exports = "/side.f5678bcf.png";
 module.exports = "/diagdown.e1200e0c.png";
 },{}],"demos/shooter/assets/flamethrower/down.png":[function(require,module,exports) {
 module.exports = "/down.05c66baf.png";
-},{}],"demos/shooter/assets/bullets/flame.png":[function(require,module,exports) {
-module.exports = "/flame.c149e728.png";
-},{}],"demos/shooter/assets/sounds/flamethrower_shoot.wav":[function(require,module,exports) {
-module.exports = "/flamethrower_shoot.257377a2.wav";
 },{}],"demos/shooter/GunData.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Flamethrower = exports.Shotgun = exports.Pistol = void 0;
+exports.gunAssets = exports.Flamethrower = exports.Shotgun = exports.Pistol = void 0;
 
 var _Bullet = require("./Bullet");
 
+var _Scene = require("../../src/Scene");
+
+var _pistol_shoot = _interopRequireDefault(require("./assets/sounds/pistol_shoot.wav"));
+
+var _shotgun_shoot = _interopRequireDefault(require("./assets/sounds/shotgun_shoot.wav"));
+
+var _flamethrower_shoot = _interopRequireDefault(require("./assets/sounds/flamethrower_shoot.wav"));
+
+var _gun_empty = _interopRequireDefault(require("./assets/sounds/gun_empty.wav"));
+
+var _gun_reload = _interopRequireDefault(require("./assets/sounds/gun_reload.mp3"));
+
 var _bullet = _interopRequireDefault(require("./assets/bullets/bullet.png"));
+
+var _flame = _interopRequireDefault(require("./assets/bullets/flame.png"));
 
 var _up = _interopRequireDefault(require("./assets/pistol/up.png"));
 
@@ -340,12 +508,6 @@ var _diagdown = _interopRequireDefault(require("./assets/pistol/diagdown.png"));
 
 var _down = _interopRequireDefault(require("./assets/pistol/down.png"));
 
-var _pistol_shoot = _interopRequireDefault(require("./assets/sounds/pistol_shoot.wav"));
-
-var _gun_empty = _interopRequireDefault(require("./assets/sounds/gun_empty.wav"));
-
-var _gun_reload = _interopRequireDefault(require("./assets/sounds/gun_reload.mp3"));
-
 var _up2 = _interopRequireDefault(require("./assets/shotgun/up.png"));
 
 var _diagup2 = _interopRequireDefault(require("./assets/shotgun/diagup.png"));
@@ -355,8 +517,6 @@ var _side2 = _interopRequireDefault(require("./assets/shotgun/side.png"));
 var _diagdown2 = _interopRequireDefault(require("./assets/shotgun/diagdown.png"));
 
 var _down2 = _interopRequireDefault(require("./assets/shotgun/down.png"));
-
-var _shotgun_shoot = _interopRequireDefault(require("./assets/sounds/shotgun_shoot.wav"));
 
 var _up3 = _interopRequireDefault(require("./assets/flamethrower/up.png"));
 
@@ -368,54 +528,57 @@ var _diagdown3 = _interopRequireDefault(require("./assets/flamethrower/diagdown.
 
 var _down3 = _interopRequireDefault(require("./assets/flamethrower/down.png"));
 
-var _flame = _interopRequireDefault(require("./assets/bullets/flame.png"));
-
-var _flamethrower_shoot = _interopRequireDefault(require("./assets/sounds/flamethrower_shoot.wav"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var pistolUpImage = new Image();
-pistolUpImage.src = _up.default;
-var pistolUp = {
-  width: 14,
-  height: 12,
-  image: pistolUpImage
-};
-var pistolDiagUpImage = new Image();
-pistolDiagUpImage.src = _diagup.default;
-var pistolDiagUp = {
-  width: 14,
-  height: 12,
-  image: pistolDiagUpImage
-};
-var pistolSideImage = new Image();
-pistolSideImage.src = _side.default;
-var pistolSide = {
-  width: 16,
-  height: 8,
-  image: pistolSideImage
-};
-var pistolDiagDownImage = new Image();
-pistolDiagDownImage.src = _diagdown.default;
-var pistolDiagDown = {
-  width: 14,
-  height: 11,
-  image: pistolDiagDownImage
-};
-var pistolDownImage = new Image();
-pistolDownImage.src = _down.default;
-var pistolDown = {
-  width: 14,
-  height: 12,
-  image: pistolDownImage
-};
-var bulletImage = new Image();
-bulletImage.src = _bullet.default;
+var bulletImage = new Dna.Dom.Image(_bullet.default);
+var flameImage = new Dna.Dom.Image(_flame.default);
+var bulletAssets = new _Scene.Assets({
+  bullet: bulletImage,
+  flame: flameImage
+}); //TODO this forces 1 component onto many objects
+
 var bullet = new Dna.Components.Image({
   width: 6,
   height: 6,
   image: bulletImage
 });
+var pistolUpImage = new Dna.Dom.Image(_up.default);
+var pistolDiagUpImage = new Dna.Dom.Image(_diagup.default);
+var pistolSideImage = new Dna.Dom.Image(_side.default);
+var pistolDiagDownImage = new Dna.Dom.Image(_diagdown.default);
+var pistolDownImage = new Dna.Dom.Image(_down.default);
+var pistolAssets = new _Scene.Assets({
+  up: pistolUpImage,
+  diagUp: pistolDiagUpImage,
+  side: pistolSideImage,
+  diagDown: pistolDiagDownImage,
+  down: pistolDownImage
+});
+var pistolUp = {
+  width: 14,
+  height: 12,
+  image: pistolUpImage
+};
+var pistolDiagUp = {
+  width: 14,
+  height: 12,
+  image: pistolDiagUpImage
+};
+var pistolSide = {
+  width: 16,
+  height: 8,
+  image: pistolSideImage
+};
+var pistolDiagDown = {
+  width: 14,
+  height: 11,
+  image: pistolDiagDownImage
+};
+var pistolDown = {
+  width: 14,
+  height: 12,
+  image: pistolDownImage
+};
 var Pistol = {
   name: "Pistol",
   shootClip: _pistol_shoot.default,
@@ -430,41 +593,42 @@ var Pistol = {
   spriteOptions: [pistolUp, pistolDiagUp, pistolSide, pistolDiagDown, pistolDown, pistolDiagDown, pistolSide, pistolDiagUp],
   spread: new Dna.Utilities.Radians(Math.PI / 8),
   generateBullets: function generateBullets(gun, hurtboxes) {
-    new _Bullet.Bullet(gun.getCanvas(), gun.transform.getAbsoluteCenter(), bullet, //new Dna.Utilities.Radians(gun.angle.radians),
-    gun.angle.getNewAngle(this.spread), hurtboxes, 600);
+    new _Bullet.Bullet(gun.getCanvas(), gun.transform.getAbsoluteCenter(), bullet, gun.angle.getNewAngle(this.spread), hurtboxes, 600);
   }
 };
 exports.Pistol = Pistol;
-var shotgunUpImage = new Image();
-shotgunUpImage.src = _up2.default;
+var shotgunUpImage = new Dna.Dom.Image(_up2.default);
+var shotgunDiagUpImage = new Dna.Dom.Image(_diagup2.default);
+var shotgunSideImage = new Dna.Dom.Image(_side2.default);
+var shotgunDiagDownImage = new Dna.Dom.Image(_diagdown2.default);
+var shotgunDownImage = new Dna.Dom.Image(_down2.default);
+var shotgunAssets = new _Scene.Assets({
+  up: shotgunUpImage,
+  diagUp: shotgunDiagUpImage,
+  side: shotgunSideImage,
+  diagDown: shotgunDiagDownImage,
+  down: shotgunDownImage
+});
 var shotgunUp = {
   width: 8,
   height: 12,
   image: shotgunUpImage
 };
-var shotgunDiagUpImage = new Image();
-shotgunDiagUpImage.src = _diagup2.default;
 var shotgunDiagUp = {
   width: 14,
   height: 14,
   image: shotgunDiagUpImage
 };
-var shotgunSideImage = new Image();
-shotgunSideImage.src = _side2.default;
 var shotgunSide = {
   width: 18,
   height: 9,
   image: shotgunSideImage
 };
-var shotgunDiagDownImage = new Image();
-shotgunDiagDownImage.src = _diagdown2.default;
 var shotgunDiagDown = {
   width: 17,
   height: 10,
   image: shotgunDiagDownImage
 };
-var shotgunDownImage = new Image();
-shotgunDownImage.src = _down2.default;
 var shotgunDown = {
   width: 8,
   height: 12,
@@ -489,43 +653,43 @@ var Shotgun = {
   }
 };
 exports.Shotgun = Shotgun;
-var flamethrowerUpImage = new Image();
-flamethrowerUpImage.src = _up3.default;
+var flamethrowerUpImage = new Dna.Dom.Image(_up3.default);
+var flamethrowerDiagUpImage = new Dna.Dom.Image(_diagup3.default);
+var flamethrowerSideImage = new Dna.Dom.Image(_side3.default);
+var flamethrowerDiagDownImage = new Dna.Dom.Image(_diagdown3.default);
+var flamethrowerDownImage = new Dna.Dom.Image(_down3.default);
+var flamethrowerAssets = new _Scene.Assets({
+  up: flamethrowerUpImage,
+  diagUp: flamethrowerDiagUpImage,
+  side: flamethrowerSideImage,
+  diagDown: flamethrowerDiagDownImage,
+  down: flamethrowerDownImage
+});
 var flamethrowerUp = {
   width: 14,
   height: 17,
   image: flamethrowerUpImage
 };
-var flamethrowerDiagUpImage = new Image();
-flamethrowerDiagUpImage.src = _diagup3.default;
 var flamethrowerDiagUp = {
   width: 16,
   height: 16,
   image: flamethrowerDiagUpImage
 };
-var flamethrowerSideImage = new Image();
-flamethrowerSideImage.src = _side3.default;
 var flamethrowerSide = {
   width: 26,
   height: 9,
   image: flamethrowerSideImage
 };
-var flamethrowerDiagDownImage = new Image();
-flamethrowerDiagDownImage.src = _diagdown3.default;
 var flamethrowerDiagDown = {
   width: 19,
   height: 14,
   image: flamethrowerDiagDownImage
 };
-var flamethrowerDownImage = new Image();
-flamethrowerDownImage.src = _down3.default;
 var flamethrowerDown = {
   width: 14,
   height: 17,
   image: flamethrowerDownImage
 };
-var flameImage = new Image();
-flameImage.src = _flame.default;
 var Flamethrower = {
   name: "Flamethrower",
   shootClip: _flamethrower_shoot.default,
@@ -552,7 +716,14 @@ var Flamethrower = {
   }
 };
 exports.Flamethrower = Flamethrower;
-},{"./Bullet":"demos/shooter/Bullet.js","./assets/bullets/bullet.png":"demos/shooter/assets/bullets/bullet.png","./assets/pistol/up.png":"demos/shooter/assets/pistol/up.png","./assets/pistol/diagup.png":"demos/shooter/assets/pistol/diagup.png","./assets/pistol/side.png":"demos/shooter/assets/pistol/side.png","./assets/pistol/diagdown.png":"demos/shooter/assets/pistol/diagdown.png","./assets/pistol/down.png":"demos/shooter/assets/pistol/down.png","./assets/sounds/pistol_shoot.wav":"demos/shooter/assets/sounds/pistol_shoot.wav","./assets/sounds/gun_empty.wav":"demos/shooter/assets/sounds/gun_empty.wav","./assets/sounds/gun_reload.mp3":"demos/shooter/assets/sounds/gun_reload.mp3","./assets/shotgun/up.png":"demos/shooter/assets/shotgun/up.png","./assets/shotgun/diagup.png":"demos/shooter/assets/shotgun/diagup.png","./assets/shotgun/side.png":"demos/shooter/assets/shotgun/side.png","./assets/shotgun/diagdown.png":"demos/shooter/assets/shotgun/diagdown.png","./assets/shotgun/down.png":"demos/shooter/assets/shotgun/down.png","./assets/sounds/shotgun_shoot.wav":"demos/shooter/assets/sounds/shotgun_shoot.wav","./assets/flamethrower/up.png":"demos/shooter/assets/flamethrower/up.png","./assets/flamethrower/diagup.png":"demos/shooter/assets/flamethrower/diagup.png","./assets/flamethrower/side.png":"demos/shooter/assets/flamethrower/side.png","./assets/flamethrower/diagdown.png":"demos/shooter/assets/flamethrower/diagdown.png","./assets/flamethrower/down.png":"demos/shooter/assets/flamethrower/down.png","./assets/bullets/flame.png":"demos/shooter/assets/bullets/flame.png","./assets/sounds/flamethrower_shoot.wav":"demos/shooter/assets/sounds/flamethrower_shoot.wav"}],"demos/shooter/assets/sounds/weapon_swap.mp3":[function(require,module,exports) {
+var gunAssets = new _Scene.Assets({
+  bullets: bulletAssets,
+  pistol: pistolAssets,
+  shotgun: shotgunAssets,
+  flamethrower: flamethrowerAssets
+});
+exports.gunAssets = gunAssets;
+},{"./Bullet":"demos/shooter/Bullet.js","../../src/Scene":"src/Scene.js","./assets/sounds/pistol_shoot.wav":"demos/shooter/assets/sounds/pistol_shoot.wav","./assets/sounds/shotgun_shoot.wav":"demos/shooter/assets/sounds/shotgun_shoot.wav","./assets/sounds/flamethrower_shoot.wav":"demos/shooter/assets/sounds/flamethrower_shoot.wav","./assets/sounds/gun_empty.wav":"demos/shooter/assets/sounds/gun_empty.wav","./assets/sounds/gun_reload.mp3":"demos/shooter/assets/sounds/gun_reload.mp3","./assets/bullets/bullet.png":"demos/shooter/assets/bullets/bullet.png","./assets/bullets/flame.png":"demos/shooter/assets/bullets/flame.png","./assets/pistol/up.png":"demos/shooter/assets/pistol/up.png","./assets/pistol/diagup.png":"demos/shooter/assets/pistol/diagup.png","./assets/pistol/side.png":"demos/shooter/assets/pistol/side.png","./assets/pistol/diagdown.png":"demos/shooter/assets/pistol/diagdown.png","./assets/pistol/down.png":"demos/shooter/assets/pistol/down.png","./assets/shotgun/up.png":"demos/shooter/assets/shotgun/up.png","./assets/shotgun/diagup.png":"demos/shooter/assets/shotgun/diagup.png","./assets/shotgun/side.png":"demos/shooter/assets/shotgun/side.png","./assets/shotgun/diagdown.png":"demos/shooter/assets/shotgun/diagdown.png","./assets/shotgun/down.png":"demos/shooter/assets/shotgun/down.png","./assets/flamethrower/up.png":"demos/shooter/assets/flamethrower/up.png","./assets/flamethrower/diagup.png":"demos/shooter/assets/flamethrower/diagup.png","./assets/flamethrower/side.png":"demos/shooter/assets/flamethrower/side.png","./assets/flamethrower/diagdown.png":"demos/shooter/assets/flamethrower/diagdown.png","./assets/flamethrower/down.png":"demos/shooter/assets/flamethrower/down.png"}],"demos/shooter/assets/sounds/weapon_swap.mp3":[function(require,module,exports) {
 module.exports = "/weapon_swap.2e32c4a2.mp3";
 },{}],"demos/shooter/Gun.js":[function(require,module,exports) {
 "use strict";
@@ -1586,6 +1757,8 @@ var _Slime = require("./Slime");
 
 var _Crosshair = require("./Crosshair");
 
+var _GunData = require("./GunData");
+
 var _tileset = _interopRequireDefault(require("./assets/tileset.png"));
 
 var _w = _interopRequireDefault(require("./assets/controls/w.png"));
@@ -1761,11 +1934,14 @@ function start() {
   var bottomBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.BOTTOM, Y_OFFSET, Y_LONG, SHORT, heroHurtbox);
   var leftBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.LEFT, -X_OFFSET, SHORT, X_LONG, heroHurtbox);
   var rightBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.RIGHT, X_OFFSET, SHORT, X_LONG, heroHurtbox);
-}
+} //TODO load hero and slime images this way
 
-var scene = new Dna.Scene([canvas], new Dna.Assets({}), start);
+
+var scene = new Dna.Scene([canvas], new Dna.Assets({
+  guns: _GunData.gunAssets
+}), start);
 scene.load();
-},{"./HeroPrefab":"demos/shooter/HeroPrefab.js","./Boundary":"demos/shooter/Boundary.js","./Slime":"demos/shooter/Slime.js","./Crosshair":"demos/shooter/Crosshair.js","./assets/tileset.png":"demos/shooter/assets/tileset.png","./assets/controls/w.png":"demos/shooter/assets/controls/w.png","./assets/controls/a.png":"demos/shooter/assets/controls/a.png","./assets/controls/s.png":"demos/shooter/assets/controls/s.png","./assets/controls/d.png":"demos/shooter/assets/controls/d.png","./assets/controls/tab.png":"demos/shooter/assets/controls/tab.png","./assets/controls/r.png":"demos/shooter/assets/controls/r.png","./assets/controls/mouse.png":"demos/shooter/assets/controls/mouse.png","./assets/controls/leftclick.png":"demos/shooter/assets/controls/leftclick.png"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./HeroPrefab":"demos/shooter/HeroPrefab.js","./Boundary":"demos/shooter/Boundary.js","./Slime":"demos/shooter/Slime.js","./Crosshair":"demos/shooter/Crosshair.js","./GunData":"demos/shooter/GunData.js","./assets/tileset.png":"demos/shooter/assets/tileset.png","./assets/controls/w.png":"demos/shooter/assets/controls/w.png","./assets/controls/a.png":"demos/shooter/assets/controls/a.png","./assets/controls/s.png":"demos/shooter/assets/controls/s.png","./assets/controls/d.png":"demos/shooter/assets/controls/d.png","./assets/controls/tab.png":"demos/shooter/assets/controls/tab.png","./assets/controls/r.png":"demos/shooter/assets/controls/r.png","./assets/controls/mouse.png":"demos/shooter/assets/controls/mouse.png","./assets/controls/leftclick.png":"demos/shooter/assets/controls/leftclick.png"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1792,7 +1968,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65159" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53262" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
