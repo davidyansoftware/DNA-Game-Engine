@@ -1376,12 +1376,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Physics).call(this));
     _this.angle = options.angle || new _Angle.Degrees(0);
     _this.speed = options.speed || 0;
-    _this.distanceTraveled = {
-      x: 0,
-      y: 0,
-      total: 0
-    };
-    _this.totalDistanceTraveled = 0;
+    _this.distanceTraveled = 0;
     _this.maxDistance = options.maxDistance || Infinity;
 
     _this.callback = options.callback || function () {
@@ -1399,15 +1394,12 @@ function (_Component) {
       var xv = this.speed * Math.sin(this.angle.radians);
       var yv = this.speed * -Math.cos(this.angle.radians);
       this.gameObject.transform.x += xv;
-      this.gameObject.transform.y += yv; //TODO this wont be updated correctly to account for walls
+      this.gameObject.transform.y += yv; // this wont account for boundaries or other forces
 
-      this.distanceTraveled.x = xv;
-      this.distanceTraveled.y = yv;
-      this.distanceTraveled.total = this.speed;
-      this.totalDistanceTraveled += this.speed;
-      console.log(this.totalDistanceTraveled + ">=" + this.maxDistance);
+      this.distanceTraveled += this.speed;
+      console.log(this.distanceTraveled + ">=" + this.maxDistance);
 
-      if (this.totalDistanceTraveled >= this.maxDistance) {
+      if (this.distanceTraveled >= this.maxDistance) {
         this.callback();
       }
     }
@@ -2486,7 +2478,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52319" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52568" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

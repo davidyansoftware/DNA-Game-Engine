@@ -8,13 +8,7 @@ class Physics extends Component {
     this.angle = options.angle || new Degrees(0);
     this.speed = options.speed || 0;
 
-    this.distanceTraveled = {
-      x: 0,
-      y: 0,
-      total: 0
-    };
-
-    this.totalDistanceTraveled = 0;
+    this.distanceTraveled = 0;
     this.maxDistance = options.maxDistance || Infinity;
     this.callback =
       options.callback ||
@@ -32,14 +26,10 @@ class Physics extends Component {
     this.gameObject.transform.x += xv;
     this.gameObject.transform.y += yv;
 
-    //TODO this wont be updated correctly to account for walls
-    this.distanceTraveled.x = xv;
-    this.distanceTraveled.y = yv;
-    this.distanceTraveled.total = this.speed;
-
-    this.totalDistanceTraveled += this.speed;
-    console.log(this.totalDistanceTraveled + ">=" + this.maxDistance);
-    if (this.totalDistanceTraveled >= this.maxDistance) {
+    // this wont account for boundaries or other forces
+    this.distanceTraveled += this.speed;
+    console.log(this.distanceTraveled + ">=" + this.maxDistance);
+    if (this.distanceTraveled >= this.maxDistance) {
       this.callback();
     }
   }
