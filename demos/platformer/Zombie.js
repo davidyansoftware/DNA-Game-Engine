@@ -1,8 +1,14 @@
 import { AI, Facing } from "./Monster";
 import girlAttackSprite from "./assets/zombiegirl/attack.png";
-import girlDeadSprite from "./assets/zombiegirl/dead.png";
-import girlIdleSprite from "./assets/zombiegirl/idle.png";
 import girlWalkSprite from "./assets/zombiegirl/walk.png";
+
+let girlAttackImage = new Dna.Dom.Image(girlAttackSprite);
+let girlWalkImage = new Dna.Dom.Image(girlWalkSprite);
+
+let zombieAssets = new Dna.Assets({
+  attack: girlAttackImage,
+  walk: girlWalkImage
+});
 
 const ZOMBIE_DEFAULT = {
   type: Dna.Components.Image.types.stretched,
@@ -13,16 +19,16 @@ const ZOMBIE_DEFAULT = {
   destWidth: 521 / 6,
   destHeight: 576 / 6
 };
-let girlAttackImage = new Image();
-girlAttackImage.src = girlAttackSprite;
+//let girlAttackImage = new Image();
+//girlAttackImage.src = girlAttackSprite;
 let girlAttack = {
   image: girlAttackImage,
   loop: false,
 
   numberOfFrames: 8
 };
-let girlWalkImage = new Image();
-girlWalkImage.src = girlWalkSprite;
+//let girlWalkImage = new Image();
+//girlWalkImage.src = girlWalkSprite;
 let girlWalk = {
   image: girlWalkImage,
   loop: true,
@@ -48,4 +54,4 @@ class Zombie extends Dna.GameObject {
   }
 }
 
-export { Zombie };
+export { Zombie, zombieAssets };

@@ -114,7 +114,7 @@ module.exports = "/hero_run.c72dbb97.png";
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Hero = void 0;
+exports.heroAssets = exports.Hero = void 0;
 
 var _hero = _interopRequireDefault(require("./assets/hero/hero.png"));
 
@@ -140,6 +140,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var heroImage = new Dna.Dom.Image(_hero.default);
+var heroRunImage = new Dna.Dom.Image(_hero_run.default);
+var heroAssets = new Dna.Assets({
+  hero: heroImage,
+  run: heroRunImage
+});
+exports.heroAssets = heroAssets;
 var SPRITE_WIDTH = 50;
 var SPRITE_HEIGHT = 37;
 var WIDTH = 20;
@@ -147,9 +154,9 @@ var HEIGHT = 37;
 var default_sprite = {
   width: SPRITE_WIDTH,
   height: SPRITE_HEIGHT
-};
-var heroRunImage = new Image();
-heroRunImage.src = _hero_run.default;
+}; //let heroRunImage = new Image();
+//heroRunImage.src = heroRunSprite;
+
 var hero_run = {
   image: heroRunImage,
   loop: true,
@@ -158,9 +165,9 @@ var hero_run = {
   startingColumn: 0,
   startingRow: 0 //framesPerRow: 6
 
-};
-var heroImage = new Image();
-heroImage.src = _hero.default;
+}; //let heroImage = new Image();
+//heroImage.src = heroSprite;
+
 var hero_idle = {
   image: heroImage,
   loop: true,
@@ -761,10 +768,6 @@ function (_Dna$Component2) {
 exports.Facing = Facing;
 },{}],"demos/platformer/assets/zombiegirl/attack.png":[function(require,module,exports) {
 module.exports = "/attack.177d6950.png";
-},{}],"demos/platformer/assets/zombiegirl/dead.png":[function(require,module,exports) {
-module.exports = "/dead.cca2baf3.png";
-},{}],"demos/platformer/assets/zombiegirl/idle.png":[function(require,module,exports) {
-module.exports = "/idle.e6eba50b.png";
 },{}],"demos/platformer/assets/zombiegirl/walk.png":[function(require,module,exports) {
 module.exports = "/walk.4af18103.png";
 },{}],"demos/platformer/Zombie.js":[function(require,module,exports) {
@@ -773,15 +776,11 @@ module.exports = "/walk.4af18103.png";
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Zombie = void 0;
+exports.zombieAssets = exports.Zombie = void 0;
 
 var _Monster = require("./Monster");
 
 var _attack = _interopRequireDefault(require("./assets/zombiegirl/attack.png"));
-
-var _dead = _interopRequireDefault(require("./assets/zombiegirl/dead.png"));
-
-var _idle = _interopRequireDefault(require("./assets/zombiegirl/idle.png"));
 
 var _walk = _interopRequireDefault(require("./assets/zombiegirl/walk.png"));
 
@@ -805,6 +804,13 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+var girlAttackImage = new Dna.Dom.Image(_attack.default);
+var girlWalkImage = new Dna.Dom.Image(_walk.default);
+var zombieAssets = new Dna.Assets({
+  attack: girlAttackImage,
+  walk: girlWalkImage
+});
+exports.zombieAssets = zombieAssets;
 var ZOMBIE_DEFAULT = {
   type: Dna.Components.Image.types.stretched,
   width: 521,
@@ -812,16 +818,16 @@ var ZOMBIE_DEFAULT = {
   ticksPerFrame: 10,
   destWidth: 521 / 6,
   destHeight: 576 / 6
-};
-var girlAttackImage = new Image();
-girlAttackImage.src = _attack.default;
+}; //let girlAttackImage = new Image();
+//girlAttackImage.src = girlAttackSprite;
+
 var girlAttack = {
   image: girlAttackImage,
   loop: false,
   numberOfFrames: 8
-};
-var girlWalkImage = new Image();
-girlWalkImage.src = _walk.default;
+}; //let girlWalkImage = new Image();
+//girlWalkImage.src = girlWalkSprite;
+
 var girlWalk = {
   image: girlWalkImage,
   loop: true,
@@ -860,7 +866,7 @@ function (_Dna$GameObject) {
 }(Dna.GameObject);
 
 exports.Zombie = Zombie;
-},{"./Monster":"demos/platformer/Monster.js","./assets/zombiegirl/attack.png":"demos/platformer/assets/zombiegirl/attack.png","./assets/zombiegirl/dead.png":"demos/platformer/assets/zombiegirl/dead.png","./assets/zombiegirl/idle.png":"demos/platformer/assets/zombiegirl/idle.png","./assets/zombiegirl/walk.png":"demos/platformer/assets/zombiegirl/walk.png"}],"demos/platformer/platformer.js":[function(require,module,exports) {
+},{"./Monster":"demos/platformer/Monster.js","./assets/zombiegirl/attack.png":"demos/platformer/assets/zombiegirl/attack.png","./assets/zombiegirl/walk.png":"demos/platformer/assets/zombiegirl/walk.png"}],"demos/platformer/platformer.js":[function(require,module,exports) {
 "use strict";
 
 var _Hero = require("./Hero");
@@ -875,36 +881,55 @@ var _Zombie = require("./Zombie");
 
 var RADIUS = 20;
 var canvas = new Dna.Canvas(document.getElementById("canvas"));
-var gravity = new Dna.Components.SimplePhysics({
-  xy: 5
+
+function start() {
+  var gravity = new Dna.Components.SimplePhysics({
+    xy: 5
+  });
+  var enemyHurtboxes = [];
+  new _Target.Target(canvas, {
+    y: 225
+  }, enemyHurtboxes);
+  var hero = new _Hero.Hero(canvas, {}, enemyHurtboxes);
+  var hurtboxes = [hero.hurtbox];
+  var zombie0 = new _Zombie.Zombie(canvas, {}, hero, hurtboxes, enemyHurtboxes);
+  new _Platform.Platform(canvas, {
+    y: 150,
+    x: -100
+  }, hurtboxes);
+  new _Platform.Platform(canvas, {
+    y: 150,
+    x: 100
+  }, hurtboxes);
+  new _Platform.Platform(canvas, {
+    y: 50
+  }, hurtboxes);
+  var SHORT = 10;
+  var X_LONG = 500;
+  var Y_LONG = 700;
+  var X_OFFSET = 350;
+  var Y_OFFSET = 250;
+  var topBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.TOP, -Y_OFFSET, Y_LONG, SHORT, hurtboxes);
+  var bottomBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.BOTTOM, Y_OFFSET, Y_LONG, SHORT, hurtboxes);
+  var leftBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.LEFT, -X_OFFSET, SHORT, X_LONG, hurtboxes);
+  var rightBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.RIGHT, X_OFFSET, SHORT, X_LONG, hurtboxes);
+}
+/*
+import heroSprite from "./assets/hero/hero.png";
+import heroRunSprite from "./assets/hero/hero_run.png";
+
+let heroAssets = new Dna.Assets({
+  hero: heroSprite,
+  run: heroRunSprite
 });
-var enemyHurtboxes = [];
-new _Target.Target(canvas, {
-  y: 225
-}, enemyHurtboxes);
-var hero = new _Hero.Hero(canvas, {}, enemyHurtboxes);
-var hurtboxes = [hero.hurtbox];
-var zombie0 = new _Zombie.Zombie(canvas, {}, hero, hurtboxes, enemyHurtboxes);
-new _Platform.Platform(canvas, {
-  y: 150,
-  x: -100
-}, hurtboxes);
-new _Platform.Platform(canvas, {
-  y: 150,
-  x: 100
-}, hurtboxes);
-new _Platform.Platform(canvas, {
-  y: 50
-}, hurtboxes);
-var SHORT = 10;
-var X_LONG = 500;
-var Y_LONG = 700;
-var X_OFFSET = 350;
-var Y_OFFSET = 250;
-var topBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.TOP, -Y_OFFSET, Y_LONG, SHORT, hurtboxes);
-var bottomBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.BOTTOM, Y_OFFSET, Y_LONG, SHORT, hurtboxes);
-var leftBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.LEFT, -X_OFFSET, SHORT, X_LONG, hurtboxes);
-var rightBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.RIGHT, X_OFFSET, SHORT, X_LONG, hurtboxes);
+*/
+
+
+var scene = new Dna.Scene([canvas], new Dna.Assets({
+  hero: _Hero.heroAssets,
+  zombie: _Zombie.zombieAssets
+}), start);
+scene.load();
 },{"./Hero":"demos/platformer/Hero.js","./Boundary":"demos/platformer/Boundary.js","./Platform":"demos/platformer/Platform.js","./Target":"demos/platformer/Target.js","./Zombie":"demos/platformer/Zombie.js"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -932,7 +957,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55184" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63060" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

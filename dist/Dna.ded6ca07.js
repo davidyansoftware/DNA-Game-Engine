@@ -670,15 +670,15 @@ function (_Composite2) {
 
     _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Canvas).call(this)); //TODO probably dont need to reference game here, just handle canvases from the game itself
     //this.game = game;
+    //this.scene = scene;
 
     _this2.ctx = domCanvas.getContext("2d");
     _this2.transform = new _Transform.CanvasTransform(domCanvas); //this.prevTime;
+    //let self = this;
+    //window.requestAnimationFrame(function(currTime) {
+    //  self.gameLoop(currTime);
+    //});
 
-    var self = _assertThisInitialized(_assertThisInitialized(_this2));
-
-    window.requestAnimationFrame(function (currTime) {
-      self.gameLoop(currTime);
-    });
     return _this2;
   }
 
@@ -702,6 +702,11 @@ function (_Composite2) {
       window.requestAnimationFrame(function (currTime) {
         self.gameLoop(currTime);
       });
+    }
+  }, {
+    key: "getScene",
+    value: function getScene() {
+      return this.scene;
     }
   }, {
     key: "getCanvas",
@@ -853,6 +858,11 @@ function (_Composite) {
       }
     }
   }, {
+    key: "getScene",
+    value: function getScene() {
+      return this.parent.getScene();
+    }
+  }, {
     key: "getCanvas",
     value: function getCanvas() {
       return this.parent.getCanvas();
@@ -906,6 +916,157 @@ function () {
 }();
 
 exports.Component = Component;
+},{}],"src/Scene.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Assets = exports.Scene = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Scene =
+/*#__PURE__*/
+function () {
+  function Scene(canvases, assets, start) {
+    _classCallCheck(this, Scene);
+
+    //this.canvases = canvases || [];
+    this.canvases = [];
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = canvases[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var canvas = _step.value;
+        this.addCanvas(canvas);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    this.assets = assets || new Assets();
+    this.start = start;
+  }
+
+  _createClass(Scene, [{
+    key: "addAssets",
+    value: function addAssets(key, asset) {
+      this.assets.key = asset;
+    }
+  }, {
+    key: "addCanvas",
+    value: function addCanvas(canvas) {
+      canvas.scene = this;
+      this.canvases.push(canvas);
+    } //TODO handle gameloop from here
+
+  }, {
+    key: "load",
+    value: function load() {
+      var _this = this;
+
+      this.assets.load.then(function () {
+        console.log(_this);
+
+        _this.start();
+
+        window.requestAnimationFrame(function (currTime) {
+          var _iteratorNormalCompletion2 = true;
+          var _didIteratorError2 = false;
+          var _iteratorError2 = undefined;
+
+          try {
+            for (var _iterator2 = _this.canvases[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+              var canvas = _step2.value;
+              canvas.gameLoop(currTime);
+            }
+          } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                _iterator2.return();
+              }
+            } finally {
+              if (_didIteratorError2) {
+                throw _iteratorError2;
+              }
+            }
+          }
+        });
+      });
+    }
+  }]);
+
+  return Scene;
+}();
+
+exports.Scene = Scene;
+
+var Assets =
+/*#__PURE__*/
+function () {
+  function Assets() {
+    var _this2 = this;
+
+    var assets = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, Assets);
+
+    this.assets = assets;
+    this.load = new Promise(function (resolve) {
+      var assets = [];
+
+      for (var asset in _this2.assets) {
+        assets.push(_this2.assets[asset].load);
+      }
+
+      Promise.all(assets).then(resolve);
+    });
+  }
+  /*
+  async load() {
+    return new Promise(resolve => {
+      let assets = [];
+      for (let asset in this.assets) {
+        assets.push(this.assets[asset].load);
+      }
+      Promise.all(assets).then(resolve);
+    });
+  }
+  */
+
+
+  _createClass(Assets, [{
+    key: "get",
+    value: function get(key) {
+      return this.assets[key];
+    }
+  }]);
+
+  return Assets;
+}();
+
+exports.Assets = Assets;
 },{}],"src/Components/Image.js":[function(require,module,exports) {
 "use strict";
 
@@ -2375,6 +2536,8 @@ var _GameObject = require("./GameObject");
 
 var _Component = require("./Component");
 
+var _Scene = require("./Scene");
+
 var _Image = require("./Components/Image");
 
 var _SimplePhysics = require("./Components/SimplePhysics");
@@ -2417,6 +2580,8 @@ var Dna = {
   StaticCanvas: _Canvas.StaticCanvas,
   GameObject: _GameObject.GameObject,
   Component: _Component.Component,
+  Scene: _Scene.Scene,
+  Assets: _Scene.Assets,
   //Transform: Transform,
   Components: {
     Image: _Image.Image,
@@ -2446,7 +2611,7 @@ var Dna = {
   }
 };
 window.Dna = Dna;
-},{"./Canvas":"src/Canvas.js","./GameObject":"src/GameObject.js","./Component":"src/Component.js","./Components/Image":"src/Components/Image.js","./Components/SimplePhysics":"src/Components/SimplePhysics.js","./Components/Polygon":"src/Components/Polygon.js","./Components/Rectangle":"src/Components/Rectangle.js","./Components/Physics":"src/Components/Physics.js","./Components/Acceleration":"src/Components/Acceleration.js","./Components/Hitcircle":"src/Components/Hitcircle.js","./Components/Hitbox":"src/Components/Hitbox.js","./Components/Text":"src/Components/Text.js","./Components/Audio":"src/Components/Audio.js","./Utilities/Angle":"src/Utilities/Angle.js","./Utilities/Position":"src/Utilities/Position.js","./Input/Input":"src/Input/Input.js","./Input/Keyboard":"src/Input/Keyboard.js","./Input/Mouse":"src/Input/Mouse.js","./Dom/Image":"src/Dom/Image.js"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Canvas":"src/Canvas.js","./GameObject":"src/GameObject.js","./Component":"src/Component.js","./Scene":"src/Scene.js","./Components/Image":"src/Components/Image.js","./Components/SimplePhysics":"src/Components/SimplePhysics.js","./Components/Polygon":"src/Components/Polygon.js","./Components/Rectangle":"src/Components/Rectangle.js","./Components/Physics":"src/Components/Physics.js","./Components/Acceleration":"src/Components/Acceleration.js","./Components/Hitcircle":"src/Components/Hitcircle.js","./Components/Hitbox":"src/Components/Hitbox.js","./Components/Text":"src/Components/Text.js","./Components/Audio":"src/Components/Audio.js","./Utilities/Angle":"src/Utilities/Angle.js","./Utilities/Position":"src/Utilities/Position.js","./Input/Input":"src/Input/Input.js","./Input/Keyboard":"src/Input/Keyboard.js","./Input/Mouse":"src/Input/Mouse.js","./Dom/Image":"src/Dom/Image.js"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2473,7 +2638,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55184" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63060" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

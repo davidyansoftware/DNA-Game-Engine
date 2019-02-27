@@ -1,6 +1,7 @@
 import { Canvas, StaticCanvas } from "./Canvas";
 import { GameObject } from "./GameObject";
 import { Component } from "./Component";
+import { Scene, Assets } from "./Scene";
 
 //import { Transform } from "./Components/Transform";
 import { Image } from "./Components/Image";
@@ -32,6 +33,8 @@ let Dna = {
   StaticCanvas: StaticCanvas,
   GameObject: GameObject,
   Component: Component,
+  Scene: Scene,
+  Assets: Assets,
   //Transform: Transform,
 
   Components: {

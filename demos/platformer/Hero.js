@@ -1,6 +1,14 @@
 import heroSprite from "./assets/hero/hero.png";
 import heroRunSprite from "./assets/hero/hero_run.png";
 
+let heroImage = new Dna.Dom.Image(heroSprite);
+let heroRunImage = new Dna.Dom.Image(heroRunSprite);
+
+let heroAssets = new Dna.Assets({
+  hero: heroImage,
+  run: heroRunImage
+});
+
 const SPRITE_WIDTH = 50;
 const SPRITE_HEIGHT = 37;
 const WIDTH = 20;
@@ -11,8 +19,8 @@ let default_sprite = {
   height: SPRITE_HEIGHT
 };
 
-let heroRunImage = new Image();
-heroRunImage.src = heroRunSprite;
+//let heroRunImage = new Image();
+//heroRunImage.src = heroRunSprite;
 let hero_run = {
   image: heroRunImage,
   loop: true,
@@ -24,8 +32,8 @@ let hero_run = {
   startingRow: 0
   //framesPerRow: 6
 };
-let heroImage = new Image();
-heroImage.src = heroSprite;
+//let heroImage = new Image();
+//heroImage.src = heroSprite;
 let hero_idle = {
   image: heroImage,
   loop: true,
@@ -287,4 +295,4 @@ class Hero extends Dna.GameObject {
   }
 }
 
-export { Hero };
+export { Hero, heroAssets };

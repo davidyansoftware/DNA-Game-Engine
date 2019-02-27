@@ -1,63 +1,86 @@
-import { Hero } from "./Hero";
+import { Hero, heroAssets } from "./Hero";
 import { Boundary, Alignments } from "./Boundary";
 import { Platform } from "./Platform";
 import { Target } from "./Target";
-import { Zombie } from "./Zombie";
+import { Zombie, zombieAssets } from "./Zombie";
 
 const RADIUS = 20;
 
 let canvas = new Dna.Canvas(document.getElementById("canvas"));
 
-let gravity = new Dna.Components.SimplePhysics({ xy: 5 });
+function start() {
+  let gravity = new Dna.Components.SimplePhysics({ xy: 5 });
 
-let enemyHurtboxes = [];
-new Target(canvas, { y: 225 }, enemyHurtboxes);
+  let enemyHurtboxes = [];
+  new Target(canvas, { y: 225 }, enemyHurtboxes);
 
-let hero = new Hero(canvas, {}, enemyHurtboxes);
-let hurtboxes = [hero.hurtbox];
+  let hero = new Hero(canvas, {}, enemyHurtboxes);
+  let hurtboxes = [hero.hurtbox];
 
-let zombie0 = new Zombie(canvas, {}, hero, hurtboxes, enemyHurtboxes);
+  let zombie0 = new Zombie(canvas, {}, hero, hurtboxes, enemyHurtboxes);
 
-new Platform(canvas, { y: 150, x: -100 }, hurtboxes);
-new Platform(canvas, { y: 150, x: 100 }, hurtboxes);
-new Platform(canvas, { y: 50 }, hurtboxes);
+  new Platform(canvas, { y: 150, x: -100 }, hurtboxes);
+  new Platform(canvas, { y: 150, x: 100 }, hurtboxes);
+  new Platform(canvas, { y: 50 }, hurtboxes);
 
-const SHORT = 10;
-const X_LONG = 500;
-const Y_LONG = 700;
-const X_OFFSET = 350;
-const Y_OFFSET = 250;
+  const SHORT = 10;
+  const X_LONG = 500;
+  const Y_LONG = 700;
+  const X_OFFSET = 350;
+  const Y_OFFSET = 250;
 
-let topBoundary = new Boundary(
-  canvas,
-  Alignments.TOP,
-  -Y_OFFSET,
-  Y_LONG,
-  SHORT,
-  hurtboxes
+  let topBoundary = new Boundary(
+    canvas,
+    Alignments.TOP,
+    -Y_OFFSET,
+    Y_LONG,
+    SHORT,
+    hurtboxes
+  );
+  let bottomBoundary = new Boundary(
+    canvas,
+    Alignments.BOTTOM,
+    Y_OFFSET,
+    Y_LONG,
+    SHORT,
+    hurtboxes
+  );
+
+  let leftBoundary = new Boundary(
+    canvas,
+    Alignments.LEFT,
+    -X_OFFSET,
+    SHORT,
+    X_LONG,
+    hurtboxes
+  );
+  let rightBoundary = new Boundary(
+    canvas,
+    Alignments.RIGHT,
+    X_OFFSET,
+    SHORT,
+    X_LONG,
+    hurtboxes
+  );
+}
+
+/*
+import heroSprite from "./assets/hero/hero.png";
+import heroRunSprite from "./assets/hero/hero_run.png";
+
+let heroAssets = new Dna.Assets({
+  hero: heroSprite,
+  run: heroRunSprite
+});
+*/
+
+let scene = new Dna.Scene(
+  [canvas],
+  new Dna.Assets({
+    hero: heroAssets,
+    zombie: zombieAssets
+  }),
+  start
 );
-let bottomBoundary = new Boundary(
-  canvas,
-  Alignments.BOTTOM,
-  Y_OFFSET,
-  Y_LONG,
-  SHORT,
-  hurtboxes
-);
 
-let leftBoundary = new Boundary(
-  canvas,
-  Alignments.LEFT,
-  -X_OFFSET,
-  SHORT,
-  X_LONG,
-  hurtboxes
-);
-let rightBoundary = new Boundary(
-  canvas,
-  Alignments.RIGHT,
-  X_OFFSET,
-  SHORT,
-  X_LONG,
-  hurtboxes
-);
+scene.load();

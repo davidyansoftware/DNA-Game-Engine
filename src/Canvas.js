@@ -41,16 +41,17 @@ class Canvas extends Composite {
     super();
     //TODO probably dont need to reference game here, just handle canvases from the game itself
     //this.game = game;
+    //this.scene = scene;
     this.ctx = domCanvas.getContext("2d");
 
     this.transform = new CanvasTransform(domCanvas);
 
     //this.prevTime;
 
-    let self = this;
-    window.requestAnimationFrame(function(currTime) {
-      self.gameLoop(currTime);
-    });
+    //let self = this;
+    //window.requestAnimationFrame(function(currTime) {
+    //  self.gameLoop(currTime);
+    //});
   }
 
   clear() {
@@ -72,6 +73,10 @@ class Canvas extends Composite {
     window.requestAnimationFrame(function(currTime) {
       self.gameLoop(currTime);
     });
+  }
+
+  getScene() {
+    return this.scene;
   }
 
   getCanvas() {
