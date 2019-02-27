@@ -1353,13 +1353,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var Physics =
 /*#__PURE__*/
@@ -1381,6 +1381,13 @@ function (_Component) {
       y: 0,
       total: 0
     };
+    _this.totalDistanceTraveled = 0;
+    _this.maxDistance = options.maxDistance || Infinity;
+
+    _this.callback = options.callback || function () {
+      _this.gameObject.removeComponent(_assertThisInitialized(_assertThisInitialized(_this)));
+    };
+
     return _this;
   } //TODO radians vs degrees?
 
@@ -1396,6 +1403,12 @@ function (_Component) {
       this.distanceTraveled.x = xv;
       this.distanceTraveled.y = yv;
       this.distanceTraveled.total = this.speed;
+      this.totalDistanceTraveled += this.speed;
+      console.log(this.totalDistanceTraveled + " >= " + this.maxDistance);
+
+      if (this.totalDistanceTraveled >= this.maxDistance) {
+        this.callback();
+      }
     }
   }]);
 
@@ -2485,7 +2498,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54877" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57826" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -15,16 +15,16 @@ class BulletComponent extends Dna.Component {
     super();
 
     this.physics = physics;
-    this.distanceTraveled = 0;
+    //this.distanceTraveled = 0;
     this.maxDistance = maxDistance;
     this.damage = DAMAGE;
   }
 
   update(deltaTime) {
-    this.distanceTraveled += this.physics.distanceTraveled.total;
-    if (this.distanceTraveled > this.maxDistance) {
-      this.gameObject.destroy();
-    }
+    //this.distanceTraveled += this.physics.distanceTraveled.total;
+    //if (this.distanceTraveled > this.maxDistance) {
+    //  this.gameObject.destroy();
+    //}
   }
 }
 
@@ -47,7 +47,14 @@ class Bullet extends Dna.GameObject {
       )
     );
 
-    let physics = new Dna.Components.Physics({ speed: SPEED, angle: angle });
+    let physics = new Dna.Components.Physics({
+      speed: SPEED,
+      angle: angle,
+      maxDistance: maxDistance,
+      callback: () => {
+        this.destroy();
+      }
+    });
     this.addComponent(physics);
 
     let bullet = new BulletComponent(physics, maxDistance);

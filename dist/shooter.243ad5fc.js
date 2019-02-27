@@ -241,8 +241,8 @@ function (_Dna$Component) {
     _classCallCheck(this, BulletComponent);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(BulletComponent).call(this));
-    _this.physics = physics;
-    _this.distanceTraveled = 0;
+    _this.physics = physics; //this.distanceTraveled = 0;
+
     _this.maxDistance = maxDistance;
     _this.damage = DAMAGE;
     return _this;
@@ -250,12 +250,10 @@ function (_Dna$Component) {
 
   _createClass(BulletComponent, [{
     key: "update",
-    value: function update(deltaTime) {
-      this.distanceTraveled += this.physics.distanceTraveled.total;
-
-      if (this.distanceTraveled > this.maxDistance) {
-        this.gameObject.destroy();
-      }
+    value: function update(deltaTime) {//this.distanceTraveled += this.physics.distanceTraveled.total;
+      //if (this.distanceTraveled > this.maxDistance) {
+      //  this.gameObject.destroy();
+      //}
     }
   }]);
 
@@ -284,7 +282,11 @@ function (_Dna$GameObject) {
 
     var physics = new Dna.Components.Physics({
       speed: SPEED,
-      angle: angle
+      angle: angle,
+      maxDistance: maxDistance,
+      callback: function callback() {
+        _this2.destroy();
+      }
     });
 
     _this2.addComponent(physics);
@@ -1882,7 +1884,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54853" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57826" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

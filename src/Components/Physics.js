@@ -13,6 +13,14 @@ class Physics extends Component {
       y: 0,
       total: 0
     };
+
+    this.totalDistanceTraveled = 0;
+    this.maxDistance = options.maxDistance || Infinity;
+    this.callback =
+      options.callback ||
+      (() => {
+        this.gameObject.removeComponent(this);
+      });
   }
 
   //TODO radians vs degrees?
@@ -27,6 +35,11 @@ class Physics extends Component {
     this.distanceTraveled.x = xv;
     this.distanceTraveled.y = yv;
     this.distanceTraveled.total = this.speed;
+
+    this.totalDistanceTraveled += this.speed;
+    if (this.totalDistanceTraveled >= this.maxDistance) {
+      this.callback();
+    }
   }
 }
 
