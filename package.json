@@ -1,0 +1,16 @@
+{
+  "name": "dna-game-engine",
+  "version": "1.0.0",
+  "description": "a 2d HTML5 game engine",
+  "main": "src/Dna.js",
+  "scripts": {
+    "shooter": "parcel shooter.html",
+    "platformer": "parcel platformer.html",
+    "astroids": "parcel astroids.html"
+  },
+  "author": "David Yan",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.11.0"
+  }
+}
