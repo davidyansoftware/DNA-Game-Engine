@@ -8,11 +8,6 @@ class Acceleration extends Component {
 
     this.physics = physics;
 
-    //TODO these should be private
-    //this.xa = options.xa || 0;
-    //this.ya = options.ya || 0;
-    //this.distanceTraveled = 0;
-
     this.active = options.active || true;
     //TODO vector class
     this.angle = options.angle || new Degrees(0);
@@ -35,15 +30,6 @@ class Acceleration extends Component {
       this.physics.xv -= this.physics.xv * this.friction;
       this.physics.yv -= this.physics.yv * this.friction;
     }
-
-    /*
-    this.distanceTraveled += Math.sqrt(
-      Math.pow(this.xv, 2) + Math.pow(this.yv, 2)
-    );
-    if (this.distanceTraveled >= this.maxDistance.distance) {
-      this.maxDistance.callback();
-    }
-    */
   }
 }
 

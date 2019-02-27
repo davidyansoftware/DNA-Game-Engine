@@ -326,64 +326,6 @@ function (_Dna$Component) {
 }(Dna.Component);
 
 exports.Rollover = Rollover;
-},{}],"demos/astroids/Bullet.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Bullet = void 0;
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var Bullet =
-/*#__PURE__*/
-function (_Dna$Component) {
-  _inherits(Bullet, _Dna$Component);
-
-  function Bullet(physics, maxDistance) {
-    var _this;
-
-    _classCallCheck(this, Bullet);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Bullet).call(this));
-    _this.physics = physics;
-    _this.distanceTraveled = 0;
-    _this.maxDistance = maxDistance;
-    return _this;
-  }
-
-  _createClass(Bullet, [{
-    key: "update",
-    value: function update(deltaTime) {
-      this.distanceTraveled += this.physics.distanceTraveled.total;
-
-      if (this.distanceTraveled >= this.maxDistance) {
-        this.gameObject.destroy();
-      }
-    }
-  }]);
-
-  return Bullet;
-}(Dna.Component);
-
-exports.Bullet = Bullet;
 },{}],"demos/astroids/BulletPrefab.js":[function(require,module,exports) {
 "use strict";
 
@@ -393,8 +335,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.BulletPrefab = void 0;
 
 var _Rollover = require("./Rollover");
-
-var _Bullet = require("./Bullet");
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -429,12 +369,12 @@ function (_Dna$GameObject) {
     }), new _Rollover.Rollover(BULLET_RADIUS)]));
     var physics = new Dna.Components.Physics({
       speed: BULLET_SPEED,
-      angle: angle
+      angle: angle,
+      maxDistance: BULLET_DISTANCE
     });
 
-    _this.addComponent(physics);
+    _this.addComponent(physics); //this.addComponent(new Bullet(physics, BULLET_DISTANCE));
 
-    _this.addComponent(new _Bullet.Bullet(physics, BULLET_DISTANCE));
 
     var hitbox = new Dna.Components.Hitcircle({
       radius: BULLET_RADIUS,
@@ -455,7 +395,7 @@ function (_Dna$GameObject) {
 }(Dna.GameObject);
 
 exports.BulletPrefab = BulletPrefab;
-},{"./Rollover":"demos/astroids/Rollover.js","./Bullet":"demos/astroids/Bullet.js"}],"demos/astroids/ShipPrefab.js":[function(require,module,exports) {
+},{"./Rollover":"demos/astroids/Rollover.js"}],"demos/astroids/ShipPrefab.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -844,7 +784,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54877" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52319" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

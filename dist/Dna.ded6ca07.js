@@ -1353,13 +1353,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var Physics =
 /*#__PURE__*/
@@ -1385,7 +1385,8 @@ function (_Component) {
     _this.maxDistance = options.maxDistance || Infinity;
 
     _this.callback = options.callback || function () {
-      _this.gameObject.removeComponent(_assertThisInitialized(_assertThisInitialized(_this)));
+      //this.gameObject.removeComponent(this);
+      _this.gameObject.destroy();
     };
 
     return _this;
@@ -1460,11 +1461,7 @@ function (_Component) {
     _classCallCheck(this, Acceleration);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Acceleration).call(this));
-    _this.physics = physics; //TODO these should be private
-    //this.xa = options.xa || 0;
-    //this.ya = options.ya || 0;
-    //this.distanceTraveled = 0;
-
+    _this.physics = physics;
     _this.active = options.active || true; //TODO vector class
 
     _this.angle = options.angle || new _Angle.Degrees(0);
@@ -1489,15 +1486,6 @@ function (_Component) {
         this.physics.xv -= this.physics.xv * this.friction;
         this.physics.yv -= this.physics.yv * this.friction;
       }
-      /*
-      this.distanceTraveled += Math.sqrt(
-        Math.pow(this.xv, 2) + Math.pow(this.yv, 2)
-      );
-      if (this.distanceTraveled >= this.maxDistance.distance) {
-        this.maxDistance.callback();
-      }
-      */
-
     }
   }]);
 
@@ -2498,7 +2486,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64281" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52319" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

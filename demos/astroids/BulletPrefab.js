@@ -1,5 +1,4 @@
 import { Rollover } from "./Rollover";
-import { Bullet } from "./Bullet";
 
 const BULLET_SPEED = 5;
 const BULLET_RADIUS = 2;
@@ -14,10 +13,11 @@ class BulletPrefab extends Dna.GameObject {
 
     let physics = new Dna.Components.Physics({
       speed: BULLET_SPEED,
-      angle: angle
+      angle: angle,
+      maxDistance: BULLET_DISTANCE
     });
     this.addComponent(physics);
-    this.addComponent(new Bullet(physics, BULLET_DISTANCE));
+    //this.addComponent(new Bullet(physics, BULLET_DISTANCE));
 
     let hitbox = new Dna.Components.Hitcircle({
       radius: BULLET_RADIUS,

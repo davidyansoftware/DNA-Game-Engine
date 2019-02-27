@@ -19,7 +19,8 @@ class Physics extends Component {
     this.callback =
       options.callback ||
       (() => {
-        this.gameObject.removeComponent(this);
+        //this.gameObject.removeComponent(this);
+        this.gameObject.destroy();
       });
   }
 
