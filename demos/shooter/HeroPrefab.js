@@ -10,6 +10,19 @@ import heroUpSideSheet from "./assets/hero/upside.png";
 import heroSideSheet from "./assets/hero/side.png";
 import heroDownSideSheet from "./assets/hero/downside.png";
 import heroDownSheet from "./assets/hero/down.png";
+let heroUpImage = new Dna.Dom.Image(heroUpSheet);
+let heroUpSideImage = new Dna.Dom.Image(heroUpSideSheet);
+let heroSideImage = new Dna.Dom.Image(heroSideSheet);
+let heroDownSideImage = new Dna.Dom.Image(heroDownSideSheet);
+let heroDownImage = new Dna.Dom.Image(heroDownSheet);
+
+let heroAssets = new Dna.Assets({
+  up: heroUpImage,
+  upSide: heroUpSideImage,
+  side: heroSideImage,
+  downSide: heroDownSideImage,
+  down: heroDownImage
+});
 
 const RADIUS = 10;
 let hero_default = {
@@ -20,28 +33,19 @@ let hero_default = {
   ticksPerFrame: 5
   //framesPerRow: 4
 };
-let heroUpImage = new Image();
-heroUpImage.src = heroUpSheet;
+
 let heroUp = {
   image: heroUpImage
 };
-let heroUpSideImage = new Image();
-heroUpSideImage.src = heroUpSideSheet;
 let heroUpSide = {
   image: heroUpSideImage
 };
-let heroSideImage = new Image();
-heroSideImage.src = heroSideSheet;
 let heroSide = {
   image: heroSideImage
 };
-let heroDownSideImage = new Image();
-heroDownSideImage.src = heroDownSideSheet;
 let heroDownSide = {
   image: heroDownSideImage
 };
-let heroDownImage = new Image();
-heroDownImage.src = heroDownSheet;
 let heroDown = {
   image: heroDownImage
 };
@@ -112,4 +116,4 @@ class HeroPrefab extends Dna.GameObject {
   }
 }
 
-export { HeroPrefab };
+export { HeroPrefab, heroAssets };

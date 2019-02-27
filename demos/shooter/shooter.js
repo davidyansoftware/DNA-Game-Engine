@@ -1,6 +1,6 @@
-import { HeroPrefab } from "./HeroPrefab";
+import { HeroPrefab, heroAssets } from "./HeroPrefab";
 import { Boundary, Alignments } from "./Boundary";
-import { Slime } from "./Slime";
+import { Slime, slimeAssets } from "./Slime";
 import { Crosshair } from "./Crosshair";
 import { gunAssets } from "./GunData";
 
@@ -195,6 +195,8 @@ function start() {
 let scene = new Dna.Scene(
   [canvas],
   new Dna.Assets({
+    hero: heroAssets,
+    slime: slimeAssets,
     guns: gunAssets
   }),
   start

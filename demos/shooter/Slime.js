@@ -5,6 +5,15 @@ import { ImageAngle } from "./ImageAngle";
 import slimeUpSheet from "./assets/slime/slime1_back.png";
 import slimeDownSheet from "./assets/slime/slime1_front.png";
 import slimeLeftSheet from "./assets/slime/slime1_side.png";
+let slimeUpImage = new Dna.Dom.Image(slimeUpSheet);
+let slimeSideImage = new Dna.Dom.Image(slimeLeftSheet);
+let slimeDownImage = new Dna.Dom.Image(slimeDownSheet);
+
+let slimeAssets = new Dna.Assets({
+  up: slimeUpImage,
+  side: slimeSideImage,
+  down: slimeDownImage
+});
 
 const MAX_HP = 100;
 const RADIUS = 8;
@@ -20,20 +29,14 @@ let slime_default = {
   ticksPerFrame: 5
   //framesPerRow: 4
 };
-let slimeUpImage = new Image();
-slimeUpImage.src = slimeUpSheet;
 let slimeUp = {
   image: slimeUpImage
 };
-let slimeDownImage = new Image();
-slimeDownImage.src = slimeDownSheet;
-let slimeDown = {
-  image: slimeDownImage
-};
-let slimeSideImage = new Image();
-slimeSideImage.src = slimeLeftSheet;
 let slimeSide = {
   image: slimeSideImage
+};
+let slimeDown = {
+  image: slimeDownImage
 };
 
 const spriteOptions = [slimeUp, slimeSide, slimeDown, slimeSide];
@@ -88,4 +91,4 @@ class Slime extends Dna.GameObject {
   }
 }
 
-export { Slime };
+export { Slime, slimeAssets };

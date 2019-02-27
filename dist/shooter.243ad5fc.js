@@ -1132,7 +1132,7 @@ module.exports = "/down.571fef73.png";
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HeroPrefab = void 0;
+exports.heroAssets = exports.HeroPrefab = void 0;
 
 var _Hero = require("./Hero");
 
@@ -1170,6 +1170,19 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+var heroUpImage = new Dna.Dom.Image(_up.default);
+var heroUpSideImage = new Dna.Dom.Image(_upside.default);
+var heroSideImage = new Dna.Dom.Image(_side.default);
+var heroDownSideImage = new Dna.Dom.Image(_downside.default);
+var heroDownImage = new Dna.Dom.Image(_down.default);
+var heroAssets = new Dna.Assets({
+  up: heroUpImage,
+  upSide: heroUpSideImage,
+  side: heroSideImage,
+  downSide: heroDownSideImage,
+  down: heroDownImage
+});
+exports.heroAssets = heroAssets;
 var RADIUS = 10;
 var hero_default = {
   width: 20,
@@ -1179,28 +1192,18 @@ var hero_default = {
   ticksPerFrame: 5 //framesPerRow: 4
 
 };
-var heroUpImage = new Image();
-heroUpImage.src = _up.default;
 var heroUp = {
   image: heroUpImage
 };
-var heroUpSideImage = new Image();
-heroUpSideImage.src = _upside.default;
 var heroUpSide = {
   image: heroUpSideImage
 };
-var heroSideImage = new Image();
-heroSideImage.src = _side.default;
 var heroSide = {
   image: heroSideImage
 };
-var heroDownSideImage = new Image();
-heroDownSideImage.src = _downside.default;
 var heroDownSide = {
   image: heroDownSideImage
 };
-var heroDownImage = new Image();
-heroDownImage.src = _down.default;
 var heroDown = {
   image: heroDownImage
 };
@@ -1521,7 +1524,7 @@ module.exports = "/slime1_side.83ec7a75.png";
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Slime = void 0;
+exports.slimeAssets = exports.Slime = void 0;
 
 var _Monster = require("./Monster");
 
@@ -1551,6 +1554,15 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+var slimeUpImage = new Dna.Dom.Image(_slime1_back.default);
+var slimeSideImage = new Dna.Dom.Image(_slime1_side.default);
+var slimeDownImage = new Dna.Dom.Image(_slime1_front.default);
+var slimeAssets = new Dna.Assets({
+  up: slimeUpImage,
+  side: slimeSideImage,
+  down: slimeDownImage
+});
+exports.slimeAssets = slimeAssets;
 var MAX_HP = 100;
 var RADIUS = 8;
 var SPEED = 1;
@@ -1564,20 +1576,14 @@ var slime_default = {
   ticksPerFrame: 5 //framesPerRow: 4
 
 };
-var slimeUpImage = new Image();
-slimeUpImage.src = _slime1_back.default;
 var slimeUp = {
   image: slimeUpImage
 };
-var slimeDownImage = new Image();
-slimeDownImage.src = _slime1_front.default;
-var slimeDown = {
-  image: slimeDownImage
-};
-var slimeSideImage = new Image();
-slimeSideImage.src = _slime1_side.default;
 var slimeSide = {
   image: slimeSideImage
+};
+var slimeDown = {
+  image: slimeDownImage
 };
 var spriteOptions = [slimeUp, slimeSide, slimeDown, slimeSide];
 
@@ -1938,6 +1944,8 @@ function start() {
 
 
 var scene = new Dna.Scene([canvas], new Dna.Assets({
+  hero: _HeroPrefab.heroAssets,
+  slime: _Slime.slimeAssets,
   guns: _GunData.gunAssets
 }), start);
 scene.load();
@@ -1968,7 +1976,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53262" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57037" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
