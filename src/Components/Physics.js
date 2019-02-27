@@ -37,6 +37,7 @@ class Physics extends Component {
     this.distanceTraveled.total = this.speed;
 
     this.totalDistanceTraveled += this.speed;
+    console.log(this.totalDistanceTraveled + ">=" + this.maxDistance);
     if (this.totalDistanceTraveled >= this.maxDistance) {
       this.callback();
     }

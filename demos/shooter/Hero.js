@@ -1,6 +1,6 @@
 import { Gun } from "./Gun";
 import { Bullet } from "./Bullet";
-import { Knockback } from "./Knockback";
+//import { Knockback } from "./Knockback";
 
 const SPEED = 3;
 const CLIP_SIZE = 20;
@@ -51,11 +51,16 @@ class Hero extends Dna.Component {
     //TODO angle should be based on the angle the monster hit
     let knockbackPhysics = new Dna.Components.Physics({
       angle: source.transform.getCurrentDirection(),
-      speed: 2
+      speed: 2,
+      maxDistance: 20,
+      callback: () => {
+        //console.log("removing component");
+        this.gameObject.removeComponent(knockbackPhysics);
+      }
     });
     this.gameObject.addComponent(knockbackPhysics);
-    let knockback = new Knockback(knockbackPhysics, 20);
-    this.gameObject.addComponent(knockback);
+    //let knockback = new Knockback(knockbackPhysics, 20);
+    //this.gameObject.addComponent(knockback);
 
     this.invulnerable = 0.5;
   }

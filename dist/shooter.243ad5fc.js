@@ -815,67 +815,7 @@ function (_Dna$GameObject) {
 }(Dna.GameObject);
 
 exports.Gun = Gun;
-},{"./ImageAngle":"demos/shooter/ImageAngle.js","./GunState":"demos/shooter/GunState.js","./GunData":"demos/shooter/GunData.js","./assets/sounds/weapon_swap.mp3":"demos/shooter/assets/sounds/weapon_swap.mp3"}],"demos/shooter/Knockback.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Knockback = void 0;
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-//TODO this should be a tween of physics
-var Knockback =
-/*#__PURE__*/
-function (_Dna$Component) {
-  _inherits(Knockback, _Dna$Component);
-
-  function Knockback(physics, maxDistance) {
-    var _this;
-
-    _classCallCheck(this, Knockback);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Knockback).call(this));
-    _this.physics = physics;
-    _this.maxDistance = maxDistance;
-    _this.distanceTraveled = 0;
-    return _this;
-  }
-
-  _createClass(Knockback, [{
-    key: "update",
-    value: function update(deltaTime) {
-      this.distanceTraveled += this.physics.distanceTraveled.total;
-
-      if (this.distanceTraveled >= this.maxDistance) {
-        this.gameObject.removeComponent(this.physics);
-        this.gameObject.removeComponent(this);
-      }
-    }
-  }]);
-
-  return Knockback;
-}(Dna.Component);
-
-exports.Knockback = Knockback;
-},{}],"demos/shooter/Hero.js":[function(require,module,exports) {
+},{"./ImageAngle":"demos/shooter/ImageAngle.js","./GunState":"demos/shooter/GunState.js","./GunData":"demos/shooter/GunData.js","./assets/sounds/weapon_swap.mp3":"demos/shooter/assets/sounds/weapon_swap.mp3"}],"demos/shooter/Hero.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -886,8 +826,6 @@ exports.Hero = void 0;
 var _Gun = require("./Gun");
 
 var _Bullet = require("./Bullet");
-
-var _Knockback = require("./Knockback");
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -911,6 +849,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+//import { Knockback } from "./Knockback";
 var SPEED = 3;
 var CLIP_SIZE = 20;
 var TOTAL_AMMO = 100;
@@ -949,16 +888,23 @@ function (_Dna$Component) {
   _createClass(Hero, [{
     key: "takeDamage",
     value: function takeDamage(damage, source) {
+      var _this2 = this;
+
       if (this.invulnerable > 0) return;
       console.log("taking damage: " + damage); //TODO angle should be based on the angle the monster hit
 
       var knockbackPhysics = new Dna.Components.Physics({
         angle: source.transform.getCurrentDirection(),
-        speed: 2
+        speed: 2,
+        maxDistance: 20,
+        callback: function callback() {
+          //console.log("removing component");
+          _this2.gameObject.removeComponent(knockbackPhysics);
+        }
       });
-      this.gameObject.addComponent(knockbackPhysics);
-      var knockback = new _Knockback.Knockback(knockbackPhysics, 20);
-      this.gameObject.addComponent(knockback);
+      this.gameObject.addComponent(knockbackPhysics); //let knockback = new Knockback(knockbackPhysics, 20);
+      //this.gameObject.addComponent(knockback);
+
       this.invulnerable = 0.5;
     } //TODO update this to use regular physics class
 
@@ -992,7 +938,7 @@ function (_Dna$Component) {
 }(Dna.Component);
 
 exports.Hero = Hero;
-},{"./Gun":"demos/shooter/Gun.js","./Bullet":"demos/shooter/Bullet.js","./Knockback":"demos/shooter/Knockback.js"}],"demos/shooter/UnitAngle.js":[function(require,module,exports) {
+},{"./Gun":"demos/shooter/Gun.js","./Bullet":"demos/shooter/Bullet.js"}],"demos/shooter/UnitAngle.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1300,8 +1246,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Monster = exports.Ai = exports.Movement = void 0;
 
-var _Knockback = require("./Knockback");
-
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1320,6 +1264,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+//import { Knockback } from "./Knockback";
 var Movement =
 /*#__PURE__*/
 function (_Dna$Component) {
@@ -1422,13 +1367,18 @@ function (_Dna$Component3) {
   }, {
     key: "knockback",
     value: function knockback(direction) {
+      var _this4 = this;
+
       var knockbackPhysics = new Dna.Components.Physics({
         angle: direction,
-        speed: 2
+        speed: 2,
+        maxDistance: 20,
+        callback: function callback() {
+          _this4.gameObject.removeComponent(knockbackPhysics);
+        }
       });
-      this.gameObject.addComponent(knockbackPhysics);
-      var knockback = new _Knockback.Knockback(knockbackPhysics, 20);
-      this.gameObject.addComponent(knockback);
+      this.gameObject.addComponent(knockbackPhysics); //let knockback = new Knockback(knockbackPhysics, 20);
+      //this.gameObject.addComponent(knockback);
     }
   }]);
 
@@ -1436,7 +1386,7 @@ function (_Dna$Component3) {
 }(Dna.Component);
 
 exports.Monster = Monster;
-},{"./Knockback":"demos/shooter/Knockback.js"}],"demos/shooter/assets/slime/slime1_back.png":[function(require,module,exports) {
+},{}],"demos/shooter/assets/slime/slime1_back.png":[function(require,module,exports) {
 module.exports = "/slime1_back.c385b3b1.png";
 },{}],"demos/shooter/assets/slime/slime1_front.png":[function(require,module,exports) {
 module.exports = "/slime1_front.b81d3c74.png";
@@ -1884,7 +1834,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57826" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63705" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

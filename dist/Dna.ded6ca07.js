@@ -1404,7 +1404,7 @@ function (_Component) {
       this.distanceTraveled.y = yv;
       this.distanceTraveled.total = this.speed;
       this.totalDistanceTraveled += this.speed;
-      console.log(this.totalDistanceTraveled + " >= " + this.maxDistance);
+      console.log(this.totalDistanceTraveled + ">=" + this.maxDistance);
 
       if (this.totalDistanceTraveled >= this.maxDistance) {
         this.callback();
@@ -2498,7 +2498,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57826" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63705" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
