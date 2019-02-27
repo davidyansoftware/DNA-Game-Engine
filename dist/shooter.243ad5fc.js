@@ -274,7 +274,9 @@ function (_Dna$GameObject) {
 }(Dna.GameObject);
 
 exports.Bullet = Bullet;
-},{"./assets/sounds/gun_hit.wav":"demos/shooter/assets/sounds/gun_hit.wav"}],"demos/shooter/assets/pistol/up.png":[function(require,module,exports) {
+},{"./assets/sounds/gun_hit.wav":"demos/shooter/assets/sounds/gun_hit.wav"}],"demos/shooter/assets/bullets/bullet.png":[function(require,module,exports) {
+module.exports = "/bullet.8736c3be.png";
+},{}],"demos/shooter/assets/pistol/up.png":[function(require,module,exports) {
 module.exports = "/up.c0307eb4.png";
 },{}],"demos/shooter/assets/pistol/diagup.png":[function(require,module,exports) {
 module.exports = "/diagup.95eb5552.png";
@@ -290,8 +292,6 @@ module.exports = "/pistol_shoot.91dab88e.wav";
 module.exports = "/gun_empty.df7523a4.wav";
 },{}],"demos/shooter/assets/sounds/gun_reload.mp3":[function(require,module,exports) {
 module.exports = "/gun_reload.1dec945f.mp3";
-},{}],"demos/shooter/assets/bullets/bullet.png":[function(require,module,exports) {
-module.exports = "/bullet.8736c3be.png";
 },{}],"demos/shooter/assets/shotgun/up.png":[function(require,module,exports) {
 module.exports = "/up.9a65feca.png";
 },{}],"demos/shooter/assets/shotgun/diagup.png":[function(require,module,exports) {
@@ -328,6 +328,8 @@ exports.Flamethrower = exports.Shotgun = exports.Pistol = void 0;
 
 var _Bullet = require("./Bullet");
 
+var _bullet = _interopRequireDefault(require("./assets/bullets/bullet.png"));
+
 var _up = _interopRequireDefault(require("./assets/pistol/up.png"));
 
 var _diagup = _interopRequireDefault(require("./assets/pistol/diagup.png"));
@@ -343,8 +345,6 @@ var _pistol_shoot = _interopRequireDefault(require("./assets/sounds/pistol_shoot
 var _gun_empty = _interopRequireDefault(require("./assets/sounds/gun_empty.wav"));
 
 var _gun_reload = _interopRequireDefault(require("./assets/sounds/gun_reload.mp3"));
-
-var _bullet = _interopRequireDefault(require("./assets/bullets/bullet.png"));
 
 var _up2 = _interopRequireDefault(require("./assets/shotgun/up.png"));
 
@@ -552,7 +552,7 @@ var Flamethrower = {
   }
 };
 exports.Flamethrower = Flamethrower;
-},{"./Bullet":"demos/shooter/Bullet.js","./assets/pistol/up.png":"demos/shooter/assets/pistol/up.png","./assets/pistol/diagup.png":"demos/shooter/assets/pistol/diagup.png","./assets/pistol/side.png":"demos/shooter/assets/pistol/side.png","./assets/pistol/diagdown.png":"demos/shooter/assets/pistol/diagdown.png","./assets/pistol/down.png":"demos/shooter/assets/pistol/down.png","./assets/sounds/pistol_shoot.wav":"demos/shooter/assets/sounds/pistol_shoot.wav","./assets/sounds/gun_empty.wav":"demos/shooter/assets/sounds/gun_empty.wav","./assets/sounds/gun_reload.mp3":"demos/shooter/assets/sounds/gun_reload.mp3","./assets/bullets/bullet.png":"demos/shooter/assets/bullets/bullet.png","./assets/shotgun/up.png":"demos/shooter/assets/shotgun/up.png","./assets/shotgun/diagup.png":"demos/shooter/assets/shotgun/diagup.png","./assets/shotgun/side.png":"demos/shooter/assets/shotgun/side.png","./assets/shotgun/diagdown.png":"demos/shooter/assets/shotgun/diagdown.png","./assets/shotgun/down.png":"demos/shooter/assets/shotgun/down.png","./assets/sounds/shotgun_shoot.wav":"demos/shooter/assets/sounds/shotgun_shoot.wav","./assets/flamethrower/up.png":"demos/shooter/assets/flamethrower/up.png","./assets/flamethrower/diagup.png":"demos/shooter/assets/flamethrower/diagup.png","./assets/flamethrower/side.png":"demos/shooter/assets/flamethrower/side.png","./assets/flamethrower/diagdown.png":"demos/shooter/assets/flamethrower/diagdown.png","./assets/flamethrower/down.png":"demos/shooter/assets/flamethrower/down.png","./assets/bullets/flame.png":"demos/shooter/assets/bullets/flame.png","./assets/sounds/flamethrower_shoot.wav":"demos/shooter/assets/sounds/flamethrower_shoot.wav"}],"demos/shooter/assets/sounds/weapon_swap.mp3":[function(require,module,exports) {
+},{"./Bullet":"demos/shooter/Bullet.js","./assets/bullets/bullet.png":"demos/shooter/assets/bullets/bullet.png","./assets/pistol/up.png":"demos/shooter/assets/pistol/up.png","./assets/pistol/diagup.png":"demos/shooter/assets/pistol/diagup.png","./assets/pistol/side.png":"demos/shooter/assets/pistol/side.png","./assets/pistol/diagdown.png":"demos/shooter/assets/pistol/diagdown.png","./assets/pistol/down.png":"demos/shooter/assets/pistol/down.png","./assets/sounds/pistol_shoot.wav":"demos/shooter/assets/sounds/pistol_shoot.wav","./assets/sounds/gun_empty.wav":"demos/shooter/assets/sounds/gun_empty.wav","./assets/sounds/gun_reload.mp3":"demos/shooter/assets/sounds/gun_reload.mp3","./assets/shotgun/up.png":"demos/shooter/assets/shotgun/up.png","./assets/shotgun/diagup.png":"demos/shooter/assets/shotgun/diagup.png","./assets/shotgun/side.png":"demos/shooter/assets/shotgun/side.png","./assets/shotgun/diagdown.png":"demos/shooter/assets/shotgun/diagdown.png","./assets/shotgun/down.png":"demos/shooter/assets/shotgun/down.png","./assets/sounds/shotgun_shoot.wav":"demos/shooter/assets/sounds/shotgun_shoot.wav","./assets/flamethrower/up.png":"demos/shooter/assets/flamethrower/up.png","./assets/flamethrower/diagup.png":"demos/shooter/assets/flamethrower/diagup.png","./assets/flamethrower/side.png":"demos/shooter/assets/flamethrower/side.png","./assets/flamethrower/diagdown.png":"demos/shooter/assets/flamethrower/diagdown.png","./assets/flamethrower/down.png":"demos/shooter/assets/flamethrower/down.png","./assets/bullets/flame.png":"demos/shooter/assets/bullets/flame.png","./assets/sounds/flamethrower_shoot.wav":"demos/shooter/assets/sounds/flamethrower_shoot.wav"}],"demos/shooter/assets/sounds/weapon_swap.mp3":[function(require,module,exports) {
 module.exports = "/weapon_swap.2e32c4a2.mp3";
 },{}],"demos/shooter/Gun.js":[function(require,module,exports) {
 "use strict";
@@ -1716,49 +1716,55 @@ var foreground = new Dna.StaticCanvas(document.getElementById("foreground"), [wI
   foreground.renderAll();
 });
 var canvas = new Dna.Canvas(document.getElementById("canvas"));
-var mouse = new Dna.Input.Mouse(canvas);
-var crosshair = new _Crosshair.Crosshair(canvas, mouse);
-var ammoTextContainer = new Dna.GameObject(canvas, {
-  x: 300,
-  y: 200
-});
-var ammoText = new Dna.Components.Text({});
-new Dna.GameObject(ammoTextContainer, {
-  y: -10
-}, [new Dna.Components.Text({
-  text: "AMMO"
-})]);
-new Dna.GameObject(ammoTextContainer, {
-  y: 10
-}, [ammoText]);
-var heroHurtbox = [];
-var enemyHurtboxes = [];
-var hero = new _HeroPrefab.HeroPrefab(canvas, ammoText, mouse, crosshair, enemyHurtboxes, heroHurtbox);
-new _Slime.Slime(canvas, {
-  x: 200,
-  y: 150
-}, hero, heroHurtbox, enemyHurtboxes);
-new _Slime.Slime(canvas, {
-  x: 200,
-  y: -150
-}, hero, heroHurtbox, enemyHurtboxes);
-new _Slime.Slime(canvas, {
-  x: -200,
-  y: 150
-}, hero, heroHurtbox, enemyHurtboxes);
-new _Slime.Slime(canvas, {
-  x: -200,
-  y: -150
-}, hero, heroHurtbox, enemyHurtboxes);
-var X_OFFSET = 350;
-var Y_OFFSET = 250;
-var X_LONG = 500;
-var Y_LONG = 700;
-var SHORT = 20;
-var topBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.TOP, -Y_OFFSET, Y_LONG, SHORT, heroHurtbox);
-var bottomBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.BOTTOM, Y_OFFSET, Y_LONG, SHORT, heroHurtbox);
-var leftBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.LEFT, -X_OFFSET, SHORT, X_LONG, heroHurtbox);
-var rightBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.RIGHT, X_OFFSET, SHORT, X_LONG, heroHurtbox);
+
+function start() {
+  var mouse = new Dna.Input.Mouse(canvas);
+  var crosshair = new _Crosshair.Crosshair(canvas, mouse);
+  var ammoTextContainer = new Dna.GameObject(canvas, {
+    x: 300,
+    y: 200
+  });
+  var ammoText = new Dna.Components.Text({});
+  new Dna.GameObject(ammoTextContainer, {
+    y: -10
+  }, [new Dna.Components.Text({
+    text: "AMMO"
+  })]);
+  new Dna.GameObject(ammoTextContainer, {
+    y: 10
+  }, [ammoText]);
+  var heroHurtbox = [];
+  var enemyHurtboxes = [];
+  var hero = new _HeroPrefab.HeroPrefab(canvas, ammoText, mouse, crosshair, enemyHurtboxes, heroHurtbox);
+  new _Slime.Slime(canvas, {
+    x: 200,
+    y: 150
+  }, hero, heroHurtbox, enemyHurtboxes);
+  new _Slime.Slime(canvas, {
+    x: 200,
+    y: -150
+  }, hero, heroHurtbox, enemyHurtboxes);
+  new _Slime.Slime(canvas, {
+    x: -200,
+    y: 150
+  }, hero, heroHurtbox, enemyHurtboxes);
+  new _Slime.Slime(canvas, {
+    x: -200,
+    y: -150
+  }, hero, heroHurtbox, enemyHurtboxes);
+  var X_OFFSET = 350;
+  var Y_OFFSET = 250;
+  var X_LONG = 500;
+  var Y_LONG = 700;
+  var SHORT = 20;
+  var topBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.TOP, -Y_OFFSET, Y_LONG, SHORT, heroHurtbox);
+  var bottomBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.BOTTOM, Y_OFFSET, Y_LONG, SHORT, heroHurtbox);
+  var leftBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.LEFT, -X_OFFSET, SHORT, X_LONG, heroHurtbox);
+  var rightBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.RIGHT, X_OFFSET, SHORT, X_LONG, heroHurtbox);
+}
+
+var scene = new Dna.Scene([canvas], new Dna.Assets({}), start);
+scene.load();
 },{"./HeroPrefab":"demos/shooter/HeroPrefab.js","./Boundary":"demos/shooter/Boundary.js","./Slime":"demos/shooter/Slime.js","./Crosshair":"demos/shooter/Crosshair.js","./assets/tileset.png":"demos/shooter/assets/tileset.png","./assets/controls/w.png":"demos/shooter/assets/controls/w.png","./assets/controls/a.png":"demos/shooter/assets/controls/a.png","./assets/controls/s.png":"demos/shooter/assets/controls/s.png","./assets/controls/d.png":"demos/shooter/assets/controls/d.png","./assets/controls/tab.png":"demos/shooter/assets/controls/tab.png","./assets/controls/r.png":"demos/shooter/assets/controls/r.png","./assets/controls/mouse.png":"demos/shooter/assets/controls/mouse.png","./assets/controls/leftclick.png":"demos/shooter/assets/controls/leftclick.png"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1786,7 +1792,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64281" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65159" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

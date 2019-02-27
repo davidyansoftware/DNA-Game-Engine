@@ -122,68 +122,73 @@ let foreground = new Dna.StaticCanvas(
 
 let canvas = new Dna.Canvas(document.getElementById("canvas"));
 
-let mouse = new Dna.Input.Mouse(canvas);
+function start() {
+  let mouse = new Dna.Input.Mouse(canvas);
 
-let crosshair = new Crosshair(canvas, mouse);
+  let crosshair = new Crosshair(canvas, mouse);
 
-let ammoTextContainer = new Dna.GameObject(canvas, { x: 300, y: 200 });
-let ammoText = new Dna.Components.Text({});
-new Dna.GameObject(ammoTextContainer, { y: -10 }, [
-  new Dna.Components.Text({ text: "AMMO" })
-]);
-new Dna.GameObject(ammoTextContainer, { y: 10 }, [ammoText]);
+  let ammoTextContainer = new Dna.GameObject(canvas, { x: 300, y: 200 });
+  let ammoText = new Dna.Components.Text({});
+  new Dna.GameObject(ammoTextContainer, { y: -10 }, [
+    new Dna.Components.Text({ text: "AMMO" })
+  ]);
+  new Dna.GameObject(ammoTextContainer, { y: 10 }, [ammoText]);
 
-let heroHurtbox = [];
-let enemyHurtboxes = [];
+  let heroHurtbox = [];
+  let enemyHurtboxes = [];
 
-let hero = new HeroPrefab(
-  canvas,
-  ammoText,
-  mouse,
-  crosshair,
-  enemyHurtboxes,
-  heroHurtbox
-);
+  let hero = new HeroPrefab(
+    canvas,
+    ammoText,
+    mouse,
+    crosshair,
+    enemyHurtboxes,
+    heroHurtbox
+  );
 
-new Slime(canvas, { x: 200, y: 150 }, hero, heroHurtbox, enemyHurtboxes);
-new Slime(canvas, { x: 200, y: -150 }, hero, heroHurtbox, enemyHurtboxes);
-new Slime(canvas, { x: -200, y: 150 }, hero, heroHurtbox, enemyHurtboxes);
-new Slime(canvas, { x: -200, y: -150 }, hero, heroHurtbox, enemyHurtboxes);
+  new Slime(canvas, { x: 200, y: 150 }, hero, heroHurtbox, enemyHurtboxes);
+  new Slime(canvas, { x: 200, y: -150 }, hero, heroHurtbox, enemyHurtboxes);
+  new Slime(canvas, { x: -200, y: 150 }, hero, heroHurtbox, enemyHurtboxes);
+  new Slime(canvas, { x: -200, y: -150 }, hero, heroHurtbox, enemyHurtboxes);
 
-const X_OFFSET = 350;
-const Y_OFFSET = 250;
-const X_LONG = 500;
-const Y_LONG = 700;
-const SHORT = 20;
-let topBoundary = new Boundary(
-  canvas,
-  Alignments.TOP,
-  -Y_OFFSET,
-  Y_LONG,
-  SHORT,
-  heroHurtbox
-);
-let bottomBoundary = new Boundary(
-  canvas,
-  Alignments.BOTTOM,
-  Y_OFFSET,
-  Y_LONG,
-  SHORT,
-  heroHurtbox
-);
-let leftBoundary = new Boundary(
-  canvas,
-  Alignments.LEFT,
-  -X_OFFSET,
-  SHORT,
-  X_LONG,
-  heroHurtbox
-);
-let rightBoundary = new Boundary(
-  canvas,
-  Alignments.RIGHT,
-  X_OFFSET,
-  SHORT,
-  X_LONG,
-  heroHurtbox
-);
+  const X_OFFSET = 350;
+  const Y_OFFSET = 250;
+  const X_LONG = 500;
+  const Y_LONG = 700;
+  const SHORT = 20;
+  let topBoundary = new Boundary(
+    canvas,
+    Alignments.TOP,
+    -Y_OFFSET,
+    Y_LONG,
+    SHORT,
+    heroHurtbox
+  );
+  let bottomBoundary = new Boundary(
+    canvas,
+    Alignments.BOTTOM,
+    Y_OFFSET,
+    Y_LONG,
+    SHORT,
+    heroHurtbox
+  );
+  let leftBoundary = new Boundary(
+    canvas,
+    Alignments.LEFT,
+    -X_OFFSET,
+    SHORT,
+    X_LONG,
+    heroHurtbox
+  );
+  let rightBoundary = new Boundary(
+    canvas,
+    Alignments.RIGHT,
+    X_OFFSET,
+    SHORT,
+    X_LONG,
+    heroHurtbox
+  );
+}
+
+let scene = new Dna.Scene([canvas], new Dna.Assets({}), start);
+scene.load();

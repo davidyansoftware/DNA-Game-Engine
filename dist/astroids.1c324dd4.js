@@ -709,54 +709,60 @@ var _AstroidPrefab = require("./AstroidPrefab");
 var NUM_ASTROIDS = 4;
 var ASTROID_SIZE = 100;
 var canvas = new Dna.Canvas(document.getElementById("canvas"));
-var input = {
-  87: "up",
-  83: "down",
-  65: "left",
-  68: "right",
-  32: "primary" //up: 87,
-  //down: 83,
-  //left: 65,
-  //right: 68,
-  //primary: 32
-  //secondary: 17
 
-};
-var keyboard = new Dna.Input.Keyboard(input);
-var level = 0;
-var astroids = [];
-var astroidHurtboxes = [];
-var ship = new _ShipPrefab.ShipPrefab(canvas, keyboard, astroidHurtboxes);
-var shiphurtbox = [ship.hurtbox]; //TODO function of transform?
+function start() {
+  var input = {
+    87: "up",
+    83: "down",
+    65: "left",
+    68: "right",
+    32: "primary" //up: 87,
+    //down: 83,
+    //left: 65,
+    //right: 68,
+    //primary: 32
+    //secondary: 17
 
-function distBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-}
+  };
+  var keyboard = new Dna.Input.Keyboard(input);
+  var level = 0;
+  var astroids = [];
+  var astroidHurtboxes = [];
+  var ship = new _ShipPrefab.ShipPrefab(canvas, keyboard, astroidHurtboxes);
+  var shiphurtbox = [ship.hurtbox]; //TODO function of transform?
 
-createAstroidBelt(canvas);
+  function distBetweenPoints(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  }
 
-function createAstroidBelt(canvas) {
-  astroids = []; //astroidsTotal = (NUM_ASTROIDS + level) * 7;
-  //astroidsLeft = astroidsTotal;
+  createAstroidBelt(canvas);
 
-  var domCanvas = canvas.getContext().canvas;
-  var x, y;
-  var dist;
+  function createAstroidBelt(canvas) {
+    astroids = []; //astroidsTotal = (NUM_ASTROIDS + level) * 7;
+    //astroidsLeft = astroidsTotal;
 
-  for (var i = 0; i < NUM_ASTROIDS + level; i++) {
-    do {
-      x = Math.random() * domCanvas.width - domCanvas.width / 2;
-      y = Math.random() * domCanvas.height - domCanvas.height / 2; //TODO should use absolute distance
+    var domCanvas = canvas.getContext().canvas;
+    var x, y;
+    var dist;
 
-      dist = distBetweenPoints(ship.transform.x, ship.transform.y, x, y);
-    } while (dist < ASTROID_SIZE + ship.r);
+    for (var i = 0; i < NUM_ASTROIDS + level; i++) {
+      do {
+        x = Math.random() * domCanvas.width - domCanvas.width / 2;
+        y = Math.random() * domCanvas.height - domCanvas.height / 2; //TODO should use absolute distance
 
-    astroids.push(new _AstroidPrefab.AstroidPrefab(canvas, {
-      x: x,
-      y: y
-    }, level, shiphurtbox, astroidHurtboxes));
+        dist = distBetweenPoints(ship.transform.x, ship.transform.y, x, y);
+      } while (dist < ASTROID_SIZE + ship.r);
+
+      astroids.push(new _AstroidPrefab.AstroidPrefab(canvas, {
+        x: x,
+        y: y
+      }, level, shiphurtbox, astroidHurtboxes));
+    }
   }
 }
+
+var scene = new Dna.Scene([canvas], new Dna.Assets({}), start);
+scene.load();
 },{"./ShipPrefab":"demos/astroids/ShipPrefab.js","./AstroidPrefab":"demos/astroids/AstroidPrefab.js"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -784,7 +790,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55142" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65302" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

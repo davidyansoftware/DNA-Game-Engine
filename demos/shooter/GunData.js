@@ -1,4 +1,7 @@
 import { Bullet } from "./Bullet";
+
+import bulletSprite from "./assets/bullets/bullet.png";
+
 import pistolUpSprite from "./assets/pistol/up.png";
 import pistolDiagUpSprite from "./assets/pistol/diagup.png";
 import pistolSideSprite from "./assets/pistol/side.png";
@@ -7,7 +10,6 @@ import pistolDownSprite from "./assets/pistol/down.png";
 import pistolShoot from "./assets/sounds/pistol_shoot.wav";
 import pistolEmpty from "./assets/sounds/gun_empty.wav";
 import pistolReload from "./assets/sounds/gun_reload.mp3";
-import bulletSprite from "./assets/bullets/bullet.png";
 
 let pistolUpImage = new Image();
 pistolUpImage.src = pistolUpSprite;
