@@ -14,11 +14,6 @@ class Acceleration extends Component {
     this.accel = options.accel || 0;
     //TODO rename to drag
     this.friction = options.friction || 0;
-
-    this.maxDistance = options.maxDistance || {
-      distance: Infinity,
-      callback: () => {}
-    };
   }
 
   update(deltaTime) {

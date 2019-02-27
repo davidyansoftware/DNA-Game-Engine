@@ -1373,20 +1373,19 @@ function (_Component) {
 
     _classCallCheck(this, Physics);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Physics).call(this));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Physics).call(this)); //TODO use position type
+
     _this.angle = options.angle || new _Angle.Degrees(0);
     _this.speed = options.speed || 0;
     _this.distanceTraveled = 0;
     _this.maxDistance = options.maxDistance || Infinity;
 
     _this.callback = options.callback || function () {
-      //this.gameObject.removeComponent(this);
       _this.gameObject.destroy();
     };
 
     return _this;
-  } //TODO radians vs degrees?
-
+  }
 
   _createClass(Physics, [{
     key: "update",
@@ -1460,10 +1459,6 @@ function (_Component) {
     _this.accel = options.accel || 0; //TODO rename to drag
 
     _this.friction = options.friction || 0;
-    _this.maxDistance = options.maxDistance || {
-      distance: Infinity,
-      callback: function callback() {}
-    };
     return _this;
   }
 
@@ -1527,7 +1522,7 @@ function (_Component) {
     _this.radius = options.radius || 10; //TODO generalize this behavior in a superclass
 
     _this.hurtboxes = options.hurtboxes || [];
-    _this.hitboxSet = options.hitboxSet || []; //TODO rename to onCollision
+    _this.hitboxSet = options.hitboxSet || [];
 
     _this.onCollision = options.onCollision || function () {};
 
@@ -1648,7 +1643,7 @@ function (_Component) {
     _this.height = options.height || 10; //TODO generalize this behavior in a superclass
 
     _this.hurtboxes = options.hurtboxes || [];
-    _this.hitboxSet = options.hitboxSet || []; //TODO rename to onCollision
+    _this.hitboxSet = options.hitboxSet || [];
 
     _this.onCollision = options.onCollision || function () {};
 
@@ -2478,7 +2473,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52568" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55184" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

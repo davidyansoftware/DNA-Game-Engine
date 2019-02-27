@@ -9,9 +9,8 @@ class Hitcircle extends Component {
     //TODO generalize this behavior in a superclass
     this.hurtboxes = options.hurtboxes || [];
     this.hitboxSet = options.hitboxSet || [];
-    //TODO rename to onCollision
-    this.onCollision = options.onCollision || function() {};
 
+    this.onCollision = options.onCollision || function() {};
     this.onCollisionEnter = options.onCollisionEnter || function() {};
     this.onCollisionExit = options.onCollisionExit || function() {};
 
