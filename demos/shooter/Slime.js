@@ -50,8 +50,13 @@ class Slime extends Dna.GameObject {
     new Dna.GameObject(this, {}, [image]);
     //this.addComponent(image);
 
-    let hpText = new Dna.Components.Text({});
-    new Dna.GameObject(this, { y: -20 }, [hpText]);
+    //let hpText = new Dna.Components.Text({});
+    let hpSlider = new Dna.Components.Slider({
+      width: 25,
+      height: 5,
+      emptyColor: "gray"
+    });
+    new Dna.GameObject(this, { y: -20 }, [hpSlider]);
 
     let hurtbox = new Dna.Components.Hitcircle({
       radius: RADIUS,
@@ -71,7 +76,7 @@ class Slime extends Dna.GameObject {
 
     this.addComponent(new Movement(physics, unitAngle.angle));
 
-    this.unit = new Monster(MAX_HP, hpText);
+    this.unit = new Monster(MAX_HP, hpSlider);
     this.addComponent(this.unit);
 
     //TODO this logic should be reveresed, onhit should happen on hero, these stored in monsterHitboxes

@@ -1461,7 +1461,7 @@ var Monster =
 function (_Dna$Component3) {
   _inherits(Monster, _Dna$Component3);
 
-  function Monster(hp, hpText) {
+  function Monster(hp, hpSlider) {
     var _this3;
 
     _classCallCheck(this, Monster);
@@ -1469,7 +1469,7 @@ function (_Dna$Component3) {
     _this3 = _possibleConstructorReturn(this, _getPrototypeOf(Monster).call(this));
     _this3.maxHp = hp;
     _this3.hp = hp;
-    _this3.hpText = hpText;
+    _this3.hpSlider = hpSlider;
 
     _this3.setHpText();
 
@@ -1479,7 +1479,9 @@ function (_Dna$Component3) {
   _createClass(Monster, [{
     key: "setHpText",
     value: function setHpText() {
-      this.hpText.text = this.hp + "/" + this.maxHp;
+      //this.hpText.text = this.hp + "/" + this.maxHp;
+      this.hpSlider.value = this.hp;
+      this.hpSlider.maxValue = this.maxHp;
     }
   }, {
     key: "takeDamage",
@@ -1601,11 +1603,16 @@ function (_Dna$GameObject) {
     var image = new Dna.Components.Image(slime_default);
     image.updateOptions(slimeDown);
     new Dna.GameObject(_assertThisInitialized(_this), {}, [image]); //this.addComponent(image);
+    //let hpText = new Dna.Components.Text({});
 
-    var hpText = new Dna.Components.Text({});
+    var hpSlider = new Dna.Components.Slider({
+      width: 25,
+      height: 5,
+      emptyColor: "gray"
+    });
     new Dna.GameObject(_assertThisInitialized(_this), {
       y: -20
-    }, [hpText]);
+    }, [hpSlider]);
     var hurtbox = new Dna.Components.Hitcircle({
       radius: RADIUS,
       hitboxSet: enemyHurtboxes
@@ -1627,7 +1634,7 @@ function (_Dna$GameObject) {
 
     _this.addComponent(new _Monster.Movement(physics, unitAngle.angle));
 
-    _this.unit = new _Monster.Monster(MAX_HP, hpText);
+    _this.unit = new _Monster.Monster(MAX_HP, hpSlider);
 
     _this.addComponent(_this.unit); //TODO this logic should be reveresed, onhit should happen on hero, these stored in monsterHitboxes
     //TODO add via component array
@@ -1975,7 +1982,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41939" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46767" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -2023,6 +2023,69 @@ function (_Component) {
 }(_Component2.Component);
 
 exports.Audio = Audio;
+},{"../Component":"src/Component.js"}],"src/Components/Slider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Slider = void 0;
+
+var _Component2 = require("../Component");
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Slider =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Slider, _Component);
+
+  function Slider(options) {
+    var _this;
+
+    _classCallCheck(this, Slider);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Slider).call(this));
+    _this.height = options.height !== undefined ? options.height : 100;
+    _this.width = options.width !== undefined ? options.width : 20;
+    _this.value = options.value !== undefined ? options.value : 100;
+    _this.maxValue = options.maxValue !== undefined ? options.maxValue : 100;
+    _this.fillColor = options.fillColor !== undefined ? options.fillColor : "red";
+    _this.emptyColor = options.emptyColor !== undefined ? options.emptyColor : "grey";
+    return _this;
+  }
+
+  _createClass(Slider, [{
+    key: "render",
+    value: function render(ctx) {
+      var fillPercent = this.value / this.maxValue;
+      ctx.fillStyle = this.emptyColor;
+      ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+      ctx.fillStyle = this.fillColor;
+      ctx.fillRect(-this.width / 2, -this.height / 2, this.width * fillPercent, this.height * fillPercent);
+    }
+  }]);
+
+  return Slider;
+}(_Component2.Component);
+
+exports.Slider = Slider;
 },{"../Component":"src/Component.js"}],"src/Utilities/Position.js":[function(require,module,exports) {
 "use strict";
 
@@ -2562,6 +2625,8 @@ var _Text = require("./Components/Text");
 
 var _Audio = require("./Components/Audio");
 
+var _Slider = require("./Components/Slider");
+
 var _Angle = require("./Utilities/Angle");
 
 var _Position = require("./Utilities/Position");
@@ -2597,7 +2662,8 @@ var Dna = {
     Hitcircle: _Hitcircle.Hitcircle,
     Hitbox: _Hitbox.Hitbox,
     Text: _Text.Text,
-    Audio: _Audio.Audio
+    Audio: _Audio.Audio,
+    Slider: _Slider.Slider
   },
   Utilities: {
     Degrees: _Angle.Degrees,
@@ -2615,7 +2681,7 @@ var Dna = {
   }
 };
 window.Dna = Dna;
-},{"./Canvas":"src/Canvas.js","./GameObject":"src/GameObject.js","./Component":"src/Component.js","./Scene":"src/Scene.js","./Components/Image":"src/Components/Image.js","./Components/SimplePhysics":"src/Components/SimplePhysics.js","./Components/Polygon":"src/Components/Polygon.js","./Components/Rectangle":"src/Components/Rectangle.js","./Components/Physics":"src/Components/Physics.js","./Components/Acceleration":"src/Components/Acceleration.js","./Components/Hitcircle":"src/Components/Hitcircle.js","./Components/Hitbox":"src/Components/Hitbox.js","./Components/Text":"src/Components/Text.js","./Components/Audio":"src/Components/Audio.js","./Utilities/Angle":"src/Utilities/Angle.js","./Utilities/Position":"src/Utilities/Position.js","./Input/Input":"src/Input/Input.js","./Input/Keyboard":"src/Input/Keyboard.js","./Input/Mouse":"src/Input/Mouse.js","./Dom/Image":"src/Dom/Image.js"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Canvas":"src/Canvas.js","./GameObject":"src/GameObject.js","./Component":"src/Component.js","./Scene":"src/Scene.js","./Components/Image":"src/Components/Image.js","./Components/SimplePhysics":"src/Components/SimplePhysics.js","./Components/Polygon":"src/Components/Polygon.js","./Components/Rectangle":"src/Components/Rectangle.js","./Components/Physics":"src/Components/Physics.js","./Components/Acceleration":"src/Components/Acceleration.js","./Components/Hitcircle":"src/Components/Hitcircle.js","./Components/Hitbox":"src/Components/Hitbox.js","./Components/Text":"src/Components/Text.js","./Components/Audio":"src/Components/Audio.js","./Components/Slider":"src/Components/Slider.js","./Utilities/Angle":"src/Utilities/Angle.js","./Utilities/Position":"src/Utilities/Position.js","./Input/Input":"src/Input/Input.js","./Input/Keyboard":"src/Input/Keyboard.js","./Input/Mouse":"src/Input/Mouse.js","./Dom/Image":"src/Dom/Image.js"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2642,7 +2708,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41939" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46767" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

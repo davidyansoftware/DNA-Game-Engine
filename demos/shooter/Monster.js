@@ -37,19 +37,21 @@ class Ai extends Dna.Component {
 }
 
 class Monster extends Dna.Component {
-  constructor(hp, hpText) {
+  constructor(hp, hpSlider) {
     super();
 
     this.maxHp = hp;
     this.hp = hp;
 
-    this.hpText = hpText;
+    this.hpSlider = hpSlider;
 
     this.setHpText();
   }
 
   setHpText() {
-    this.hpText.text = this.hp + "/" + this.maxHp;
+    //this.hpText.text = this.hp + "/" + this.maxHp;
+    this.hpSlider.value = this.hp;
+    this.hpSlider.maxValue = this.maxHp;
   }
 
   takeDamage(damage) {
