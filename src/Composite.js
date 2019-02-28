@@ -29,7 +29,7 @@ class Composite {
   }
 
   //TODO do not need update/render functions here, remove from composite entirely
-  render() {}
+  render(context) {}
   update() {}
 
   updateAll(deltaTime) {
@@ -54,9 +54,9 @@ class Composite {
   }
   */
 
-  renderAll() {
+  renderAll(context) {
     let currDraw = {
-      context: this.getContext(),
+      context: context,
 
       x: this.transform.x,
       y: this.transform.y,
@@ -68,9 +68,9 @@ class Composite {
     };
     updateContext(currDraw);
 
-    this.render();
+    this.render(context);
     this.gameObjects.forEach(function(gameObject) {
-      gameObject.renderAll();
+      gameObject.renderAll(context);
     });
 
     restoreContext(currDraw);

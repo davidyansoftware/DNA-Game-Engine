@@ -20,8 +20,8 @@ class Text extends Component {
     this.font = options.font || DEFAULT.font;
   }
 
-  render() {
-    let ctx = this.gameObject.getContext();
+  render(ctx) {
+    //let ctx = this.gameObject.getContext();
 
     ctx.save();
     ctx.font = this.font;

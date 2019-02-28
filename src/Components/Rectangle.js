@@ -8,8 +8,8 @@ class Rectangle extends Component {
     this.width = options.width;
   }
 
-  render() {
-    let ctx = this.gameObject.getContext();
+  render(ctx) {
+    //let ctx = this.gameObject.getContext();
     ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
   }
 }

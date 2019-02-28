@@ -3,7 +3,7 @@ class Component {
 
   //TODO handleInput()?
   update(deltaTime) {}
-  render() {}
+  render(context) {}
 
   onDestroy() {}
 }

@@ -45,10 +45,10 @@ class GameObject extends Composite {
     this.components.splice(index, 1);
   }
 
-  render() {
+  render(ctx) {
     if (!this.active) return;
     this.components.forEach(function(component) {
-      component.render();
+      component.render(ctx);
     });
   }
   update(deltaTime) {

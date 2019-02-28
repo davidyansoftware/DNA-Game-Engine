@@ -117,7 +117,7 @@ let foreground = new Dna.StaticCanvas(
       new Dna.Components.Image(getImageOptions(tabImage))
     ]);
     //TODO fix this, dont depend on calling this
-    foreground.renderAll();
+    //foreground.renderAll();
   }
 );
 

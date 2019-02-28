@@ -12,6 +12,7 @@ class StaticCanvas extends Composite {
     //TODO this should be handled as part of scene class
     Promise.all(load).then(() => {
       start(this);
+      this.renderAll(this.ctx);
     });
   }
 
@@ -32,7 +33,7 @@ class StaticCanvas extends Composite {
     super.addGameObject(gameObject);
     this.clear();
     console.log(this);
-    this.renderAll();
+    this.renderAll(this.ctx);
   }
 }
 
@@ -67,7 +68,7 @@ class Canvas extends Composite {
 
     this.clear();
     this.updateAll(deltaTime);
-    this.renderAll();
+    this.renderAll(this.ctx);
 
     let self = this;
     window.requestAnimationFrame(function(currTime) {

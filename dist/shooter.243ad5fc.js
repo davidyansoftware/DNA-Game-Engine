@@ -212,11 +212,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var SPEED = 5;
 var RADIUS = 2; //const MAX_DISTANCE = 500;
@@ -238,7 +238,7 @@ function (_Dna$GameObject) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Bullet).call(this, parent, position, [])); // this is a nested object to handle rotation seperate from physics
 
-    _this.addGameObject(new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this)), {
+    _this.addGameObject(new Dna.GameObject(_assertThisInitialized(_this), {
       rotation: new Dna.Utilities.Radians(angle.radians - Math.PI / 2)
     }, [image]));
 
@@ -926,7 +926,7 @@ function (_Dna$GameObject) {
     _this3 = _possibleConstructorReturn(this, _getPrototypeOf(Gun).call(this, parent, position, []));
     _this3.angle = angle;
     var image = new Dna.Components.Image(GUN_STATES[0].gunData.spriteOptions[0]);
-    new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this3)), {}, [image]);
+    new Dna.GameObject(_assertThisInitialized(_this3), {}, [image]);
     _this3.gunImage = new _ImageAngle.ImageAngle(image, angle, GUN_STATES[0].gunData.spriteOptions, 1);
 
     _this3.addComponent(_this3.gunImage);
@@ -1164,11 +1164,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var heroUpImage = new Dna.Dom.Image(_up.default);
 var heroUpSideImage = new Dna.Dom.Image(_upside.default);
@@ -1222,8 +1222,8 @@ function (_Dna$GameObject) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HeroPrefab).call(this, canvas, {}, []));
     var image = new Dna.Components.Image(hero_default);
     image.updateOptions(heroDown);
-    var heroImage = new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this)), {}, [image]);
-    var reloadingText = new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this)), {
+    var heroImage = new Dna.GameObject(_assertThisInitialized(_this), {}, [image]);
+    var reloadingText = new Dna.GameObject(_assertThisInitialized(_this), {
       y: -20
     }, [new Dna.Components.Text({
       text: "RELOADING"
@@ -1241,7 +1241,7 @@ function (_Dna$GameObject) {
 
     _this.addComponent(new _ImageAngle.ImageAngle(image, unitAngle.angle, spriteOptions, 1));
 
-    var gun = new _Gun.Gun(_assertThisInitialized(_assertThisInitialized(_this)), {}, unitAngle.angle, hurtboxes, ammoText, reloadingText);
+    var gun = new _Gun.Gun(_assertThisInitialized(_this), {}, unitAngle.angle, hurtboxes, ammoText, reloadingText);
     var physics = new Dna.Components.SimplePhysics();
 
     _this.addComponent(physics);
@@ -1548,11 +1548,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var slimeUpImage = new Dna.Dom.Image(_slime1_back.default);
 var slimeSideImage = new Dna.Dom.Image(_slime1_side.default);
@@ -1600,10 +1600,10 @@ function (_Dna$GameObject) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Slime).call(this, canvas, position, []));
     var image = new Dna.Components.Image(slime_default);
     image.updateOptions(slimeDown);
-    new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this)), {}, [image]); //this.addComponent(image);
+    new Dna.GameObject(_assertThisInitialized(_this), {}, [image]); //this.addComponent(image);
 
     var hpText = new Dna.Components.Text({});
-    new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this)), {
+    new Dna.GameObject(_assertThisInitialized(_this), {
       y: -20
     }, [hpText]);
     var hurtbox = new Dna.Components.Hitcircle({
@@ -1637,7 +1637,7 @@ function (_Dna$GameObject) {
       radius: RADIUS,
       hurtboxes: heroHurtbox,
       onCollisionEnter: function onCollisionEnter(heroHurtbox) {
-        hero.unit.takeDamage(10, _assertThisInitialized(_assertThisInitialized(_this)));
+        hero.unit.takeDamage(10, _assertThisInitialized(_this));
       }
     }));
 
@@ -1891,8 +1891,7 @@ var foreground = new Dna.StaticCanvas(document.getElementById("foreground"), [wI
   new Dna.GameObject(gunControls, {
     y: 35
   }, [new Dna.Components.Image(getImageOptions(tabImage))]); //TODO fix this, dont depend on calling this
-
-  foreground.renderAll();
+  //foreground.renderAll();
 });
 var canvas = new Dna.Canvas(document.getElementById("canvas"));
 
@@ -1949,7 +1948,7 @@ var scene = new Dna.Scene([canvas], new Dna.Assets({
   guns: _GunData.gunAssets
 }), start);
 scene.load();
-},{"./HeroPrefab":"demos/shooter/HeroPrefab.js","./Boundary":"demos/shooter/Boundary.js","./Slime":"demos/shooter/Slime.js","./Crosshair":"demos/shooter/Crosshair.js","./GunData":"demos/shooter/GunData.js","./assets/tileset.png":"demos/shooter/assets/tileset.png","./assets/controls/w.png":"demos/shooter/assets/controls/w.png","./assets/controls/a.png":"demos/shooter/assets/controls/a.png","./assets/controls/s.png":"demos/shooter/assets/controls/s.png","./assets/controls/d.png":"demos/shooter/assets/controls/d.png","./assets/controls/tab.png":"demos/shooter/assets/controls/tab.png","./assets/controls/r.png":"demos/shooter/assets/controls/r.png","./assets/controls/mouse.png":"demos/shooter/assets/controls/mouse.png","./assets/controls/leftclick.png":"demos/shooter/assets/controls/leftclick.png"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./HeroPrefab":"demos/shooter/HeroPrefab.js","./Boundary":"demos/shooter/Boundary.js","./Slime":"demos/shooter/Slime.js","./Crosshair":"demos/shooter/Crosshair.js","./GunData":"demos/shooter/GunData.js","./assets/tileset.png":"demos/shooter/assets/tileset.png","./assets/controls/w.png":"demos/shooter/assets/controls/w.png","./assets/controls/a.png":"demos/shooter/assets/controls/a.png","./assets/controls/s.png":"demos/shooter/assets/controls/s.png","./assets/controls/d.png":"demos/shooter/assets/controls/d.png","./assets/controls/tab.png":"demos/shooter/assets/controls/tab.png","./assets/controls/r.png":"demos/shooter/assets/controls/r.png","./assets/controls/mouse.png":"demos/shooter/assets/controls/mouse.png","./assets/controls/leftclick.png":"demos/shooter/assets/controls/leftclick.png"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1976,7 +1975,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57037" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41939" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -2118,5 +2117,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","demos/shooter/shooter.js"], null)
+},{}]},{},["../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","demos/shooter/shooter.js"], null)
 //# sourceMappingURL=/shooter.243ad5fc.map

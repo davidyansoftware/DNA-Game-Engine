@@ -316,7 +316,7 @@ function () {
 
   }, {
     key: "render",
-    value: function render() {}
+    value: function render(context) {}
   }, {
     key: "update",
     value: function update() {}
@@ -345,9 +345,9 @@ function () {
 
   }, {
     key: "renderAll",
-    value: function renderAll() {
+    value: function renderAll(context) {
       var currDraw = {
-        context: this.getContext(),
+        context: context,
         x: this.transform.x,
         y: this.transform.y,
         rotation: this.transform.rotation || new _Angle.Degrees(0),
@@ -355,9 +355,9 @@ function () {
         yScale: this.transform.yScale || 1
       };
       updateContext(currDraw);
-      this.render();
+      this.render(context);
       this.gameObjects.forEach(function (gameObject) {
-        gameObject.renderAll();
+        gameObject.renderAll(context);
       });
       restoreContext(currDraw);
     }
@@ -591,6 +591,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
@@ -600,8 +602,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var StaticCanvas =
 /*#__PURE__*/
@@ -621,7 +621,9 @@ function (_Composite) {
     _this.transform = new _Transform.CanvasTransform(domCanvas); //TODO this should be handled as part of scene class
 
     Promise.all(load).then(function () {
-      start(_assertThisInitialized(_assertThisInitialized(_this)));
+      start(_assertThisInitialized(_this));
+
+      _this.renderAll(_this.ctx);
     });
     return _this;
   }
@@ -649,7 +651,7 @@ function (_Composite) {
 
       this.clear();
       console.log(this);
-      this.renderAll();
+      this.renderAll(this.ctx);
     }
   }]);
 
@@ -697,7 +699,7 @@ function (_Composite2) {
       this.prevTime = currTime;
       this.clear();
       this.updateAll(deltaTime);
-      this.renderAll();
+      this.renderAll(this.ctx);
       var self = this;
       window.requestAnimationFrame(function (currTime) {
         self.gameLoop(currTime);
@@ -748,11 +750,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var GameObject =
 /*#__PURE__*/
@@ -774,7 +776,7 @@ function (_Composite) {
     _this.dead = false; //this.dirty = false;
 
     _this.transform = new _Transform.Transform(transform);
-    _this.transform.gameObject = _assertThisInitialized(_assertThisInitialized(_this));
+    _this.transform.gameObject = _assertThisInitialized(_this);
     _this.components = [];
 
     for (var i = 0; i < components.length; i++) {
@@ -815,10 +817,10 @@ function (_Composite) {
     }
   }, {
     key: "render",
-    value: function render() {
+    value: function render(ctx) {
       if (!this.active) return;
       this.components.forEach(function (component) {
-        component.render();
+        component.render(ctx);
       });
     }
   }, {
@@ -906,7 +908,7 @@ function () {
     value: function update(deltaTime) {}
   }, {
     key: "render",
-    value: function render() {}
+    value: function render(context) {}
   }, {
     key: "onDestroy",
     value: function onDestroy() {}
@@ -1224,12 +1226,12 @@ function (_Component) {
     }
   }, {
     key: "render",
-    value: function render() {
+    value: function render(ctx) {
       var destWidth = this.destWidth === undefined ? this.width : this.destWidth;
       var destHeight = this.destHeight === undefined ? this.height : this.destHeight; //console.log(this.image);
 
       if (this.type === types.stretched) {
-        this.gameObject.getContext().drawImage(this.image, this._xIndex * this.width, this._yIndex * this.height, this.width, this.height, -destWidth / 2, -destHeight / 2, destWidth, destHeight);
+        ctx.drawImage(this.image, this._xIndex * this.width, this._yIndex * this.height, this.width, this.height, -destWidth / 2, -destHeight / 2, destWidth, destHeight);
       } else if (this.type === types.tiled) {
         //TODO this wont be bounded correctly
         var currTileX = -destWidth / 2;
@@ -1240,7 +1242,7 @@ function (_Component) {
           var currTileY = -destHeight / 2;
 
           while (currTileY < endTileY) {
-            this.gameObject.getContext().drawImage(this.image, this._xIndex * this.width, this._yIndex * this.height, this.width, this.height, currTileX, currTileY, this.width, this.height);
+            ctx.drawImage(this.image, this._xIndex * this.width, this._yIndex * this.height, this.width, this.height, currTileX, currTileY, this.width, this.height);
             currTileY += this.height;
           }
 
@@ -1266,7 +1268,7 @@ function (_Component) {
             var yRandom = getWeightedIndex(this.yWeight);
             var xTile = this._xIndex * this.width + xRandom * tileWidth;
             var yTile = this._yIndex * this.height + yRandom * tileHeight;
-            this.gameObject.getContext().drawImage(this.image, xTile, yTile, tileWidth, tileHeight, _currTileX, _currTileY, tileWidth, tileHeight);
+            ctx.drawImage(this.image, xTile, yTile, tileWidth, tileHeight, _currTileX, _currTileY, tileWidth, tileHeight);
             _currTileY += tileHeight;
           }
 
@@ -1275,7 +1277,7 @@ function (_Component) {
       } else {
         // default
         //TODO currently just draws at source size, may need to bound?
-        this.gameObject.getContext().drawImage(this.image, this._xIndex * this.width, this._yIndex * this.height, this.width, this.height, -this.width / 2, -this.height / 2, this.width, this.height);
+        ctx.drawImage(this.image, this._xIndex * this.width, this._yIndex * this.height, this.width, this.height, -this.width / 2, -this.height / 2, this.width, this.height);
       }
     }
   }]);
@@ -1409,9 +1411,9 @@ function (_Component) {
     }
   }, {
     key: "render",
-    value: function render() {
+    value: function render(ctx) {
       //TODO cache with dirty flag
-      var ctx = this.gameObject.getContext();
+      //let ctx = this.gameObject.getContext();
       ctx.save();
       ctx.strokeStyle = this.options.strokeStyle;
       ctx.fillStyle = this.options.fillStyle;
@@ -1485,8 +1487,8 @@ function (_Component) {
 
   _createClass(Rectangle, [{
     key: "render",
-    value: function render() {
-      var ctx = this.gameObject.getContext();
+    value: function render(ctx) {
+      //let ctx = this.gameObject.getContext();
       ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
     }
   }]);
@@ -1665,11 +1667,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var Hitcircle =
 /*#__PURE__*/
@@ -1695,7 +1697,7 @@ function (_Component) {
 
     _this.collidingWith = [];
 
-    _this.hitboxSet.push(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.hitboxSet.push(_assertThisInitialized(_this));
 
     return _this;
   }
@@ -1785,11 +1787,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var Hitbox =
 /*#__PURE__*/
@@ -1816,7 +1818,7 @@ function (_Component) {
 
     _this.collidingWith = [];
 
-    _this.hitboxSet.push(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.hitboxSet.push(_assertThisInitialized(_this));
 
     return _this;
   }
@@ -1944,8 +1946,8 @@ function (_Component) {
 
   _createClass(Text, [{
     key: "render",
-    value: function render() {
-      var ctx = this.gameObject.getContext();
+    value: function render(ctx) {
+      //let ctx = this.gameObject.getContext();
       ctx.save();
       ctx.font = this.font;
       ctx.fillStyle = this.fillStyle;
@@ -2613,7 +2615,7 @@ var Dna = {
   }
 };
 window.Dna = Dna;
-},{"./Canvas":"src/Canvas.js","./GameObject":"src/GameObject.js","./Component":"src/Component.js","./Scene":"src/Scene.js","./Components/Image":"src/Components/Image.js","./Components/SimplePhysics":"src/Components/SimplePhysics.js","./Components/Polygon":"src/Components/Polygon.js","./Components/Rectangle":"src/Components/Rectangle.js","./Components/Physics":"src/Components/Physics.js","./Components/Acceleration":"src/Components/Acceleration.js","./Components/Hitcircle":"src/Components/Hitcircle.js","./Components/Hitbox":"src/Components/Hitbox.js","./Components/Text":"src/Components/Text.js","./Components/Audio":"src/Components/Audio.js","./Utilities/Angle":"src/Utilities/Angle.js","./Utilities/Position":"src/Utilities/Position.js","./Input/Input":"src/Input/Input.js","./Input/Keyboard":"src/Input/Keyboard.js","./Input/Mouse":"src/Input/Mouse.js","./Dom/Image":"src/Dom/Image.js"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Canvas":"src/Canvas.js","./GameObject":"src/GameObject.js","./Component":"src/Component.js","./Scene":"src/Scene.js","./Components/Image":"src/Components/Image.js","./Components/SimplePhysics":"src/Components/SimplePhysics.js","./Components/Polygon":"src/Components/Polygon.js","./Components/Rectangle":"src/Components/Rectangle.js","./Components/Physics":"src/Components/Physics.js","./Components/Acceleration":"src/Components/Acceleration.js","./Components/Hitcircle":"src/Components/Hitcircle.js","./Components/Hitbox":"src/Components/Hitbox.js","./Components/Text":"src/Components/Text.js","./Components/Audio":"src/Components/Audio.js","./Utilities/Angle":"src/Utilities/Angle.js","./Utilities/Position":"src/Utilities/Position.js","./Input/Input":"src/Input/Input.js","./Input/Keyboard":"src/Input/Keyboard.js","./Input/Mouse":"src/Input/Mouse.js","./Dom/Image":"src/Dom/Image.js"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2640,7 +2642,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57037" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41939" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -2782,5 +2784,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/Dna.js"], null)
+},{}]},{},["../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/Dna.js"], null)
 //# sourceMappingURL=/Dna.ded6ca07.map

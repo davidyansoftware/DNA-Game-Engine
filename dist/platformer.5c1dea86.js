@@ -375,7 +375,7 @@ function (_Dna$GameObject) {
     _this2.addComponent(new HeroComponent(_this2.physics)); // this is not added to the gameObject until the attack is triggered
 
 
-    _this2.attackingPosition = new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this2)), {
+    _this2.attackingPosition = new Dna.GameObject(_assertThisInitialized(_this2), {
       x: 15
     });
     _this2.attackingHitbox = new Dna.Components.Hitbox({
@@ -798,11 +798,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var girlAttackImage = new Dna.Dom.Image(_attack.default);
 var girlWalkImage = new Dna.Dom.Image(_walk.default);
@@ -847,7 +847,7 @@ function (_Dna$GameObject) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Zombie).call(this, canvas, position, [new _Monster.AI(hero, 10)]));
     var image = new Dna.Components.Image(ZOMBIE_DEFAULT);
     image.updateOptions(girlWalk);
-    var imageObject = new Dna.GameObject(_assertThisInitialized(_assertThisInitialized(_this)), {}, [image]);
+    var imageObject = new Dna.GameObject(_assertThisInitialized(_this), {}, [image]);
 
     _this.addComponent(new _Monster.Facing(hero, imageObject));
 
@@ -930,7 +930,7 @@ var scene = new Dna.Scene([canvas], new Dna.Assets({
   zombie: _Zombie.zombieAssets
 }), start);
 scene.load();
-},{"./Hero":"demos/platformer/Hero.js","./Boundary":"demos/platformer/Boundary.js","./Platform":"demos/platformer/Platform.js","./Target":"demos/platformer/Target.js","./Zombie":"demos/platformer/Zombie.js"}],"C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Hero":"demos/platformer/Hero.js","./Boundary":"demos/platformer/Boundary.js","./Platform":"demos/platformer/Platform.js","./Target":"demos/platformer/Target.js","./Zombie":"demos/platformer/Zombie.js"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -957,7 +957,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63060" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41937" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -1099,5 +1099,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["C:/Users/David/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","demos/platformer/platformer.js"], null)
+},{}]},{},["../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","demos/platformer/platformer.js"], null)
 //# sourceMappingURL=/platformer.5c1dea86.map

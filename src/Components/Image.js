@@ -124,25 +124,23 @@ class Image extends Component {
     }
   }
 
-  render() {
+  render(ctx) {
     let destWidth = this.destWidth === undefined ? this.width : this.destWidth;
     let destHeight =
       this.destHeight === undefined ? this.height : this.destHeight;
     //console.log(this.image);
     if (this.type === types.stretched) {
-      this.gameObject
-        .getContext()
-        .drawImage(
-          this.image,
-          this._xIndex * this.width,
-          this._yIndex * this.height,
-          this.width,
-          this.height,
-          -destWidth / 2,
-          -destHeight / 2,
-          destWidth,
-          destHeight
-        );
+      ctx.drawImage(
+        this.image,
+        this._xIndex * this.width,
+        this._yIndex * this.height,
+        this.width,
+        this.height,
+        -destWidth / 2,
+        -destHeight / 2,
+        destWidth,
+        destHeight
+      );
     } else if (this.type === types.tiled) {
       //TODO this wont be bounded correctly
       let currTileX = -destWidth / 2;
@@ -152,19 +150,17 @@ class Image extends Component {
       while (currTileX < endTileX) {
         let currTileY = -destHeight / 2;
         while (currTileY < endTileY) {
-          this.gameObject
-            .getContext()
-            .drawImage(
-              this.image,
-              this._xIndex * this.width,
-              this._yIndex * this.height,
-              this.width,
-              this.height,
-              currTileX,
-              currTileY,
-              this.width,
-              this.height
-            );
+          ctx.drawImage(
+            this.image,
+            this._xIndex * this.width,
+            this._yIndex * this.height,
+            this.width,
+            this.height,
+            currTileX,
+            currTileY,
+            this.width,
+            this.height
+          );
 
           currTileY += this.height;
         }
@@ -191,19 +187,17 @@ class Image extends Component {
           let xTile = this._xIndex * this.width + xRandom * tileWidth;
           let yTile = this._yIndex * this.height + yRandom * tileHeight;
 
-          this.gameObject
-            .getContext()
-            .drawImage(
-              this.image,
-              xTile,
-              yTile,
-              tileWidth,
-              tileHeight,
-              currTileX,
-              currTileY,
-              tileWidth,
-              tileHeight
-            );
+          ctx.drawImage(
+            this.image,
+            xTile,
+            yTile,
+            tileWidth,
+            tileHeight,
+            currTileX,
+            currTileY,
+            tileWidth,
+            tileHeight
+          );
 
           currTileY += tileHeight;
         }
@@ -212,19 +206,17 @@ class Image extends Component {
     } else {
       // default
       //TODO currently just draws at source size, may need to bound?
-      this.gameObject
-        .getContext()
-        .drawImage(
-          this.image,
-          this._xIndex * this.width,
-          this._yIndex * this.height,
-          this.width,
-          this.height,
-          -this.width / 2,
-          -this.height / 2,
-          this.width,
-          this.height
-        );
+      ctx.drawImage(
+        this.image,
+        this._xIndex * this.width,
+        this._yIndex * this.height,
+        this.width,
+        this.height,
+        -this.width / 2,
+        -this.height / 2,
+        this.width,
+        this.height
+      );
     }
   }
 }
