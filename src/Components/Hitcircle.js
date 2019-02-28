@@ -1,22 +1,10 @@
-import { Component } from "../Component";
+import { HitEntity } from "./HitEntity";
 
-class Hitcircle extends Component {
+class Hitcircle extends HitEntity {
   constructor(options) {
-    super();
+    super(options);
 
     this.radius = options.radius || 10;
-
-    //TODO generalize this behavior in a superclass
-    this.hurtboxes = options.hurtboxes || [];
-    this.hitboxSet = options.hitboxSet || [];
-
-    this.onCollision = options.onCollision || function() {};
-    this.onCollisionEnter = options.onCollisionEnter || function() {};
-    this.onCollisionExit = options.onCollisionExit || function() {};
-
-    this.collidingWith = [];
-
-    this.hitboxSet.push(this);
   }
 
   update(deltaTime) {
@@ -39,11 +27,6 @@ class Hitcircle extends Component {
         }
       }
     }
-  }
-
-  onDestroy() {
-    let index = this.hitboxSet.indexOf(this);
-    this.hitboxSet.splice(index, 1);
   }
 
   //TODO handle rotation??
@@ -70,10 +53,6 @@ class Hitcircle extends Component {
         Math.pow(thisCenter.y - hitcircleCenter.y, 2)
     );
     return distanceBetween < this.radius + hitcircle.radius;
-  }
-
-  clearCollisions() {
-    this.collidingWith = [];
   }
 }
 

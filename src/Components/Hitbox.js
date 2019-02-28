@@ -1,23 +1,11 @@
-import { Component } from "../Component";
+import { HitEntity } from "./HitEntity";
 
-class Hitbox extends Component {
+class Hitbox extends HitEntity {
   constructor(options) {
-    super();
+    super(options);
 
     this.width = options.width || 10;
     this.height = options.height || 10;
-
-    //TODO generalize this behavior in a superclass
-    this.hurtboxes = options.hurtboxes || [];
-    this.hitboxSet = options.hitboxSet || [];
-
-    this.onCollision = options.onCollision || function() {};
-    this.onCollisionEnter = options.onCollisionEnter || function() {};
-    this.onCollisionExit = options.onCollisionExit || function() {};
-
-    this.collidingWith = [];
-
-    this.hitboxSet.push(this);
   }
 
   update(deltaTime) {
@@ -40,11 +28,6 @@ class Hitbox extends Component {
         }
       }
     }
-  }
-
-  onDestroy() {
-    let index = this.hitboxSet.indexOf(this);
-    this.hitboxSet.splice(index, 1);
   }
 
   //TODO handle rotation?? use absoluteposition(x,y)
@@ -76,10 +59,6 @@ class Hitbox extends Component {
       return false;
 
     return true;
-  }
-
-  clearCollisions() {
-    this.collidingWith = [];
   }
 }
 
