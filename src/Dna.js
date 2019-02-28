@@ -14,6 +14,7 @@ import { Hitcircle } from "./Components/Hitcircle";
 import { Hitbox } from "./Components/Hitbox";
 import { Text } from "./Components/Text";
 import { Audio } from "./Components/Audio";
+import { Slider } from "./Components/Slider";
 
 //import { Vector } from "./Utilities/Vector";
 //import { Coordinates } from "./Utilities/Coordinates";
@@ -47,7 +48,8 @@ let Dna = {
     Hitcircle: Hitcircle,
     Hitbox: Hitbox,
     Text: Text,
-    Audio: Audio
+    Audio: Audio,
+    Slider: Slider
   },
   Utilities: {
     Degrees: Degrees,
