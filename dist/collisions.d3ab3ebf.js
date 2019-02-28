@@ -331,111 +331,107 @@ var _Boundary = require("./Boundary");
 
 var RADIUS = 20;
 var canvas = new Dna.Canvas(document.getElementById("canvas"));
-var gravity = new Dna.Components.SimplePhysics({
-  xy: 5
-}); //TODO handle mouse input
 
-var circleInput = {
-  87: "up",
-  83: "down",
-  65: "left",
-  68: "right" //up: 87,
-  //down: 83,
-  //left: 65,
-  //right: 68
-  //jump: 32
-  //secondary: 17
+function start() {
+  var gravity = new Dna.Components.SimplePhysics({
+    xy: 5
+  }); //TODO handle mouse input
 
-};
-var circleKeyboard = new Dna.Input.Keyboard(circleInput);
-var rectInput = {
-  38: "up",
-  40: "down",
-  37: "left",
-  39: "right" //up: 38,
-  //down: 40,
-  //left: 37,
-  //right: 39
+  var circleInput = {
+    87: "up",
+    83: "down",
+    65: "left",
+    68: "right"
+  };
+  var circleKeyboard = new Dna.Input.Keyboard(circleInput);
+  var rectInput = {
+    38: "up",
+    40: "down",
+    37: "left",
+    39: "right"
+  };
+  var rectKeyboard = new Dna.Input.Keyboard(rectInput); //let hero = new Hero(canvas, {}, circleKeyboard);
 
-};
-var rectKeyboard = new Dna.Input.Keyboard(rectInput); //let hero = new Hero(canvas, {}, circleKeyboard);
+  var circle = new Dna.GameObject(canvas, {
+    x: -30
+  }, [new Dna.Components.Polygon({
+    vert: 0,
+    radius: RADIUS
+  })]);
+  var circlePhysics = new Dna.Components.SimplePhysics();
+  var circleHeroComponent = new _Unit.Unit(circleKeyboard, circlePhysics);
+  var circleHurtcircle = new Dna.Components.Hitcircle({
+    radius: RADIUS
+  });
+  circle.addComponent(circlePhysics);
+  circle.addComponent(circleHeroComponent);
+  circle.addComponent(circleHurtcircle);
+  var rect = new Dna.GameObject(canvas, {
+    x: 30
+  }, [new Dna.Components.Rectangle({
+    width: RADIUS * 2,
+    height: RADIUS * 2
+  })]);
+  var rectPhysics = new Dna.Components.SimplePhysics();
+  var rectHeroComponent = new _Unit.Unit(rectKeyboard, rectPhysics);
+  var rectHurtbox = new Dna.Components.Hitbox({
+    width: RADIUS * 2,
+    height: RADIUS * 2
+  });
+  rect.addComponent(rectPhysics);
+  rect.addComponent(rectHeroComponent);
+  rect.addComponent(rectHurtbox);
+  var circleHitcircle = new Dna.Components.Hitcircle({
+    radius: RADIUS,
+    hurtboxes: [rectHurtbox],
+    onCollision: function onCollision(hurtbox) {
+      //TODO these should be using absolute positions
+      var xOffset = this.radius + hurtbox.width / 2;
+      var leftLimit = hurtbox.gameObject.transform.x - xOffset;
+      var rightLimit = hurtbox.gameObject.transform.x + xOffset;
 
-var circle = new Dna.GameObject(canvas, {
-  x: -30
-}, [new Dna.Components.Polygon({
-  vert: 0,
-  radius: RADIUS
-})]);
-var circlePhysics = new Dna.Components.SimplePhysics();
-var circleHeroComponent = new _Unit.Unit(circleKeyboard, circlePhysics);
-var circleHurtcircle = new Dna.Components.Hitcircle({
-  radius: RADIUS
-});
-circle.addComponent(circlePhysics);
-circle.addComponent(circleHeroComponent);
-circle.addComponent(circleHurtcircle);
-var rect = new Dna.GameObject(canvas, {
-  x: 30
-}, [new Dna.Components.Rectangle({
-  width: RADIUS * 2,
-  height: RADIUS * 2
-})]);
-var rectPhysics = new Dna.Components.SimplePhysics();
-var rectHeroComponent = new _Unit.Unit(rectKeyboard, rectPhysics);
-var rectHurtbox = new Dna.Components.Hitbox({
-  width: RADIUS * 2,
-  height: RADIUS * 2
-});
-rect.addComponent(rectPhysics);
-rect.addComponent(rectHeroComponent);
-rect.addComponent(rectHurtbox);
-var circleHitcircle = new Dna.Components.Hitcircle({
-  radius: RADIUS,
-  hurtboxes: [rectHurtbox],
-  onCollision: function onCollision(hurtbox) {
-    //TODO these should be using absolute positions
-    var xOffset = this.radius + hurtbox.width / 2;
-    var leftLimit = hurtbox.gameObject.transform.x - xOffset;
-    var rightLimit = hurtbox.gameObject.transform.x + xOffset;
+      if (this.gameObject.transform.prevX <= leftLimit && this.gameObject.transform.x > leftLimit) {
+        this.gameObject.transform.x = leftLimit;
+      }
 
-    if (this.gameObject.transform.prevX <= leftLimit && this.gameObject.transform.x > leftLimit) {
-      this.gameObject.transform.x = leftLimit;
+      if (this.gameObject.transform.prevX >= rightLimit && this.gameObject.transform.x < rightLimit) {
+        this.gameObject.transform.x = rightLimit;
+      }
+
+      var yOffset = this.radius + hurtbox.height / 2;
+      var topLimit = hurtbox.gameObject.transform.y - yOffset;
+      var bottomLimit = hurtbox.gameObject.transform.y + yOffset;
+
+      if (this.gameObject.transform.prevY <= topLimit && this.gameObject.transform.y > topLimit) {
+        this.gameObject.transform.y = topLimit;
+      }
+
+      if (this.gameObject.transform.prevY >= bottomLimit && this.gameObject.transform.y < bottomLimit) {
+        this.gameObject.transform.y = bottomLimit;
+      }
     }
+  });
+  var rectHitbox = new Dna.Components.Hitbox({
+    width: RADIUS * 2,
+    height: RADIUS * 2,
+    hurtboxes: [circleHurtcircle]
+  });
+  rect.addComponent(rectHitbox);
+  circle.addComponent(circleHitcircle); //TODO normalize callback by using alignment?? top, bottom, left, right
 
-    if (this.gameObject.transform.prevX >= rightLimit && this.gameObject.transform.x < rightLimit) {
-      this.gameObject.transform.x = rightLimit;
-    }
+  var SHORT = 10;
+  var LONG = 500;
+  var OFFSET = 100;
+  var hurtboxes = [circleHurtcircle, rectHurtbox]; //let hurtboxes = [hero.hurtbox];
 
-    var yOffset = this.radius + hurtbox.height / 2;
-    var topLimit = hurtbox.gameObject.transform.y - yOffset;
-    var bottomLimit = hurtbox.gameObject.transform.y + yOffset;
+  var topBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.TOP, -OFFSET, LONG, SHORT, hurtboxes);
+  var bottomBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.BOTTOM, OFFSET, LONG, SHORT, hurtboxes);
+  var leftBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.LEFT, -OFFSET, SHORT, LONG, hurtboxes);
+  var rightBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.RIGHT, OFFSET, SHORT, LONG, hurtboxes);
+}
 
-    if (this.gameObject.transform.prevY <= topLimit && this.gameObject.transform.y > topLimit) {
-      this.gameObject.transform.y = topLimit;
-    }
-
-    if (this.gameObject.transform.prevY >= bottomLimit && this.gameObject.transform.y < bottomLimit) {
-      this.gameObject.transform.y = bottomLimit;
-    }
-  }
-});
-var rectHitbox = new Dna.Components.Hitbox({
-  width: RADIUS * 2,
-  height: RADIUS * 2,
-  hurtboxes: [circleHurtcircle]
-});
-rect.addComponent(rectHitbox);
-circle.addComponent(circleHitcircle); //TODO normalize callback by using alignment?? top, bottom, left, right
-
-var SHORT = 10;
-var LONG = 500;
-var OFFSET = 100;
-var hurtboxes = [circleHurtcircle, rectHurtbox]; //let hurtboxes = [hero.hurtbox];
-
-var topBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.TOP, -OFFSET, LONG, SHORT, hurtboxes);
-var bottomBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.BOTTOM, OFFSET, LONG, SHORT, hurtboxes);
-var leftBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.LEFT, -OFFSET, SHORT, LONG, hurtboxes);
-var rightBoundary = new _Boundary.Boundary(canvas, _Boundary.Alignments.RIGHT, OFFSET, SHORT, LONG, hurtboxes);
+var scene = new Dna.Scene([canvas], new Dna.Assets(), start);
+scene.load();
 },{"./Unit":"Unit.js","./Boundary":"Boundary.js"}],"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -463,7 +459,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33399" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40153" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

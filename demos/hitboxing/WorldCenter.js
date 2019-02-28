@@ -6,12 +6,12 @@ class WorldCenter extends Dna.Components.Polygon {
     this.target = target;
   }
 
-  render() {
+  render(ctx) {
     let absoluteCenter = this.target.transform.getAbsoluteCenter();
     this.gameObject.transform.x = absoluteCenter.x;
     this.gameObject.transform.y = absoluteCenter.y;
 
-    super.render();
+    super.render(ctx);
   }
 }
 

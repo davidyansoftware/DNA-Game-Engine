@@ -303,13 +303,13 @@ function (_Dna$Components$Polyg) {
     }
   }, {
     key: "render",
-    value: function render() {
+    value: function render(ctx) {
       var absoluteCenter = this.gameObject.transform.getAbsoluteCenter();
       var dx = this.mouse.x - absoluteCenter.x;
       var dy = this.mouse.y - absoluteCenter.y;
       this.gameObject.transform.rotation = new Dna.Utilities.Radians(Math.atan2(dy, dx) + Math.PI / 2);
 
-      _get(_getPrototypeOf(Body.prototype), "render", this).call(this);
+      _get(_getPrototypeOf(Body.prototype), "render", this).call(this, ctx);
     }
   }]);
 
@@ -368,12 +368,12 @@ function (_Dna$Components$Polyg) {
 
   _createClass(WorldCenter, [{
     key: "render",
-    value: function render() {
+    value: function render(ctx) {
       var absoluteCenter = this.target.transform.getAbsoluteCenter();
       this.gameObject.transform.x = absoluteCenter.x;
       this.gameObject.transform.y = absoluteCenter.y;
 
-      _get(_getPrototypeOf(WorldCenter.prototype), "render", this).call(this);
+      _get(_getPrototypeOf(WorldCenter.prototype), "render", this).call(this, ctx);
     }
   }]);
 
@@ -461,28 +461,34 @@ exports.Player = Player;
 var _Player = require("./Player");
 
 var canvas = new Dna.Canvas(document.getElementById("canvas"));
-var input = {
-  87: "up",
-  83: "down",
-  65: "left",
-  68: "right" //up: 87,
-  //down: 83,
-  //left: 65,
-  //right: 68
 
-};
-var keyboard = new Dna.Input.Keyboard(input);
+function start() {
+  var input = {
+    87: "up",
+    83: "down",
+    65: "left",
+    68: "right" //up: 87,
+    //down: 83,
+    //left: 65,
+    //right: 68
 
-function onLeftClick(mouse) {
-  player.leftHand.moveTo(mouse.x, mouse.y);
+  };
+  var keyboard = new Dna.Input.Keyboard(input);
+
+  function onLeftClick(mouse) {
+    player.leftHand.moveTo(mouse.x, mouse.y);
+  }
+
+  function onRightClick(mouse) {
+    player.rightHand.moveTo(mouse.x, mouse.y);
+  }
+
+  var mouse = new Dna.Input.Mouse(canvas, onLeftClick, onRightClick);
+  var player = new _Player.Player(canvas, keyboard, mouse);
 }
 
-function onRightClick(mouse) {
-  player.rightHand.moveTo(mouse.x, mouse.y);
-}
-
-var mouse = new Dna.Input.Mouse(canvas, onLeftClick, onRightClick);
-var player = new _Player.Player(canvas, keyboard, mouse);
+var scene = new Dna.Scene([canvas], new Dna.Assets(), start);
+scene.load();
 },{"./Player":"Player.js"}],"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -510,7 +516,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39473" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37927" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -43,7 +43,7 @@ class Body extends Dna.Components.Polygon {
     super.update(deltaTime);
   }
 
-  render() {
+  render(ctx) {
     let absoluteCenter = this.gameObject.transform.getAbsoluteCenter();
     let dx = this.mouse.x - absoluteCenter.x;
     let dy = this.mouse.y - absoluteCenter.y;
@@ -51,7 +51,7 @@ class Body extends Dna.Components.Polygon {
       Math.atan2(dy, dx) + Math.PI / 2
     );
 
-    super.render();
+    super.render(ctx);
   }
 }
 
