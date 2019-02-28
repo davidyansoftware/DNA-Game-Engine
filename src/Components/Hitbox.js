@@ -12,18 +12,16 @@ class Hitbox extends HitEntity {
     let num = this.hurtboxes.length;
     for (let i = 0; i < num; i++) {
       let hurtbox = this.hurtboxes[i];
-      //TODO maybe use a hash, not array
-      let collidingWithIndex = this.collidingWith.indexOf(hurtbox);
-      let prevColliding = collidingWithIndex >= 0;
+      let prevColliding = this.collidingWith[hurtbox];
       if (hurtbox.collidingWithHitbox(this)) {
         if (!prevColliding) {
-          this.collidingWith.push(hurtbox);
+          this.collidingWith[hurtbox] = true;
           this.onCollisionEnter(hurtbox);
         }
         this.onCollision(hurtbox);
       } else {
         if (prevColliding) {
-          this.collidingWith.splice(collidingWithIndex, 1);
+          this.collidingWith[hurtbox] = false;
           this.onCollisionExit(hurtbox);
         }
       }

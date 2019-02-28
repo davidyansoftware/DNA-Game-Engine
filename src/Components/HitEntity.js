@@ -11,7 +11,7 @@ class HitEntity extends Component {
     this.onCollisionEnter = options.onCollisionEnter || function() {};
     this.onCollisionExit = options.onCollisionExit || function() {};
 
-    this.collidingWith = [];
+    this.collidingWith = {};
 
     this.hitboxSet.push(this);
   }
@@ -22,7 +22,7 @@ class HitEntity extends Component {
   }
 
   clearCollisions() {
-    this.collidingWith = [];
+    this.collidingWith = {};
   }
 }
 
