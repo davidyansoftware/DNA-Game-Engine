@@ -26,7 +26,7 @@ class Slider extends Component {
       -this.width / 2,
       -this.height / 2,
       this.width * fillPercent,
-      this.height * fillPercent
+      this.height
     );
   }
 }
