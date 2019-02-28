@@ -4,11 +4,12 @@
   "description": "a 2d HTML5 game engine",
   "main": "src/Dna.js",
   "scripts": {
-    "shooter": "parcel demos/shooter/shooter.html",
-    "platformer": "parcel demos/platformer/platformer.html",
-    "astroids": "parcel demos/astroids/astroids.html",
-    "collisions": "parcel demos/collisions/collisions.html",
-    "hitboxing": "parcel demos/hitboxing/hitboxing.html"
+    "build": "parcel build src/Dna.js --out-dir dist",
+    "shooter": "parcel demos/shooter/shooter.html --out-dir local",
+    "platformer": "parcel demos/platformer/platformer.html --out-dir local",
+    "astroids": "parcel demos/astroids/astroids.html --out-dir local",
+    "collisions": "parcel demos/collisions/collisions.html --out-dir local",
+    "hitboxing": "parcel demos/hitboxing/hitboxing.html --out-dir local"
   },
   "author": "David Yan",
   "license": "ISC",
