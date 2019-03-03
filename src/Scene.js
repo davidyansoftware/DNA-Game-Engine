@@ -23,7 +23,6 @@ class Scene {
   //TODO handle gameloop from here
   load() {
     this.assets.load.then(() => {
-      console.log(this);
       this.start();
       window.requestAnimationFrame(currTime => {
         for (let canvas of this.canvases) {
@@ -41,26 +40,12 @@ class Assets {
     this.load = new Promise(resolve => {
       let assets = [];
       for (let asset in this.assets) {
-        console.log(asset);
-        console.log(this.assets);
         //TODO get function?
         assets.push(this.assets[asset].load);
       }
       Promise.all(assets).then(resolve);
     });
   }
-
-  /*
-  load() {
-    return new Promise(resolve => {
-      let assets = [];
-      for (let asset in this.assets) {
-        assets.push(this.assets[asset].load);
-      }
-      Promise.all(assets).then(resolve);
-    });
-  }
-  */
 
   get(key) {
     return this.assets[key];

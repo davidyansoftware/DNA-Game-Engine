@@ -161,12 +161,6 @@ function start() {
     enemyHurtboxes
   );
   slimeSpawner.delayedSpawn();
-  /*
-  new Slime(canvas, { x: 200, y: 150 }, hero, heroHurtbox, enemyHurtboxes);
-  new Slime(canvas, { x: 200, y: -150 }, hero, heroHurtbox, enemyHurtboxes);
-  new Slime(canvas, { x: -200, y: 150 }, hero, heroHurtbox, enemyHurtboxes);
-  new Slime(canvas, { x: -200, y: -150 }, hero, heroHurtbox, enemyHurtboxes);
-  */
 
   const X_OFFSET = 350;
   const Y_OFFSET = 250;

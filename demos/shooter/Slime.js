@@ -129,10 +129,9 @@ class SlimeSpawner {
     setTimeout(() => {
       this.spawn();
     }, 2000);
-    //TODO announce here?
+
     this.announcer.text = "LEVEL " + (this.level + 1);
     this.announcer.gameObject.setActive(true);
-
     setTimeout(() => {
       this.announcer.gameObject.setActive(false);
     }, 2000);
@@ -140,7 +139,6 @@ class SlimeSpawner {
 
   spawn() {
     for (let position of spawnPositions) {
-      console.log(position);
       this.monsters.push(
         new Slime(
           this.canvas,

@@ -7,7 +7,6 @@ class ImageAngle extends Dna.Component {
     this.options = options;
     this.defaultXScale = defaultXScale;
 
-    console.log(this.options);
     this.offset = Math.PI / this.options.length;
   }
 
@@ -20,9 +19,6 @@ class ImageAngle extends Dna.Component {
       this.options.length;
 
     this.image.updateOptions(this.options[index]);
-
-    //console.log(this.image.height);
-    //console.log(this.image.width);
 
     this.image.gameObject.transform.xScale =
       angle < Math.PI ? this.defaultXScale : -this.defaultXScale;
