@@ -104,8 +104,9 @@ const spawnPositions = [
 ];
 
 class SlimeSpawner {
-  constructor(canvas, hero, heroHurtbox, enemyHurtboxes) {
+  constructor(canvas, announcer, hero, heroHurtbox, enemyHurtboxes) {
     this.canvas = canvas;
+    this.announcer = announcer;
     this.hero = hero;
     this.heroHurtbox = heroHurtbox;
     this.enemyHurtboxes = enemyHurtboxes;
@@ -119,6 +120,7 @@ class SlimeSpawner {
     this.monsters.splice(index, 1);
 
     if (this.monsters.length <= 0) {
+      this.level++;
       this.delayedSpawn();
     }
   }
@@ -128,6 +130,12 @@ class SlimeSpawner {
       this.spawn();
     }, 2000);
     //TODO announce here?
+    this.announcer.text = "LEVEL " + (this.level + 1);
+    this.announcer.gameObject.setActive(true);
+
+    setTimeout(() => {
+      this.announcer.gameObject.setActive(false);
+    }, 2000);
   }
 
   spawn() {

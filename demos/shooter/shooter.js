@@ -147,8 +147,15 @@ function start() {
     heroHurtbox
   );
 
+  let announcer = new Dna.Components.Text({
+    text: "testing",
+    font: "48px serif"
+  });
+  new Dna.GameObject(canvas, { y: -100 }, [announcer]);
+
   let slimeSpawner = new SlimeSpawner(
     canvas,
+    announcer,
     hero,
     heroHurtbox,
     enemyHurtboxes
