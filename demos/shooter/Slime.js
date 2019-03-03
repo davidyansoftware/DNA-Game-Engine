@@ -56,7 +56,7 @@ class Slime extends Dna.GameObject {
       height: 5,
       emptyColor: "gray"
     });
-    new Dna.GameObject(this, { y: -20 }, [hpSlider]);
+    new Dna.GameObject(this, { y: -15 }, [hpSlider]);
 
     let hurtbox = new Dna.Components.Hitcircle({
       radius: RADIUS,

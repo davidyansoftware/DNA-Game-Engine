@@ -90,7 +90,7 @@ let Pistol = {
     pistolSide,
     pistolDiagUp
   ],
-  spread: new Dna.Utilities.Radians(Math.PI / 8),
+  spread: new Dna.Utilities.Radians(Math.PI / 16),
   generateBullets(gun, hurtboxes) {
     new Bullet(
       gun.getCanvas(),
