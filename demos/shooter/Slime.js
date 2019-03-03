@@ -42,7 +42,7 @@ let slimeDown = {
 const spriteOptions = [slimeUp, slimeSide, slimeDown, slimeSide];
 
 class Slime extends Dna.GameObject {
-  constructor(canvas, position, hero, heroHurtbox, enemyHurtboxes) {
+  constructor(canvas, position, hero, heroHurtbox, enemyHurtboxes, spawner) {
     super(canvas, position, []);
 
     let image = new Dna.Components.Image(slime_default);
@@ -76,7 +76,7 @@ class Slime extends Dna.GameObject {
 
     this.addComponent(new Movement(physics, unitAngle.angle));
 
-    this.unit = new Monster(MAX_HP, hpSlider);
+    this.unit = new Monster(MAX_HP, hpSlider, spawner);
     this.addComponent(this.unit);
 
     //TODO this logic should be reveresed, onhit should happen on hero, these stored in monsterHitboxes
@@ -96,4 +96,55 @@ class Slime extends Dna.GameObject {
   }
 }
 
-export { Slime, slimeAssets };
+const spawnPositions = [
+  { x: 200, y: 150 },
+  { x: 200, y: -150 },
+  { x: -200, y: 150 },
+  { x: -200, y: -150 }
+];
+
+class SlimeSpawner {
+  constructor(canvas, hero, heroHurtbox, enemyHurtboxes) {
+    this.canvas = canvas;
+    this.hero = hero;
+    this.heroHurtbox = heroHurtbox;
+    this.enemyHurtboxes = enemyHurtboxes;
+
+    this.level = 0;
+    this.monsters = [];
+  }
+
+  remove(slime) {
+    let index = this.monsters.indexOf(slime);
+    this.monsters.splice(index, 1);
+
+    if (this.monsters.length <= 0) {
+      this.delayedSpawn();
+    }
+  }
+
+  delayedSpawn() {
+    setTimeout(() => {
+      this.spawn();
+    }, 2000);
+    //TODO announce here?
+  }
+
+  spawn() {
+    for (let position of spawnPositions) {
+      console.log(position);
+      this.monsters.push(
+        new Slime(
+          this.canvas,
+          position,
+          this.hero,
+          this.heroHurtbox,
+          this.enemyHurtboxes,
+          this
+        )
+      );
+    }
+  }
+}
+
+export { Slime, SlimeSpawner, slimeAssets };

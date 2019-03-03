@@ -1,6 +1,6 @@
 import { HeroPrefab, heroAssets } from "./HeroPrefab";
 import { Boundary, Alignments } from "./Boundary";
-import { Slime, slimeAssets } from "./Slime";
+import { Slime, SlimeSpawner, slimeAssets } from "./Slime";
 import { Crosshair } from "./Crosshair";
 import { gunAssets } from "./GunData";
 
@@ -147,10 +147,19 @@ function start() {
     heroHurtbox
   );
 
+  let slimeSpawner = new SlimeSpawner(
+    canvas,
+    hero,
+    heroHurtbox,
+    enemyHurtboxes
+  );
+  slimeSpawner.delayedSpawn();
+  /*
   new Slime(canvas, { x: 200, y: 150 }, hero, heroHurtbox, enemyHurtboxes);
   new Slime(canvas, { x: 200, y: -150 }, hero, heroHurtbox, enemyHurtboxes);
   new Slime(canvas, { x: -200, y: 150 }, hero, heroHurtbox, enemyHurtboxes);
   new Slime(canvas, { x: -200, y: -150 }, hero, heroHurtbox, enemyHurtboxes);
+  */
 
   const X_OFFSET = 350;
   const Y_OFFSET = 250;

@@ -37,13 +37,15 @@ class Ai extends Dna.Component {
 }
 
 class Monster extends Dna.Component {
-  constructor(hp, hpSlider) {
+  constructor(hp, hpSlider, spawner) {
     super();
 
     this.maxHp = hp;
     this.hp = hp;
 
     this.hpSlider = hpSlider;
+
+    this.spawner = spawner;
 
     this.setHpText();
   }
@@ -59,8 +61,13 @@ class Monster extends Dna.Component {
     this.setHpText();
 
     if (this.hp <= 0) {
-      this.gameObject.destroy();
+      this.die();
     }
+  }
+
+  die() {
+    this.spawner.remove(this.gameObject);
+    this.gameObject.destroy();
   }
 
   knockback(direction) {
