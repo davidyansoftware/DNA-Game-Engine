@@ -19,8 +19,6 @@ let default_sprite = {
   height: SPRITE_HEIGHT
 };
 
-//let heroRunImage = new Image();
-//heroRunImage.src = heroRunSprite;
 let hero_run = {
   image: heroRunImage,
   loop: true,
@@ -30,10 +28,7 @@ let hero_run = {
 
   startingColumn: 0,
   startingRow: 0
-  //framesPerRow: 6
 };
-//let heroImage = new Image();
-//heroImage.src = heroSprite;
 let hero_idle = {
   image: heroImage,
   loop: true,
@@ -49,7 +44,6 @@ let hero_idle = {
 let hero_fall = {
   image: heroImage,
   loop: true,
-  //onFinish: function() {},
 
   numberOfFrames: 2,
   ticksPerFrame: 5,
@@ -99,7 +93,6 @@ let hero_slash2 = {
   image: heroImage,
   loop: false,
   onFinish: function(image) {
-    //image.gameObject.finishAttack();
     image.updateOptions(hero_slash3);
     image.gameObject.attackingPosition.removeComponent(
       image.gameObject.attackingHitbox
@@ -153,12 +146,6 @@ class HeroComponent extends Dna.Component {
       //right: 68,
       //jump: 32, // space
       //attack: 17 // ctrl
-
-      //arrowkeys
-      //up: 38,
-      //down: 40,
-      //left: 37,
-      //right: 39,
       //jump: 90, // z
       //attack: 88 // x
       //secondary: 17
@@ -176,6 +163,7 @@ class HeroComponent extends Dna.Component {
 
   update(deltaTime) {
     //console.log(this.gameObject.attackingHitbox);
+    //console.log(this.gameObject.attacking, this.gameObject.grounded);
 
     let x = 0;
     if (this.keyboard.left) x -= 1;
@@ -209,7 +197,10 @@ class HeroComponent extends Dna.Component {
       this.physics.yv = -JUMP_SPEED;
       this.gameObject.grounded = false;
       this.gameObject.gravity.active = true;
-      this.gameObject.image.updateOptions(hero_jump);
+      //this.gameObject.image.updateOptions(hero_jump);
+
+      //this.gameObject.finishAttack(hero_jump);
+      this.gameObject.cancelAttack(hero_jump);
     }
   }
 }
@@ -269,15 +260,25 @@ class Hero extends Dna.GameObject {
     //}, 500);
   }
   finishAttack() {
-    console.log(this);
     this.attacking = false;
+
     //this.attackingPosition.removeComponent(this.attackingHitbox);
-    console.log("finishing attack");
-
-    //TODO this should be based on hero's current state
-    this.image.updateOptions(hero_idle);
-
     this.attackingHitbox.clearCollisions();
+
+    let nextAnimation = this.grounded
+      ? this.physics.speed == 0
+        ? hero_idle
+        : hero_run
+      : hero_fall;
+    this.image.updateOptions(nextAnimation);
+  }
+  cancelAttack(nextAnimation) {
+    this.attacking = false;
+
+    this.attackingPosition.removeComponent(this.attackingHitbox);
+    this.attackingHitbox.clearCollisions();
+
+    this.image.updateOptions(nextAnimation);
   }
 
   ground() {
