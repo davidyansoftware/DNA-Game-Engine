@@ -47,9 +47,11 @@ class Hero extends Dna.Component {
 
     console.log("taking damage: " + damage);
 
+    let angle = source.transform.getAngleToTransform(this.gameObject.transform);
+
     //TODO angle should be based on the angle the monster hit
     let knockbackPhysics = new Dna.Components.Physics({
-      angle: source.transform.getCurrentDirection(),
+      angle: new Dna.Utilities.Radians(angle),
       speed: 2,
       maxDistance: 20,
       callback: () => {

@@ -38,13 +38,7 @@ class Transform {
     this.prevY = this.y;
   }
 
-  getCurrentDirection() {
-    let dx = this.x - this.prevX;
-    let dy = this.y - this.prevY;
-
-    return new Radians(Math.atan2(dy, dx) + Math.PI / 2);
-  }
-
+  //TODO consolidate these to GetVectorToTransform?
   getAngleToTransform(other) {
     let thisCenter = this.getAbsoluteCenter();
     let otherCenter = other.getAbsoluteCenter();
