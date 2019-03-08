@@ -135,10 +135,13 @@ function start() {
 
   let hpBar = new Dna.Components.Slider({
     width: 125,
-    height: 25,
+    height: 20,
     emptyColor: "gray"
   });
   new Dna.GameObject(canvas, { x: -250, y: -200 }, [hpBar]);
+  new Dna.GameObject(canvas, { x: -300, y: -220 }, [
+    new Dna.Components.Text({ text: "HP:", font: "18px serif" })
+  ]);
 
   let ammoTextContainer = new Dna.GameObject(canvas, { x: 290, y: 205 });
   let gunText = new Dna.Components.Text({ font: "15px serif" });
