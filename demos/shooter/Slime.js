@@ -15,10 +15,11 @@ let slimeAssets = new Dna.Assets({
   down: slimeDownImage
 });
 
-const MAX_HP = 100;
 const RADIUS = 8;
-const SPEED = 1;
-const DAMAGE = 10;
+const BASE_HP = 100;
+const BASE_SPEED = 1;
+const BASE_DAMAGE = 10;
+const LEVEL_SCALING = 1.1;
 
 //TODO consolidate shared state to 1 object, allow image to read from its own values
 let slime_default = {
@@ -71,22 +72,27 @@ class Slime extends Dna.GameObject {
       new ImageAngle(image, unitAngle.angle, spriteOptions, -1)
     );
 
-    let physics = new Dna.Components.Physics({ speed: SPEED });
+    let speed = BASE_SPEED * Math.pow(LEVEL_SCALING, spawner.level);
+    console.log("SPEED:" + speed);
+    let physics = new Dna.Components.Physics({ speed: speed });
     this.addComponent(physics);
 
     this.addComponent(new Movement(physics, unitAngle.angle));
 
-    this.unit = new Monster(MAX_HP, hpSlider, spawner);
+    let maxHp = BASE_HP * Math.pow(LEVEL_SCALING, spawner.level);
+    console.log("MAX HP:" + maxHp);
+    this.unit = new Monster(maxHp, hpSlider, spawner);
     this.addComponent(this.unit);
 
     //TODO this logic should be reveresed, onhit should happen on hero, these stored in monsterHitboxes
     //TODO add via component array
+    let damage = BASE_DAMAGE * Math.pow(LEVEL_SCALING, spawner.level);
     this.addComponent(
       new Dna.Components.Hitcircle({
         radius: RADIUS,
         hurtboxes: heroHurtbox,
         onCollisionEnter: heroHurtbox => {
-          hero.unit.takeDamage(10, this);
+          hero.unit.takeDamage(damage, this);
         }
       })
     );
