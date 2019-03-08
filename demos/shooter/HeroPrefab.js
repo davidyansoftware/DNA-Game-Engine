@@ -62,7 +62,15 @@ const spriteOptions = [
 ];
 
 class HeroPrefab extends Dna.GameObject {
-  constructor(canvas, ammoText, mouse, crosshair, hurtboxes, heroHitbox) {
+  constructor(
+    canvas,
+    gunText,
+    ammoText,
+    mouse,
+    crosshair,
+    hurtboxes,
+    heroHitbox
+  ) {
     super(canvas, {}, []);
 
     let image = new Dna.Components.Image(hero_default);
@@ -91,6 +99,7 @@ class HeroPrefab extends Dna.GameObject {
       {},
       unitAngle.angle,
       hurtboxes,
+      gunText,
       ammoText,
       reloadingText
     );

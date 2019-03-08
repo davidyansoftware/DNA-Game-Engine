@@ -12,9 +12,10 @@ const GUN_STATES = [
 ];
 
 class GunComponent extends Dna.Component {
-  constructor(ammoText, reloadingText, gunImage, hurtboxes) {
+  constructor(gunText, ammoText, reloadingText, gunImage, hurtboxes) {
     super();
 
+    this.gunText = gunText;
     this.ammoText = ammoText;
     this.reloadingText = reloadingText;
     this.gunImage = gunImage;
@@ -41,6 +42,7 @@ class GunComponent extends Dna.Component {
       }
     );
 
+    this.updateGunText();
     this.updateAmmoText();
   }
 
@@ -113,7 +115,12 @@ class GunComponent extends Dna.Component {
 
     this.gunImage.options = this.gunState.gunData.spriteOptions;
 
+    this.updateGunText();
     this.updateAmmoText();
+  }
+
+  updateGunText() {
+    this.gunText.text = this.gunState.gunData.name;
   }
 
   updateAmmoText() {
@@ -138,7 +145,15 @@ class GunPosition extends Dna.Component {
 }
 
 class Gun extends Dna.GameObject {
-  constructor(parent, position, angle, hurtboxes, ammoText, reloadingText) {
+  constructor(
+    parent,
+    position,
+    angle,
+    hurtboxes,
+    gunText,
+    ammoText,
+    reloadingText
+  ) {
     console.log(parent);
     super(parent, position, []);
 
@@ -160,6 +175,7 @@ class Gun extends Dna.GameObject {
     this.addComponent(new GunPosition(angle));
 
     this.gun = new GunComponent(
+      gunText,
       ammoText,
       reloadingText,
       this.gunImage,

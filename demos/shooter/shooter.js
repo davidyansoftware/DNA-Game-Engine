@@ -128,11 +128,10 @@ function start() {
 
   let crosshair = new Crosshair(canvas, mouse);
 
-  let ammoTextContainer = new Dna.GameObject(canvas, { x: 300, y: 200 });
-  let ammoText = new Dna.Components.Text({});
-  new Dna.GameObject(ammoTextContainer, { y: -10 }, [
-    new Dna.Components.Text({ text: "AMMO" })
-  ]);
+  let ammoTextContainer = new Dna.GameObject(canvas, { x: 290, y: 205 });
+  let gunText = new Dna.Components.Text({ font: "15px serif" });
+  let ammoText = new Dna.Components.Text({ font: "15px serif" });
+  new Dna.GameObject(ammoTextContainer, { y: -10 }, [gunText]);
   new Dna.GameObject(ammoTextContainer, { y: 10 }, [ammoText]);
 
   let heroHurtbox = [];
@@ -140,6 +139,7 @@ function start() {
 
   let hero = new HeroPrefab(
     canvas,
+    gunText,
     ammoText,
     mouse,
     crosshair,
