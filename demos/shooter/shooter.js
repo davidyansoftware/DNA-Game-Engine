@@ -125,8 +125,14 @@ let canvas = new Dna.Canvas(document.getElementById("canvas"));
 
 function start() {
   let mouse = new Dna.Input.Mouse(canvas);
-
   let crosshair = new Crosshair(canvas, mouse);
+
+  let hpBar = new Dna.Components.Slider({
+    width: 125,
+    height: 25,
+    emptyColor: "gray"
+  });
+  new Dna.GameObject(canvas, { x: -250, y: -200 }, [hpBar]);
 
   let ammoTextContainer = new Dna.GameObject(canvas, { x: 290, y: 205 });
   let gunText = new Dna.Components.Text({ font: "15px serif" });
@@ -139,6 +145,7 @@ function start() {
 
   let hero = new HeroPrefab(
     canvas,
+    hpBar,
     gunText,
     ammoText,
     mouse,

@@ -73,14 +73,12 @@ class Slime extends Dna.GameObject {
     );
 
     let speed = BASE_SPEED * Math.pow(LEVEL_SCALING, spawner.level);
-    console.log("SPEED:" + speed);
     let physics = new Dna.Components.Physics({ speed: speed });
     this.addComponent(physics);
 
     this.addComponent(new Movement(physics, unitAngle.angle));
 
     let maxHp = BASE_HP * Math.pow(LEVEL_SCALING, spawner.level);
-    console.log("MAX HP:" + maxHp);
     this.unit = new Monster(maxHp, hpSlider, spawner);
     this.addComponent(this.unit);
 

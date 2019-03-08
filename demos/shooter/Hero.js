@@ -7,17 +7,7 @@ const TOTAL_AMMO = 100;
 const RELOAD_TIME = 2;
 
 class Hero extends Dna.Component {
-  constructor(
-    image,
-    ammoText,
-    reloadingText,
-    mouse,
-    angle,
-    physics,
-    hurtboxes,
-    gun,
-    audio
-  ) {
+  constructor(image, hpBar, mouse, angle, physics, gun, audio) {
     super();
 
     this.keyboard = new Dna.Input.Keyboard({
@@ -29,11 +19,11 @@ class Hero extends Dna.Component {
 
     this.image = image;
 
+    this.hpBar = hpBar;
+
     this.mouse = mouse;
     this.angle = angle;
     this.physics = physics;
-    //this.hurtboxes = hurtboxes;
-    //TODO dont need this if shooting is handled from gun component
     this.gun = gun;
     this.audio = audio;
 
@@ -46,6 +36,12 @@ class Hero extends Dna.Component {
     if (this.invulnerable > 0) return;
 
     console.log("taking damage: " + damage);
+    this.hpBar.value -= damage;
+
+    if (this.hpBar.value <= 0) {
+      this.hpBar.value = 0;
+      //TODO gameover here
+    }
 
     let angle = source.transform.getAngleToTransform(this.gameObject.transform);
 
