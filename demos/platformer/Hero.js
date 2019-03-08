@@ -205,7 +205,8 @@ class HeroComponent extends Dna.Component {
   }
 }
 
-class Hero extends Dna.GameObject {
+import { Unit } from "./Unit";
+class Hero extends Unit {
   constructor(parent, position, enemyHurtboxes) {
     super(parent, position, []);
 
@@ -214,6 +215,7 @@ class Hero extends Dna.GameObject {
     this.image.updateOptions(hero_idle);
     this.addComponent(this.image);
 
+    /*
     this.physics = new Dna.Components.SimplePhysics();
     this.addComponent(this.physics);
 
@@ -222,6 +224,7 @@ class Hero extends Dna.GameObject {
       accel: GRAVITY
     });
     this.addComponent(this.gravity);
+    */
 
     this.hurtbox = new Dna.Components.Hitbox({
       width: WIDTH,
@@ -279,20 +282,6 @@ class Hero extends Dna.GameObject {
     this.attackingHitbox.clearCollisions();
 
     this.image.updateOptions(nextAnimation);
-  }
-
-  ground() {
-    this.grounded = true;
-
-    this.gravity.active = false;
-    this.physics.yv = 0;
-  }
-
-  unground() {
-    this.grounded = false;
-    this.gravity.active = true;
-
-    console.log("unground");
   }
 }
 

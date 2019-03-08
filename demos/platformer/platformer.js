@@ -15,9 +15,17 @@ function start() {
   new Target(canvas, { y: 225 }, enemyHurtboxes);
 
   let hero = new Hero(canvas, {}, enemyHurtboxes);
+  let heroHurtboxes = [hero.hurtbox];
   let hurtboxes = [hero.hurtbox];
 
-  let zombie0 = new Zombie(canvas, {}, hero, hurtboxes, enemyHurtboxes);
+  let zombie0 = new Zombie(
+    canvas,
+    { y: -100 },
+    hero,
+    heroHurtboxes,
+    enemyHurtboxes
+  );
+  hurtboxes.push(zombie0.hurtbox);
 
   new Platform(canvas, { y: 150, x: -100 }, hurtboxes);
   new Platform(canvas, { y: 150, x: 100 }, hurtboxes);
@@ -63,16 +71,6 @@ function start() {
     hurtboxes
   );
 }
-
-/*
-import heroSprite from "./assets/hero/hero.png";
-import heroRunSprite from "./assets/hero/hero_run.png";
-
-let heroAssets = new Dna.Assets({
-  hero: heroSprite,
-  run: heroRunSprite
-});
-*/
 
 let scene = new Dna.Scene(
   [canvas],

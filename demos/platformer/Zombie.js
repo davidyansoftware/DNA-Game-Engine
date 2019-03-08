@@ -10,25 +10,24 @@ let zombieAssets = new Dna.Assets({
   walk: girlWalkImage
 });
 
+const WIDTH = 521 / 6;
+const HEIGHT = 576 / 6;
+
 const ZOMBIE_DEFAULT = {
   type: Dna.Components.Image.types.stretched,
   width: 521,
   height: 576,
   ticksPerFrame: 10,
 
-  destWidth: 521 / 6,
-  destHeight: 576 / 6
+  destWidth: WIDTH,
+  destHeight: HEIGHT
 };
-//let girlAttackImage = new Image();
-//girlAttackImage.src = girlAttackSprite;
 let girlAttack = {
   image: girlAttackImage,
   loop: false,
 
   numberOfFrames: 8
 };
-//let girlWalkImage = new Image();
-//girlWalkImage.src = girlWalkSprite;
 let girlWalk = {
   image: girlWalkImage,
   loop: true,
@@ -36,7 +35,8 @@ let girlWalk = {
   numberOfFrames: 10
 };
 
-class Zombie extends Dna.GameObject {
+import { Unit } from "./Unit";
+class Zombie extends Unit {
   constructor(canvas, position, hero, heroHurtbox, monsterHurtboxes) {
     super(canvas, position, [new AI(hero, 10)]);
 
@@ -45,6 +45,12 @@ class Zombie extends Dna.GameObject {
     let imageObject = new Dna.GameObject(this, {}, [image]);
 
     this.addComponent(new Facing(hero, imageObject));
+
+    this.hurtbox = new Dna.Components.Hitbox({
+      width: WIDTH,
+      height: HEIGHT
+    });
+    this.addComponent(this.hurtbox);
   }
 
   attack() {
