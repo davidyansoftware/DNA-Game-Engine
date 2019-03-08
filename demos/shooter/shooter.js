@@ -127,6 +127,12 @@ function start() {
   let mouse = new Dna.Input.Mouse(canvas);
   let crosshair = new Crosshair(canvas, mouse);
 
+  let announcer = new Dna.Components.Text({
+    text: "testing",
+    font: "48px serif"
+  });
+  new Dna.GameObject(canvas, { y: -100 }, [announcer]);
+
   let hpBar = new Dna.Components.Slider({
     width: 125,
     height: 25,
@@ -145,6 +151,7 @@ function start() {
 
   let hero = new HeroPrefab(
     canvas,
+    announcer,
     hpBar,
     gunText,
     ammoText,
@@ -153,12 +160,6 @@ function start() {
     enemyHurtboxes,
     heroHurtbox
   );
-
-  let announcer = new Dna.Components.Text({
-    text: "testing",
-    font: "48px serif"
-  });
-  new Dna.GameObject(canvas, { y: -100 }, [announcer]);
 
   let slimeSpawner = new SlimeSpawner(
     canvas,

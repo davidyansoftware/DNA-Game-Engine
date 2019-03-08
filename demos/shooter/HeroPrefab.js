@@ -64,6 +64,7 @@ const spriteOptions = [
 class HeroPrefab extends Dna.GameObject {
   constructor(
     canvas,
+    announcer,
     hpBar,
     gunText,
     ammoText,
@@ -113,6 +114,7 @@ class HeroPrefab extends Dna.GameObject {
 
     this.unit = new Hero(
       heroImage,
+      announcer,
       hpBar,
       mouse,
       unitAngle.angle,

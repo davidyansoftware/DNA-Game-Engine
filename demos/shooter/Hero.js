@@ -7,7 +7,7 @@ const TOTAL_AMMO = 100;
 const RELOAD_TIME = 2;
 
 class Hero extends Dna.Component {
-  constructor(image, hpBar, mouse, angle, physics, gun, audio) {
+  constructor(image, announcer, hpBar, mouse, angle, physics, gun, audio) {
     super();
 
     this.keyboard = new Dna.Input.Keyboard({
@@ -19,6 +19,7 @@ class Hero extends Dna.Component {
 
     this.image = image;
 
+    this.announcer = announcer;
     this.hpBar = hpBar;
 
     this.mouse = mouse;
@@ -27,6 +28,7 @@ class Hero extends Dna.Component {
     this.gun = gun;
     this.audio = audio;
 
+    this.dead = false;
     this.invulnerable = 0;
 
     this.coordinates = new Dna.Utilities.Coordinates(0, 0);
@@ -40,7 +42,12 @@ class Hero extends Dna.Component {
 
     if (this.hpBar.value <= 0) {
       this.hpBar.value = 0;
-      //TODO gameover here
+      this.dead = true;
+      this.physics.xv = 0;
+      this.physics.yv = 0;
+
+      this.announcer.text = "GAME OVER";
+      this.announcer.gameObject.setActive(true);
     }
 
     let angle = source.transform.getAngleToTransform(this.gameObject.transform);
@@ -61,6 +68,8 @@ class Hero extends Dna.Component {
 
   //TODO update this to use regular physics class
   update(deltaTime) {
+    if (this.dead) return;
+
     this.coordinates.x = 0;
     this.coordinates.y = 0;
     if (this.keyboard.left)
@@ -71,7 +80,7 @@ class Hero extends Dna.Component {
     if (this.keyboard.down)
       this.coordinates.add(Dna.Utilities.Vector.UNIT_DOWN);
 
-    //TODO control this from gun class
+    //TODO control this from gun class, but also disable when dead
     if (this.mouse.leftClick) this.gun.gun.shoot();
 
     if (this.coordinates.magnitude > 0) this.coordinates.magnitude = SPEED;
