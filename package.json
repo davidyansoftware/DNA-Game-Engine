@@ -5,7 +5,7 @@
   "main": "src/Dna.js",
   "scripts": {
     "build": "parcel build src/Dna.js --out-dir dist",
-    "demo": "parcel build demos/shooter/shooter.html --out-dir public -o index.html",
+    "demo": "parcel build demos/shooter/shooter.html --out-dir public -o index.html --public-url ./",
     "shooter": "parcel demos/shooter/shooter.html --out-dir local",
     "platformer": "parcel demos/platformer/platformer.html --out-dir local",
     "astroids": "parcel demos/astroids/astroids.html --out-dir local",
