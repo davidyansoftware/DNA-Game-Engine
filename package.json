@@ -5,6 +5,7 @@
   "main": "src/Dna.js",
   "scripts": {
     "build": "parcel build src/Dna.js --out-dir dist",
+    "demo": "parcel build demos/shooter/shooter.html --out-dir public -o index.html",
     "shooter": "parcel demos/shooter/shooter.html --out-dir local",
     "platformer": "parcel demos/platformer/platformer.html --out-dir local",
     "astroids": "parcel demos/astroids/astroids.html --out-dir local",
@@ -14,6 +15,7 @@
   "author": "David Yan",
   "license": "ISC",
   "devDependencies": {
+    "cssnano": "^4.1.10",
     "parcel-bundler": "^1.11.0"
   }
 }
