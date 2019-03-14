@@ -84,12 +84,11 @@ class HeroPrefab extends Dna.GameObject {
     ]);
     reloadingText.setActive(false);
 
-    this.addComponent(
-      new Dna.Components.Hitcircle({
-        radius: RADIUS,
-        hitboxSet: heroHitbox
-      })
-    );
+    let hitbox = new Dna.Components.Hitcircle({
+      radius: RADIUS,
+      hitboxSet: heroHitbox
+    });
+    this.addComponent(hitbox);
 
     let unitAngle = new UnitAngle(crosshair);
     this.addComponent(unitAngle);
@@ -120,7 +119,8 @@ class HeroPrefab extends Dna.GameObject {
       unitAngle.angle,
       physics,
       gun,
-      audio
+      audio,
+      hitbox
     );
     this.addComponent(this.unit);
   }

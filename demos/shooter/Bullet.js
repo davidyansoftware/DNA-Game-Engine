@@ -41,15 +41,11 @@ class Bullet extends Dna.GameObject {
         onCollisionEnter: hurtbox => {
           this.destroy();
 
-          //audio.play(gunHit);
           hurtbox.gameObject.audio.play(gunHit);
 
           hurtbox.gameObject.unit.takeDamage(DAMAGE);
 
-          hurtbox.gameObject.unit.knockback(
-            //this.transform.getCurrentDirection()
-            physics.angle
-          );
+          hurtbox.gameObject.unit.knockback(physics.angle);
         }
       })
     );

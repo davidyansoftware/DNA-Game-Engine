@@ -7,7 +7,17 @@ const TOTAL_AMMO = 100;
 const RELOAD_TIME = 2;
 
 class Hero extends Dna.Component {
-  constructor(image, announcer, hpBar, mouse, angle, physics, gun, audio) {
+  constructor(
+    image,
+    announcer,
+    hpBar,
+    mouse,
+    angle,
+    physics,
+    gun,
+    audio,
+    hitbox
+  ) {
     super();
 
     this.keyboard = new Dna.Input.Keyboard({
@@ -27,6 +37,8 @@ class Hero extends Dna.Component {
     this.physics = physics;
     this.gun = gun;
     this.audio = audio;
+
+    this.hitbox = hitbox;
 
     this.dead = false;
     this.invulnerable = 0;
@@ -64,6 +76,8 @@ class Hero extends Dna.Component {
     this.gameObject.addComponent(knockbackPhysics);
 
     this.invulnerable = 0.5;
+
+    this.hitbox.clearCollisions();
   }
 
   //TODO update this to use regular physics class

@@ -89,7 +89,7 @@ class Slime extends Dna.GameObject {
       new Dna.Components.Hitcircle({
         radius: RADIUS,
         hurtboxes: heroHurtbox,
-        onCollisionEnter: heroHurtbox => {
+        onCollision: heroHurtbox => {
           hero.unit.takeDamage(damage, this);
         }
       })
