@@ -33,6 +33,8 @@ class Image extends Component {
   constructor(options = {}) {
     super();
 
+    this.active = true;
+
     this.image = new window.Image();
 
     this.type = types.default;
@@ -66,6 +68,9 @@ class Image extends Component {
   }
 
   updateOptions(options = {}) {
+    //TODO generalize this to a property of component? distinguish updates from composite
+    if (options.active !== undefined) this.active = options.active;
+
     // checking for undefined to account for 0 values
     if (options.image !== undefined) this.image = options.image;
 
@@ -125,6 +130,8 @@ class Image extends Component {
   }
 
   render(ctx) {
+    if (!this.active) return;
+
     let destWidth = this.destWidth === undefined ? this.width : this.destWidth;
     let destHeight =
       this.destHeight === undefined ? this.height : this.destHeight;

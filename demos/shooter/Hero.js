@@ -75,7 +75,7 @@ class Hero extends Dna.Component {
     });
     this.gameObject.addComponent(knockbackPhysics);
 
-    this.invulnerable = 0.5;
+    this.invulnerable = 2;
 
     this.hitbox.clearCollisions();
   }
@@ -104,6 +104,13 @@ class Hero extends Dna.Component {
     this.cooldown -= deltaTime;
     this.emptyCooldown -= deltaTime;
     this.invulnerable -= deltaTime;
+
+    if (this.invulnerable > 0) {
+      let show = this.invulnerable % 0.2 > 0.1;
+      this.image.active = show;
+    } else {
+      this.image.active = true;
+    }
   }
 
   render() {
