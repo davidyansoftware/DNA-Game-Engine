@@ -1,6 +1,18 @@
 import { Bullet } from "./Bullet";
 import { Assets } from "../../src/Scene";
 
+import pistolCrosshair from "./assets/crosshairs/pistol.png";
+import shotgunCrosshair from "./assets/crosshairs/shotgun.png";
+import flamethrowerCrosshair from "./assets/crosshairs/flamethrower.png";
+let pistolCrosshairAsset = new Dna.Dom.Image(pistolCrosshair);
+let shotgunCrosshairAsset = new Dna.Dom.Image(shotgunCrosshair);
+let flamethrowerCrosshairAsset = new Dna.Dom.Image(flamethrowerCrosshair);
+let crosshairAssets = new Assets({
+  pistol: pistolCrosshairAsset,
+  shotgun: shotgunCrosshairAsset,
+  flamethrower: flamethrowerCrosshairAsset
+});
+
 import pistolShoot from "./assets/sounds/pistol_shoot.wav";
 import shotgunShoot from "./assets/sounds/shotgun_shoot.wav";
 import flamethrowerShoot from "./assets/sounds/flamethrower_shoot.wav";
@@ -71,6 +83,7 @@ let pistolDown = {
 
 let Pistol = {
   name: "Pistol",
+  crosshair: pistolCrosshairAsset,
   shootClip: pistolShoot,
   emptyClip: pistolEmpty,
   reloadClip: pistolReload,
@@ -150,6 +163,7 @@ let shotgunDown = {
 
 let Shotgun = {
   name: "Shotgun",
+  crosshair: shotgunCrosshairAsset,
   shootClip: shotgunShoot,
   emptyClip: pistolEmpty,
   reloadClip: pistolReload,
@@ -230,6 +244,7 @@ let flamethrowerDown = {
 
 let Flamethrower = {
   name: "Flamethrower",
+  crosshair: flamethrowerCrosshairAsset,
   shootClip: flamethrowerShoot,
   emptyClip: pistolEmpty,
   reloadClip: pistolReload,
@@ -273,6 +288,7 @@ let Flamethrower = {
 };
 
 let gunAssets = new Assets({
+  crosshairs: crosshairAssets,
   bullets: bulletAssets,
   pistol: pistolAssets,
   shotgun: shotgunAssets,

@@ -13,15 +13,22 @@ class CrosshairComponent extends Dna.Component {
   }
 }
 
-let crosshairImage = new Image();
-crosshairImage.src = crosshair;
+//let crosshairImage = new Image();
+//crosshairImage.src = crosshair;
 
 class Crosshair extends Dna.GameObject {
   constructor(parent, mouse) {
     super(parent, {}, [
-      new CrosshairComponent(mouse),
-      new Dna.Components.Image({ width: 21, height: 21, image: crosshairImage })
+      new CrosshairComponent(mouse)
+      //new Dna.Components.Image({ width: 21, height: 21, image: crosshairImage })
     ]);
+
+    this.image = new Dna.Components.Image({
+      width: 21,
+      height: 21
+      //image: crosshairImage
+    });
+    this.addComponent(this.image);
   }
 }
 

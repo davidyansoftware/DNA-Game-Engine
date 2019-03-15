@@ -98,6 +98,7 @@ class HeroPrefab extends Dna.GameObject {
     let gun = new Gun(
       this,
       {},
+      crosshair,
       unitAngle.angle,
       hurtboxes,
       gunText,

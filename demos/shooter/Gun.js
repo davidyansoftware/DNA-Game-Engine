@@ -12,9 +12,17 @@ const GUN_STATES = [
 ];
 
 class GunComponent extends Dna.Component {
-  constructor(gunText, ammoText, reloadingText, gunImage, hurtboxes) {
+  constructor(
+    crosshair,
+    gunText,
+    ammoText,
+    reloadingText,
+    gunImage,
+    hurtboxes
+  ) {
     super();
 
+    this.crosshair = crosshair;
     this.gunText = gunText;
     this.ammoText = ammoText;
     this.reloadingText = reloadingText;
@@ -120,6 +128,7 @@ class GunComponent extends Dna.Component {
   }
 
   updateGunText() {
+    this.crosshair.image.image = this.gunState.gunData.crosshair;
     this.gunText.text = this.gunState.gunData.name;
   }
 
@@ -148,6 +157,7 @@ class Gun extends Dna.GameObject {
   constructor(
     parent,
     position,
+    crosshair,
     angle,
     hurtboxes,
     gunText,
@@ -175,6 +185,7 @@ class Gun extends Dna.GameObject {
     this.addComponent(new GunPosition(angle));
 
     this.gun = new GunComponent(
+      crosshair,
       gunText,
       ammoText,
       reloadingText,
