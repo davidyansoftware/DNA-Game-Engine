@@ -25,7 +25,7 @@ class DomImage {
 }
 */
 
-const DomImage = function(src) {
+const ImageAsset = function(src) {
   let image = new window.Image();
   image.src = src;
   image.load = new Promise((resolve, reject) => {
@@ -35,4 +35,4 @@ const DomImage = function(src) {
   return image;
 };
 
-export { DomImage };
+export { ImageAsset };

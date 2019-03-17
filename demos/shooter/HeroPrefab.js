@@ -10,11 +10,11 @@ import heroUpSideSheet from "./assets/hero/upside.png";
 import heroSideSheet from "./assets/hero/side.png";
 import heroDownSideSheet from "./assets/hero/downside.png";
 import heroDownSheet from "./assets/hero/down.png";
-let heroUpImage = new Dna.Dom.Image(heroUpSheet);
-let heroUpSideImage = new Dna.Dom.Image(heroUpSideSheet);
-let heroSideImage = new Dna.Dom.Image(heroSideSheet);
-let heroDownSideImage = new Dna.Dom.Image(heroDownSideSheet);
-let heroDownImage = new Dna.Dom.Image(heroDownSheet);
+let heroUpImage = new Dna.Asset.Image(heroUpSheet);
+let heroUpSideImage = new Dna.Asset.Image(heroUpSideSheet);
+let heroSideImage = new Dna.Asset.Image(heroSideSheet);
+let heroDownSideImage = new Dna.Asset.Image(heroDownSideSheet);
+let heroDownImage = new Dna.Asset.Image(heroDownSheet);
 
 let heroAssets = new Dna.Assets({
   up: heroUpImage,

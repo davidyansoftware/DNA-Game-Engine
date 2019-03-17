@@ -1,8 +1,8 @@
 import heroSprite from "./assets/hero/hero.png";
 import heroRunSprite from "./assets/hero/hero_run.png";
 
-let heroImage = new Dna.Dom.Image(heroSprite);
-let heroRunImage = new Dna.Dom.Image(heroRunSprite);
+let heroImage = new Dna.Asset.Image(heroSprite);
+let heroRunImage = new Dna.Asset.Image(heroRunSprite);
 
 let heroAssets = new Dna.Assets({
   hero: heroImage,

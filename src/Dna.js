@@ -26,7 +26,7 @@ import { Input } from "./Input/Input";
 import { Keyboard } from "./Input/Keyboard";
 import { Mouse } from "./Input/Mouse";
 
-import { DomImage } from "./Dom/Image";
+import { ImageAsset } from "./Assets/Image";
 
 let Dna = {
   //TODO should probably consolidate these
@@ -62,8 +62,8 @@ let Dna = {
     Keyboard: Keyboard,
     Mouse: Mouse
   },
-  Dom: {
-    Image: DomImage
+  Asset: {
+    Image: ImageAsset
   }
 };
 

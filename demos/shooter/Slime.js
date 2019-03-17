@@ -5,9 +5,9 @@ import { ImageAngle } from "./ImageAngle";
 import slimeUpSheet from "./assets/slime/slime1_back.png";
 import slimeDownSheet from "./assets/slime/slime1_front.png";
 import slimeLeftSheet from "./assets/slime/slime1_side.png";
-let slimeUpImage = new Dna.Dom.Image(slimeUpSheet);
-let slimeSideImage = new Dna.Dom.Image(slimeLeftSheet);
-let slimeDownImage = new Dna.Dom.Image(slimeDownSheet);
+let slimeUpImage = new Dna.Asset.Image(slimeUpSheet);
+let slimeSideImage = new Dna.Asset.Image(slimeLeftSheet);
+let slimeDownImage = new Dna.Asset.Image(slimeDownSheet);
 
 let slimeAssets = new Dna.Assets({
   up: slimeUpImage,

@@ -4,9 +4,9 @@ import { Assets } from "../../src/Scene";
 import pistolCrosshair from "./assets/crosshairs/pistol.png";
 import shotgunCrosshair from "./assets/crosshairs/shotgun.png";
 import flamethrowerCrosshair from "./assets/crosshairs/flamethrower.png";
-let pistolCrosshairAsset = new Dna.Dom.Image(pistolCrosshair);
-let shotgunCrosshairAsset = new Dna.Dom.Image(shotgunCrosshair);
-let flamethrowerCrosshairAsset = new Dna.Dom.Image(flamethrowerCrosshair);
+let pistolCrosshairAsset = new Dna.Asset.Image(pistolCrosshair);
+let shotgunCrosshairAsset = new Dna.Asset.Image(shotgunCrosshair);
+let flamethrowerCrosshairAsset = new Dna.Asset.Image(flamethrowerCrosshair);
 let crosshairAssets = new Assets({
   pistol: pistolCrosshairAsset,
   shotgun: shotgunCrosshairAsset,
@@ -21,8 +21,8 @@ import pistolReload from "./assets/sounds/gun_reload.mp3";
 
 import bulletSprite from "./assets/bullets/bullet.png";
 import flameSprite from "./assets/bullets/flame.png";
-let bulletImage = new Dna.Dom.Image(bulletSprite);
-let flameImage = new Dna.Dom.Image(flameSprite);
+let bulletImage = new Dna.Asset.Image(bulletSprite);
+let flameImage = new Dna.Asset.Image(flameSprite);
 
 let bulletAssets = new Assets({
   bullet: bulletImage,
@@ -41,11 +41,11 @@ import pistolDiagUpSprite from "./assets/pistol/diagup.png";
 import pistolSideSprite from "./assets/pistol/side.png";
 import pistolDiagDownSprite from "./assets/pistol/diagdown.png";
 import pistolDownSprite from "./assets/pistol/down.png";
-let pistolUpImage = new Dna.Dom.Image(pistolUpSprite);
-let pistolDiagUpImage = new Dna.Dom.Image(pistolDiagUpSprite);
-let pistolSideImage = new Dna.Dom.Image(pistolSideSprite);
-let pistolDiagDownImage = new Dna.Dom.Image(pistolDiagDownSprite);
-let pistolDownImage = new Dna.Dom.Image(pistolDownSprite);
+let pistolUpImage = new Dna.Asset.Image(pistolUpSprite);
+let pistolDiagUpImage = new Dna.Asset.Image(pistolDiagUpSprite);
+let pistolSideImage = new Dna.Asset.Image(pistolSideSprite);
+let pistolDiagDownImage = new Dna.Asset.Image(pistolDiagDownSprite);
+let pistolDownImage = new Dna.Asset.Image(pistolDownSprite);
 
 let pistolAssets = new Assets({
   up: pistolUpImage,
@@ -121,11 +121,11 @@ import shotgunDiagUpSprite from "./assets/shotgun/diagup.png";
 import shotgunSideSprite from "./assets/shotgun/side.png";
 import shotgunDiagDownSprite from "./assets/shotgun/diagdown.png";
 import shotgunDownSprite from "./assets/shotgun/down.png";
-let shotgunUpImage = new Dna.Dom.Image(shotgunUpSprite);
-let shotgunDiagUpImage = new Dna.Dom.Image(shotgunDiagUpSprite);
-let shotgunSideImage = new Dna.Dom.Image(shotgunSideSprite);
-let shotgunDiagDownImage = new Dna.Dom.Image(shotgunDiagDownSprite);
-let shotgunDownImage = new Dna.Dom.Image(shotgunDownSprite);
+let shotgunUpImage = new Dna.Asset.Image(shotgunUpSprite);
+let shotgunDiagUpImage = new Dna.Asset.Image(shotgunDiagUpSprite);
+let shotgunSideImage = new Dna.Asset.Image(shotgunSideSprite);
+let shotgunDiagDownImage = new Dna.Asset.Image(shotgunDiagDownSprite);
+let shotgunDownImage = new Dna.Asset.Image(shotgunDownSprite);
 
 let shotgunAssets = new Assets({
   up: shotgunUpImage,
@@ -202,11 +202,11 @@ import flamethrowerDiagUpSprite from "./assets/flamethrower/diagup.png";
 import flamethrowerSideSprite from "./assets/flamethrower/side.png";
 import flamethrowerDiagDownSprite from "./assets/flamethrower/diagdown.png";
 import flamethrowerDownSprite from "./assets/flamethrower/down.png";
-let flamethrowerUpImage = new Dna.Dom.Image(flamethrowerUpSprite);
-let flamethrowerDiagUpImage = new Dna.Dom.Image(flamethrowerDiagUpSprite);
-let flamethrowerSideImage = new Dna.Dom.Image(flamethrowerSideSprite);
-let flamethrowerDiagDownImage = new Dna.Dom.Image(flamethrowerDiagDownSprite);
-let flamethrowerDownImage = new Dna.Dom.Image(flamethrowerDownSprite);
+let flamethrowerUpImage = new Dna.Asset.Image(flamethrowerUpSprite);
+let flamethrowerDiagUpImage = new Dna.Asset.Image(flamethrowerDiagUpSprite);
+let flamethrowerSideImage = new Dna.Asset.Image(flamethrowerSideSprite);
+let flamethrowerDiagDownImage = new Dna.Asset.Image(flamethrowerDiagDownSprite);
+let flamethrowerDownImage = new Dna.Asset.Image(flamethrowerDownSprite);
 
 let flamethrowerAssets = new Assets({
   up: flamethrowerUpImage,

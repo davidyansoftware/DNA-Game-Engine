@@ -15,7 +15,7 @@ import rSprite from "./assets/controls/r.png";
 import mouseSprite from "./assets/controls/mouse.png";
 import leftClickSprite from "./assets/controls/leftclick.png";
 
-let floorImage = new Dna.Dom.Image(tileSet);
+let floorImage = new Dna.Asset.Image(tileSet);
 let background = new Dna.StaticCanvas(
   document.getElementById("background"),
   [floorImage.load],
@@ -36,14 +36,14 @@ let background = new Dna.StaticCanvas(
 );
 
 //TODO find an elegant way to preload these
-let wImage = new Dna.Dom.Image(wSprite);
-let aImage = new Dna.Dom.Image(aSprite);
-let sImage = new Dna.Dom.Image(sSprite);
-let dImage = new Dna.Dom.Image(dSprite);
-let tabImage = new Dna.Dom.Image(tabSprite);
-let rImage = new Dna.Dom.Image(rSprite);
-let mouseImage = new Dna.Dom.Image(mouseSprite);
-let leftClickImage = new Dna.Dom.Image(leftClickSprite);
+let wImage = new Dna.Asset.Image(wSprite);
+let aImage = new Dna.Asset.Image(aSprite);
+let sImage = new Dna.Asset.Image(sSprite);
+let dImage = new Dna.Asset.Image(dSprite);
+let tabImage = new Dna.Asset.Image(tabSprite);
+let rImage = new Dna.Asset.Image(rSprite);
+let mouseImage = new Dna.Asset.Image(mouseSprite);
+let leftClickImage = new Dna.Asset.Image(leftClickSprite);
 let foreground = new Dna.StaticCanvas(
   document.getElementById("foreground"),
   [

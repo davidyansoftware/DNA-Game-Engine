@@ -2,8 +2,8 @@ import { AI, Facing } from "./Monster";
 import girlAttackSprite from "./assets/zombiegirl/attack.png";
 import girlWalkSprite from "./assets/zombiegirl/walk.png";
 
-let girlAttackImage = new Dna.Dom.Image(girlAttackSprite);
-let girlWalkImage = new Dna.Dom.Image(girlWalkSprite);
+let girlAttackImage = new Dna.Asset.Image(girlAttackSprite);
+let girlWalkImage = new Dna.Asset.Image(girlWalkSprite);
 
 let zombieAssets = new Dna.Assets({
   attack: girlAttackImage,
