@@ -1,4 +1,5 @@
 import { Radians } from "./Utilities/Angle";
+import { Coordinates } from "./Utilities/Position";
 
 const defaults = {
   x: 0,
@@ -30,6 +31,10 @@ class Transform {
     //this.prevX;
     //this.prevY;
     this.update();
+
+    //TODO this is used to avoid generating garbage, should properly cache
+    //TODO altering this reference could cause problems for components that store this
+    this.globalPosition = new Coordinates(0, 0);
   }
 
   update(deltaTime) {
@@ -94,10 +99,10 @@ class Transform {
     let rotation = this.getAbsoluteRotation();
     let rad = rotation.radians;
 
-    return {
-      x: center.x + x * Math.cos(rad) - y * Math.sin(rad),
-      y: center.y + x * Math.sin(rad) + y * Math.cos(rad)
-    };
+    this.globalPosition.x = center.x + x * Math.cos(rad) - y * Math.sin(rad);
+    this.globalPosition.y = center.y + x * Math.sin(rad) + y * Math.cos(rad);
+
+    return this.globalPosition;
   }
 
   getAbsoluteCenter() {
