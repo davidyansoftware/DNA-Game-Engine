@@ -35,6 +35,10 @@ class Position {
     this.x -= position.x;
     this.y -= position.y;
   }
+  scale(scalar) {
+    this.x *= scalar;
+    this.y *= scalar;
+  }
 
   //TODO need to check if angle is dirty too
   get x() {
