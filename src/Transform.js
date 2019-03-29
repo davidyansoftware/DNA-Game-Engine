@@ -16,30 +16,21 @@ const defaults = {
 class Transform {
   //TODO setup anchors, base center and origin on these
   constructor(options = {}) {
-    //TODO use position here
-    //this.x = options.x || defaults.x;
-    //this.y = options.y || defaults.y;
-    //TODO probably dont want to take in redundant params
+    //TODO probably dont want to take in redundant params, pass position in as object
     this.position =
       options.position ||
       new Coordinates(options.x || defaults.x, options.y || defaults.y);
-    //this.position = options.position || new Coordinates(0, 0);
+
     this.depth = options.depth || defaults.depth;
 
-    //this.rotation = options.rotation || defaults.rotation;
     this.rotation = options.rotation || new Radians(0);
 
     this.xScale = options.xScale || defaults.xScale;
     this.yScale = options.yScale || defaults.yScale;
 
-    //TODO store and modify a different position class
-    //this.prevX;
-    //this.prevY;
     this.prevPosition = new Coordinates(this.position.x, this.position.y);
-    //this.update();
 
     //TODO this is used to avoid generating garbage, should properly cache
-    //TODO altering this reference could cause problems for components that store this
     this.globalPosition = new Coordinates(0, 0);
   }
 
@@ -48,8 +39,6 @@ class Transform {
     //TODO remove this from transform class - impliment in platform class
     this.prevPosition.x = this.position.x;
     this.prevPosition.y = this.position.y;
-    //this.prevX = this.position.x;
-    //this.prevY = this.position.y;
   }
 
   //TODO consolidate these to GetVectorToTransform?

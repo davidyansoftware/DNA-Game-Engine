@@ -1,6 +1,5 @@
 import { Component } from "../Component";
 import { Coordinates } from "../Utilities/Position";
-//import { Degrees } from "../Utilities/Angle";
 
 class Physics extends Component {
   constructor(options = {}) {
