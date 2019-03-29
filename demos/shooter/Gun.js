@@ -148,8 +148,8 @@ class GunPosition extends Dna.Component {
 
   update(deltaTime) {
     // change transform based on angle
-    this.gameObject.transform.x = this.position.x;
-    this.gameObject.transform.y = this.position.y;
+    this.gameObject.transform.position.x = this.position.x;
+    this.gameObject.transform.position.y = this.position.y;
   }
 }
 

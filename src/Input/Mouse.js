@@ -12,9 +12,9 @@ class Mouse {
     document.addEventListener("mousemove", event => {
       let rect = this.canvas.ctx.canvas.getBoundingClientRect();
       this.x =
-        event.clientX - Math.round(rect.left - 0.5) - this.canvas.transform.x;
+        event.clientX - Math.round(rect.left - 0.5) - this.canvas.transform.position.x;
       this.y =
-        event.clientY - Math.round(rect.top - 0.5) - this.canvas.transform.y;
+        event.clientY - Math.round(rect.top - 0.5) - this.canvas.transform.position.y;
     });
     document.addEventListener("mousedown", event => {
       this.leftClick = true;

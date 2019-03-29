@@ -20,46 +20,58 @@ class Boundary extends Dna.GameObject {
 let Alignments = {
   TOP: {
     getPosition: offset => {
-      return { y: offset };
+      return {
+        //position: new Dna.Utilities.Coordinates(0, offset)
+        y: offset
+      };
     },
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.height / 2;
-      hurtbox.gameObject.transform.y =
-        this.gameObject.transform.y + this.height / 2 + offset;
+      hurtbox.gameObject.transform.position.y =
+        this.gameObject.transform.position.y + this.height / 2 + offset;
     }
   },
   BOTTOM: {
     getPosition: offset => {
-      return { y: offset };
+      return {
+        //position: new Dna.Utilities.Coordinates(0, offset)
+        y: offset
+      };
     },
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.height / 2;
-      hurtbox.gameObject.transform.y =
-        this.gameObject.transform.y - this.height / 2 - offset;
+      hurtbox.gameObject.transform.position.y =
+        this.gameObject.transform.position.y - this.height / 2 - offset;
     }
   },
   LEFT: {
     getPosition: offset => {
-      return { x: offset };
+      return {
+        //position: new Dna.Utilities.Coordinates(offset, 0)
+        x: offset
+      };
     },
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.width / 2;
-      hurtbox.gameObject.transform.x =
-        this.gameObject.transform.x + this.width / 2 + offset;
+      hurtbox.gameObject.transform.position.x =
+        this.gameObject.transform.position.x + this.width / 2 + offset;
     }
   },
   RIGHT: {
     getPosition: offset => {
-      return { x: offset };
+      return {
+        //position: new Dna.Utilities.Coordinates(offset, 0)
+        x: offset
+      };
     },
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.width / 2;
-      hurtbox.gameObject.transform.x =
-        this.gameObject.transform.x - this.width / 2 - offset;
+      hurtbox.gameObject.transform.position.x =
+        this.gameObject.transform.position.x - this.width / 2 - offset;
     }
   }
 };

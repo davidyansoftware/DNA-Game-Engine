@@ -17,8 +17,13 @@ class Transform {
   //TODO setup anchors, base center and origin on these
   constructor(options = {}) {
     //TODO use position here
-    this.x = options.x || defaults.x;
-    this.y = options.y || defaults.y;
+    //this.x = options.x || defaults.x;
+    //this.y = options.y || defaults.y;
+    //TODO probably dont want to take in redundant params
+    this.position =
+      options.position ||
+      new Coordinates(options.x || defaults.x, options.y || defaults.y);
+    //this.position = options.position || new Coordinates(0, 0);
     this.depth = options.depth || defaults.depth;
 
     //this.rotation = options.rotation || defaults.rotation;
@@ -39,8 +44,9 @@ class Transform {
 
   update(deltaTime) {
     //TODO also want to keep track of absolute positions here???? many extra computations per frame
-    this.prevX = this.x;
-    this.prevY = this.y;
+    //TODO remove this from transform class - impliment in platform class
+    this.prevX = this.position.x;
+    this.prevY = this.position.y;
   }
 
   //TODO consolidate these to GetVectorToTransform?
@@ -72,18 +78,18 @@ class Transform {
   //TODO should use physics
   //TODO include this with point
   moveTo(x, y, distance) {
-    let dx = x - this.x;
-    let dy = y - this.y;
+    let dx = x - this.position.x;
+    let dy = y - this.position.y;
 
     let hypotenuse = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     if (distance > hypotenuse) {
-      this.x = x;
-      this.y = y;
+      this.position.x = x;
+      this.position.y = y;
       return true;
     } else {
       let angle = Math.atan2(dy, dx) + Math.PI / 2;
-      this.x += distance * Math.sin(angle);
-      this.y += distance * -Math.cos(angle);
+      this.position.x += distance * Math.sin(angle);
+      this.position.y += distance * -Math.cos(angle);
       return false;
     }
   }
@@ -110,8 +116,8 @@ class Transform {
     let parentRotation = this.gameObject.parent.transform.getAbsoluteRotation();
     let rad = parentRotation.radians;
 
-    let x = this.x * this.xScale;
-    let y = this.y * this.yScale;
+    let x = this.position.x * this.xScale;
+    let y = this.position.y * this.yScale;
 
     return {
       x: parentCenter.x + x * Math.cos(rad) - y * Math.sin(rad),
@@ -128,8 +134,8 @@ class Transform {
     center.x -= parentCenter.x;
     center.y -= parentCenter.y;
 
-    this.x = center.x * Math.cos(rad) - center.y * Math.sin(rad);
-    this.y = center.x * Math.sin(rad) + center.y * Math.cos(rad);
+    this.position.x = center.x * Math.cos(rad) - center.y * Math.sin(rad);
+    this.position.y = center.x * Math.sin(rad) + center.y * Math.cos(rad);
   }
 }
 
@@ -140,8 +146,8 @@ class CanvasTransform extends Transform {
     this.width = domCanvas.width;
     this.height = domCanvas.height;
 
-    this.x = this.width / 2;
-    this.y = this.height / 2;
+    this.position.x = this.width / 2;
+    this.position.y = this.height / 2;
   }
 
   getAbsoluteCenter() {

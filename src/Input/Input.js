@@ -41,9 +41,9 @@ class Input {
           x:
             event.clientX -
             Math.round(rect.left - 0.5) -
-            this.canvas.transform.x,
+            this.canvas.transform.position.x,
           y:
-            event.clientY - Math.round(rect.top - 0.5) - this.canvas.transform.y
+            event.clientY - Math.round(rect.top - 0.5) - this.canvas.transform.position.y
         });
       };
     }
@@ -61,9 +61,9 @@ class Input {
           x:
             event.clientX -
             Math.round(rect.left - 0.5) -
-            this.canvas.transform.x,
+            this.canvas.transform.position.x,
           y:
-            event.clientY - Math.round(rect.top - 0.5) - this.canvas.transform.y
+            event.clientY - Math.round(rect.top - 0.5) - this.canvas.transform.position.y
         });
       });
     }

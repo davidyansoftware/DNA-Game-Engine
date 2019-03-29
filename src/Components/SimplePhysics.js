@@ -11,8 +11,8 @@ class SimplePhysics extends Component {
   }
 
   update(deltaTime) {
-    this.gameObject.transform.x += this.xv;
-    this.gameObject.transform.y += this.yv;
+    this.gameObject.transform.position.x += this.xv;
+    this.gameObject.transform.position.y += this.yv;
   }
 }
 

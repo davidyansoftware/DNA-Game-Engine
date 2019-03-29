@@ -22,8 +22,8 @@ class Physics extends Component {
     let xv = this.speed * Math.sin(this.angle.radians);
     let yv = this.speed * -Math.cos(this.angle.radians);
 
-    this.gameObject.transform.x += xv;
-    this.gameObject.transform.y += yv;
+    this.gameObject.transform.position.x += xv;
+    this.gameObject.transform.position.y += yv;
 
     // this wont account for boundaries or other forces
     this.distanceTraveled += this.speed;

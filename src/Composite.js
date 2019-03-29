@@ -58,8 +58,8 @@ class Composite {
     let currDraw = {
       context: context,
 
-      x: this.transform.x,
-      y: this.transform.y,
+      x: this.transform.position.x,
+      y: this.transform.position.y,
 
       rotation: this.transform.rotation || new Degrees(0),
 
