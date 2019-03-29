@@ -11,7 +11,7 @@ class Player extends Dna.GameObject {
   constructor(parent, keyboard, mouse) {
     super(parent, {}, []);
 
-    let physics = new Dna.Components.SimplePhysics();
+    let physics = new Dna.Components.Physics();
     this.addComponent(physics);
 
     let body = new Body(physics, keyboard, mouse);

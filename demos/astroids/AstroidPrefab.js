@@ -36,10 +36,11 @@ class AstroidPrefab extends Dna.GameObject {
           ship.gameObject.die();
         }
       }),
-      //TODO regular physics class would make more sense here
-      new Dna.Components.SimplePhysics({
-        xv: (Math.random() - 0.5) * ASTROID_SPEED * levelMultiplier,
-        yv: (Math.random() - 0.5) * ASTROID_SPEED * levelMultiplier
+      new Dna.Components.Physics({
+        velocity: new Dna.Utilities.Coordinates(
+          (Math.random() - 0.5) * ASTROID_SPEED * levelMultiplier,
+          (Math.random() - 0.5) * ASTROID_SPEED * levelMultiplier
+        )
       }),
       new Rollover(r)
     ]);

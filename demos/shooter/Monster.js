@@ -72,8 +72,7 @@ class Monster extends Dna.Component {
 
   knockback(direction) {
     let knockbackPhysics = new Dna.Components.Physics({
-      angle: direction,
-      speed: 2,
+      velocity: new Dna.Utilities.Vector(direction, 2),
       maxDistance: 20,
       callback: () => {
         this.gameObject.removeComponent(knockbackPhysics);

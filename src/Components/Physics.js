@@ -1,6 +1,6 @@
 import { Component } from "../Component";
-import { Vector } from "../Utilities/Position";
-import { Degrees } from "../Utilities/Angle";
+import { Coordinates } from "../Utilities/Position";
+//import { Degrees } from "../Utilities/Angle";
 
 class Physics extends Component {
   constructor(options = {}) {
@@ -10,10 +10,12 @@ class Physics extends Component {
     //this.angle = options.angle || new Degrees(0);
     //this.speed = options.speed || 0;
 
-    this.velocity = new Vector(
-      options.angle || new Degrees(0),
-      options.speed || 0
-    );
+    //this.velocity = new Vector(
+    //  options.angle || new Degrees(0),
+    //  options.speed || 0
+    //);
+
+    this.velocity = options.velocity || new Coordinates(0, 0);
 
     this.distanceTraveled = 0;
     this.maxDistance = options.maxDistance || Infinity;

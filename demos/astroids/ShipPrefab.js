@@ -22,7 +22,7 @@ class ShipPrefab extends Dna.GameObject {
     this.ship = new Ship(this, keyboard, SHOOT_COOLDOWN);
     this.addComponent(this.ship);
 
-    let physics = new Dna.Components.SimplePhysics();
+    let physics = new Dna.Components.Physics();
     this.addComponent(physics);
 
     this.acceleration = new Dna.Components.Acceleration(physics, {

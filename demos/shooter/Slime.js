@@ -73,7 +73,9 @@ class Slime extends Dna.GameObject {
     );
 
     let speed = BASE_SPEED * Math.pow(LEVEL_SCALING, spawner.level);
-    let physics = new Dna.Components.Physics({ speed: speed });
+    let physics = new Dna.Components.Physics({
+      velocity: new Dna.Utilities.Vector(new Dna.Utilities.Radians(0), speed)
+    });
     this.addComponent(physics);
 
     this.addComponent(new Movement(physics, unitAngle.angle));

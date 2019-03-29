@@ -5,7 +5,6 @@ import { Scene, Assets } from "./Scene";
 
 //import { Transform } from "./Components/Transform";
 import { Image } from "./Components/Image";
-import { SimplePhysics } from "./Components/SimplePhysics";
 import { Polygon } from "./Components/Polygon";
 import { Rectangle } from "./Components/Rectangle";
 import { Physics } from "./Components/Physics";
@@ -40,7 +39,6 @@ let Dna = {
 
   Components: {
     Image: Image,
-    SimplePhysics: SimplePhysics,
     Polygon: Polygon,
     Rectangle: Rectangle,
     Physics: Physics,

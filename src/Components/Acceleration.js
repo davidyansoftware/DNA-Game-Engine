@@ -2,6 +2,7 @@ import { Component } from "../Component";
 import { Degrees } from "../Utilities/Angle";
 
 //TODO could be a subcomponent of physics??
+//TODO could also be handled as a position within physics
 class Acceleration extends Component {
   constructor(physics, options = {}) {
     super();

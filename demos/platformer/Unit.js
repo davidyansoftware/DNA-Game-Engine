@@ -5,7 +5,7 @@ class Unit extends Dna.GameObject {
   constructor(parent, position, components) {
     super(parent, position, components);
 
-    this.physics = new Dna.Components.SimplePhysics();
+    this.physics = new Dna.Components.Physics();
     this.addComponent(this.physics);
 
     this.gravity = new Dna.Components.Acceleration(this.physics, {

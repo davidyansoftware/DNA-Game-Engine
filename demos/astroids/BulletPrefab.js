@@ -12,8 +12,7 @@ class BulletPrefab extends Dna.GameObject {
     ]);
 
     let physics = new Dna.Components.Physics({
-      speed: BULLET_SPEED,
-      angle: angle,
+      velocity: new Dna.Utilities.Vector(angle, BULLET_SPEED),
       maxDistance: BULLET_DISTANCE
     });
     this.addComponent(physics);

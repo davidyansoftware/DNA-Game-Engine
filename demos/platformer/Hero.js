@@ -215,17 +215,6 @@ class Hero extends Unit {
     this.image.updateOptions(hero_idle);
     this.addComponent(this.image);
 
-    /*
-    this.physics = new Dna.Components.SimplePhysics();
-    this.addComponent(this.physics);
-
-    this.gravity = new Dna.Components.Acceleration(this.physics, {
-      angle: Dna.Utilities.Degrees.DOWN,
-      accel: GRAVITY
-    });
-    this.addComponent(this.gravity);
-    */
-
     this.hurtbox = new Dna.Components.Hitbox({
       width: WIDTH,
       height: HEIGHT

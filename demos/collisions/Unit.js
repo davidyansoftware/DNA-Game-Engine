@@ -21,34 +21,4 @@ class Unit extends Dna.Component {
   }
 }
 
-/*
-class Hero extends Dna.GameObject {
-  constructor(parent, position, input) {
-    super(parent, position, [
-      new Dna.Components.Rectangle({ width: SIZE, height: SIZE })
-    ]);
-
-    this.physics = new Dna.Components.SimplePhysics();
-    this.addComponent(this.physics);
-
-    this.hurtbox = new Dna.Components.Hitbox({
-      width: SIZE,
-      height: SIZE
-    });
-    this.addComponent(this.hurtbox);
-
-    this.addComponent(new HeroComponent(input, this.physics));
-  }
-
-  ground() {
-    this.grounded = true;
-
-    this.gravity.active = false;
-    this.physics.xy = 0;
-
-    console.log("on ground");
-  }
-}
-*/
-
 export { Unit };

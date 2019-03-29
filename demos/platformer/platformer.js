@@ -9,8 +9,6 @@ const RADIUS = 20;
 let canvas = new Dna.Canvas(document.getElementById("canvas"));
 
 function start() {
-  let gravity = new Dna.Components.SimplePhysics({ xy: 5 });
-
   let enemyHurtboxes = [];
   new Target(canvas, { y: 225 }, enemyHurtboxes);
 

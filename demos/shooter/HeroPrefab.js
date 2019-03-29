@@ -106,7 +106,7 @@ class HeroPrefab extends Dna.GameObject {
       reloadingText
     );
 
-    let physics = new Dna.Components.SimplePhysics();
+    let physics = new Dna.Components.Physics();
     this.addComponent(physics);
 
     let audio = new Dna.Components.Audio({ volume: 0.1 });

@@ -66,8 +66,7 @@ class Hero extends Dna.Component {
 
     //TODO angle should be based on the angle the monster hit
     let knockbackPhysics = new Dna.Components.Physics({
-      angle: new Dna.Utilities.Radians(angle),
-      speed: 2,
+      velocity: new Dna.Utilities.Vector(new Dna.Utilities.Radians(angle), 2),
       maxDistance: 20,
       callback: () => {
         this.gameObject.removeComponent(knockbackPhysics);

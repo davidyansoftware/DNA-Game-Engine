@@ -24,8 +24,7 @@ class Bullet extends Dna.GameObject {
     );
 
     let physics = new Dna.Components.Physics({
-      speed: SPEED,
-      angle: angle,
+      velocity: new Dna.Utilities.Vector(angle, SPEED),
       maxDistance: maxDistance,
       callback: () => {
         this.destroy();

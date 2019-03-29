@@ -6,8 +6,6 @@ const RADIUS = 20;
 let canvas = new Dna.Canvas(document.getElementById("canvas"));
 
 function start() {
-  let gravity = new Dna.Components.SimplePhysics({ xy: 5 });
-
   //TODO handle mouse input
   let circleInput = {
     87: "up",
@@ -30,7 +28,7 @@ function start() {
   let circle = new Dna.GameObject(canvas, { x: -30 }, [
     new Dna.Components.Polygon({ vert: 0, radius: RADIUS })
   ]);
-  let circlePhysics = new Dna.Components.SimplePhysics();
+  let circlePhysics = new Dna.Components.Physics();
   let circleHeroComponent = new Unit(circleKeyboard, circlePhysics);
   let circleHurtcircle = new Dna.Components.Hitcircle({ radius: RADIUS });
   circle.addComponent(circlePhysics);
@@ -40,7 +38,7 @@ function start() {
   let rect = new Dna.GameObject(canvas, { x: 30 }, [
     new Dna.Components.Rectangle({ width: RADIUS * 2, height: RADIUS * 2 })
   ]);
-  let rectPhysics = new Dna.Components.SimplePhysics();
+  let rectPhysics = new Dna.Components.Physics();
   let rectHeroComponent = new Unit(rectKeyboard, rectPhysics);
   let rectHurtbox = new Dna.Components.Hitbox({
     width: RADIUS * 2,
