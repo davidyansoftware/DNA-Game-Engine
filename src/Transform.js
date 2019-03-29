@@ -35,7 +35,8 @@ class Transform {
     //TODO store and modify a different position class
     //this.prevX;
     //this.prevY;
-    this.update();
+    this.prevPosition = new Coordinates(this.position.x, this.position.y);
+    //this.update();
 
     //TODO this is used to avoid generating garbage, should properly cache
     //TODO altering this reference could cause problems for components that store this
@@ -45,8 +46,10 @@ class Transform {
   update(deltaTime) {
     //TODO also want to keep track of absolute positions here???? many extra computations per frame
     //TODO remove this from transform class - impliment in platform class
-    this.prevX = this.position.x;
-    this.prevY = this.position.y;
+    this.prevPosition.x = this.position.x;
+    this.prevPosition.y = this.position.y;
+    //this.prevX = this.position.x;
+    //this.prevY = this.position.y;
   }
 
   //TODO consolidate these to GetVectorToTransform?
