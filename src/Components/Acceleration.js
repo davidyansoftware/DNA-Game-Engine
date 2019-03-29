@@ -11,9 +11,6 @@ class Acceleration extends Component {
     this.physics = physics;
 
     this.active = options.active || true;
-    //TODO vector class
-    this.angle = options.angle || new Degrees(0);
-    this.accel = options.accel || 0;
     this.acceleration =
       options.acceleration ||
       new Vector(options.angle || new Degrees(0), options.accel || 0);
