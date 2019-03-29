@@ -12,7 +12,7 @@ class AI extends Dna.Component {
   }
 
   update(deltaTime) {
-    let distance = this.gameObject.transform.x - this.hero.transform.x;
+    let distance = this.gameObject.transform.position.x - this.hero.transform.position.x;
     if (this.attacking) return;
 
     if (Math.abs(distance) < this.attackRange) {
@@ -20,7 +20,7 @@ class AI extends Dna.Component {
     } else {
       //TODO move
       let move = distance > 0 ? -SPEED : SPEED;
-      this.gameObject.transform.x += move;
+      this.gameObject.transform.position.x += move;
     }
   }
 
@@ -43,7 +43,7 @@ class Facing extends Dna.Component {
 
   update() {
     //console.log(this.gameObject.transform);
-    let distance = this.gameObject.transform.x - this.hero.transform.x;
+    let distance = this.gameObject.transform.position.x - this.hero.transform.position.x;
     this.imageObject.transform.xScale = distance > 0 ? -1 : 1;
   }
 }
