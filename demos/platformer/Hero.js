@@ -168,7 +168,7 @@ class HeroComponent extends Dna.Component {
     let x = 0;
     if (this.keyboard.left) x -= 1;
     if (this.keyboard.right) x += 1;
-    this.physics.xv = x * SPEED;
+    this.physics.velocity.x = x * SPEED;
 
     if (x < 0) {
       this.gameObject.transform.xScale = -1;
@@ -194,7 +194,7 @@ class HeroComponent extends Dna.Component {
   jump() {
     console.log(this);
     if (this.gameObject.grounded) {
-      this.physics.yv = -JUMP_SPEED;
+      this.physics.velocity.y = -JUMP_SPEED;
       this.gameObject.grounded = false;
       this.gameObject.gravity.active = true;
       //this.gameObject.image.updateOptions(hero_jump);
@@ -269,7 +269,7 @@ class Hero extends Unit {
     this.attackingHitbox.clearCollisions();
 
     let nextAnimation = this.grounded
-      ? this.physics.speed == 0
+      ? this.physics.velocity.magnitude == 0
         ? hero_idle
         : hero_run
       : hero_fall;

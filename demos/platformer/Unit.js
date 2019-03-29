@@ -18,7 +18,7 @@ class Unit extends Dna.GameObject {
   ground() {
     this.grounded = true;
     this.gravity.active = false;
-    this.physics.yv = 0;
+    this.physics.velocity.y = 0;
   }
 
   unground() {

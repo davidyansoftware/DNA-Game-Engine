@@ -45,7 +45,7 @@ class Bullet extends Dna.GameObject {
 
           hurtbox.gameObject.unit.takeDamage(DAMAGE);
 
-          hurtbox.gameObject.unit.knockback(physics.angle);
+          hurtbox.gameObject.unit.knockback(physics.velocity.angle);
         }
       })
     );

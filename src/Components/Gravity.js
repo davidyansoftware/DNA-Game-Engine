@@ -10,6 +10,6 @@ class Gravity extends Component() {
   }
 
   update(deltaTime) {
-    this.simplePhysics.yv -= this.acceleration * deltaTime;
+    this.simplePhysics.velocity.y -= this.acceleration * deltaTime;
   }
 }

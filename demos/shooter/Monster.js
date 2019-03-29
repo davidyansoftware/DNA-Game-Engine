@@ -7,7 +7,7 @@ class Movement extends Dna.Component {
   }
 
   update(deltaTime) {
-    this.physics.angle.radians = this.angle.radians;
+    this.physics.velocity.angle.radians = this.angle.radians;
   }
 }
 

@@ -55,8 +55,8 @@ class Hero extends Dna.Component {
     if (this.hpBar.value <= 0) {
       this.hpBar.value = 0;
       this.dead = true;
-      this.physics.xv = 0;
-      this.physics.yv = 0;
+      this.physics.velocity.x = 0;
+      this.physics.velocity.y = 0;
 
       this.announcer.text = "GAME OVER";
       this.announcer.gameObject.setActive(true);
@@ -98,8 +98,8 @@ class Hero extends Dna.Component {
     if (this.mouse.leftClick) this.gun.gun.shoot();
 
     if (this.coordinates.magnitude > 0) this.coordinates.magnitude = SPEED;
-    this.physics.xv = this.coordinates.x;
-    this.physics.yv = this.coordinates.y;
+    this.physics.velocity.x = this.coordinates.x;
+    this.physics.velocity.y = this.coordinates.y;
 
     this.cooldown -= deltaTime;
     this.emptyCooldown -= deltaTime;

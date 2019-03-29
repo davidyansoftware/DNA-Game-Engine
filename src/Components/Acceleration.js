@@ -18,12 +18,12 @@ class Acceleration extends Component {
 
   update(deltaTime) {
     if (this.active) {
-      this.physics.xv += this.accel * Math.sin(this.angle.radians);
-      this.physics.yv += this.accel * -Math.cos(this.angle.radians);
+      this.physics.velocity.x += this.accel * Math.sin(this.angle.radians);
+      this.physics.velocity.y += this.accel * -Math.cos(this.angle.radians);
     } else {
       //TODO this friction value is affected for side to side even for down friction
-      this.physics.xv -= this.physics.xv * this.friction;
-      this.physics.yv -= this.physics.yv * this.friction;
+      this.physics.velocity.x -= this.physics.velocity.x * this.friction;
+      this.physics.yv -= this.physics.velocity.y * this.friction;
     }
   }
 }

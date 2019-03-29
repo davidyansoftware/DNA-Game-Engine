@@ -16,8 +16,8 @@ class Unit extends Dna.Component {
     if (this.keyboard.up) yv -= SPEED;
     if (this.keyboard.down) yv += SPEED;
 
-    this.physics.xv = xv;
-    this.physics.yv = yv;
+    this.physics.velocity.x = xv;
+    this.physics.velocity.y = yv;
   }
 }
 

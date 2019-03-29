@@ -14,19 +14,19 @@ class Body extends Dna.Components.Polygon {
   }
 
   update(deltaTime) {
-    this.physics.xv = 0;
-    this.physics.yv = 0;
+    this.physics.velocity.x = 0;
+    this.physics.velocity.y = 0;
     if (this.keyboard.left) {
-      this.physics.xv -= 5;
+      this.physics.velocity.x -= 5;
     }
     if (this.keyboard.right) {
-      this.physics.xv += 5;
+      this.physics.velocity.x += 5;
     }
     if (this.keyboard.up) {
-      this.physics.yv -= 5;
+      this.physics.velocity.y -= 5;
     }
     if (this.keyboard.down) {
-      this.physics.yv += 5;
+      this.physics.velocity.y += 5;
     }
 
     /*
