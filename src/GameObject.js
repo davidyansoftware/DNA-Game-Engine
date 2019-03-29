@@ -11,8 +11,8 @@ class GameObject extends Composite {
     this.dead = false;
     //this.dirty = false;
 
-    this.transform = new Transform(transform);
-    this.transform._gameObject = this;
+    this._transform = new Transform(transform);
+    this._transform._gameObject = this;
 
     this.components = [];
     for (let i = 0; i < components.length; i++) {
@@ -20,6 +20,13 @@ class GameObject extends Composite {
     }
 
     this.setParent(parent);
+  }
+
+  get transform() {
+    return this._transform;
+  }
+  get gameObject() {
+    return this;
   }
 
   // mark for destroy, to be called at end of update
