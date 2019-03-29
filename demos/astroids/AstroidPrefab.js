@@ -63,7 +63,7 @@ class AstroidPrefab extends Dna.GameObject {
     if (this.r == ASTROID_LARGE) {
       new AstroidPrefab(
         this.parent,
-        { x: this.transform.x, y: this.transform.y },
+        { x: this.transform.position.x, y: this.transform.position.y },
         this.level,
         this.shipHurtbox,
         this.astroidHurtboxes,
@@ -71,7 +71,7 @@ class AstroidPrefab extends Dna.GameObject {
       );
       new AstroidPrefab(
         this.parent,
-        { x: this.transform.x, y: this.transform.y },
+        { x: this.transform.position.x, y: this.transform.position.y },
         this.level,
         this.shipHurtbox,
         this.astroidHurtboxes,
@@ -81,7 +81,7 @@ class AstroidPrefab extends Dna.GameObject {
     } else if (this.r == ASTROID_MEDIUM) {
       new AstroidPrefab(
         this.parent,
-        { x: this.transform.x, y: this.transform.y },
+        { x: this.transform.position.x, y: this.transform.position.y },
         this.level,
         this.shipHurtbox,
         this.astroidHurtboxes,
@@ -89,7 +89,7 @@ class AstroidPrefab extends Dna.GameObject {
       );
       new AstroidPrefab(
         this.parent,
-        { x: this.transform.x, y: this.transform.y },
+        { x: this.transform.position.x, y: this.transform.position.y },
         this.level,
         this.shipHurtbox,
         this.astroidHurtboxes,

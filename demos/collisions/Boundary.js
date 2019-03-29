@@ -22,7 +22,7 @@ class Boundary extends Dna.GameObject {
       /*
       hurtbox => {
         //TODO set absolute
-        hurtbox.gameObject.transform.x =
+        hurtbox.gameObject.transform.position.x =
           this.transform.getAbsoluteCenter().x - WIDTH / 2 - hurtbox.radius;
         console.log("collision detected");
       }
@@ -41,8 +41,8 @@ let Alignments = {
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.height / 2;
-      hurtbox.gameObject.transform.y =
-        this.gameObject.transform.y + this.height / 2 + offset;
+      hurtbox.gameObject.transform.position.y =
+        this.gameObject.transform.position.y + this.height / 2 + offset;
       console.log("collision detected");
     }
   },
@@ -53,8 +53,8 @@ let Alignments = {
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.height / 2;
-      hurtbox.gameObject.transform.y =
-        this.gameObject.transform.y - this.height / 2 - offset;
+      hurtbox.gameObject.transform.position.y =
+        this.gameObject.transform.position.y - this.height / 2 - offset;
       console.log("collision detected");
       //hurtbox.gameObject.ground();
     }
@@ -66,8 +66,8 @@ let Alignments = {
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.width / 2;
-      hurtbox.gameObject.transform.x =
-        this.gameObject.transform.x + this.width / 2 + offset;
+      hurtbox.gameObject.transform.position.x =
+        this.gameObject.transform.position.x + this.width / 2 + offset;
       console.log("collision detected");
     }
   },
@@ -78,8 +78,8 @@ let Alignments = {
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.width / 2;
-      hurtbox.gameObject.transform.x =
-        this.gameObject.transform.x - this.width / 2 - offset;
+      hurtbox.gameObject.transform.position.x =
+        this.gameObject.transform.position.x - this.width / 2 - offset;
       console.log("collision detected");
     }
   }

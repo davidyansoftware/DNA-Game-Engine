@@ -49,7 +49,7 @@ function start() {
         x = Math.random() * domCanvas.width - domCanvas.width / 2;
         y = Math.random() * domCanvas.height - domCanvas.height / 2;
         //TODO should use absolute distance
-        dist = distBetweenPoints(ship.transform.x, ship.transform.y, x, y);
+        dist = distBetweenPoints(ship.transform.position.x, ship.transform.position.y, x, y);
       } while (dist < ASTROID_SIZE + ship.r);
       astroids.push(
         new AstroidPrefab(

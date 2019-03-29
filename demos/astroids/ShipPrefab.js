@@ -58,8 +58,8 @@ class ShipPrefab extends Dna.GameObject {
     let bullet = new BulletPrefab(
       this.parent,
       {
-        x: this.transform.x + (4 / 3) * SHIP_RADIUS * Math.sin(radians),
-        y: this.transform.y - (4 / 3) * SHIP_RADIUS * Math.cos(radians)
+        x: this.transform.position.x + (4 / 3) * SHIP_RADIUS * Math.sin(radians),
+        y: this.transform.position.y - (4 / 3) * SHIP_RADIUS * Math.cos(radians)
       },
       new Dna.Utilities.Radians(this.transform.rotation.radians),
       //radians,

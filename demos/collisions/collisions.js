@@ -56,35 +56,35 @@ function start() {
     onCollision: function(hurtbox) {
       //TODO these should be using absolute positions
       let xOffset = this.radius + hurtbox.width / 2;
-      let leftLimit = hurtbox.gameObject.transform.x - xOffset;
-      let rightLimit = hurtbox.gameObject.transform.x + xOffset;
+      let leftLimit = hurtbox.gameObject.transform.position.x - xOffset;
+      let rightLimit = hurtbox.gameObject.transform.position.x + xOffset;
       if (
         this.gameObject.transform.prevX <= leftLimit &&
-        this.gameObject.transform.x > leftLimit
+        this.gameObject.transform.position.x > leftLimit
       ) {
-        this.gameObject.transform.x = leftLimit;
+        this.gameObject.transform.position.x = leftLimit;
       }
       if (
         this.gameObject.transform.prevX >= rightLimit &&
-        this.gameObject.transform.x < rightLimit
+        this.gameObject.transform.position.x < rightLimit
       ) {
-        this.gameObject.transform.x = rightLimit;
+        this.gameObject.transform.position.x = rightLimit;
       }
 
       let yOffset = this.radius + hurtbox.height / 2;
-      let topLimit = hurtbox.gameObject.transform.y - yOffset;
-      let bottomLimit = hurtbox.gameObject.transform.y + yOffset;
+      let topLimit = hurtbox.gameObject.transform.position.y - yOffset;
+      let bottomLimit = hurtbox.gameObject.transform.position.y + yOffset;
       if (
         this.gameObject.transform.prevY <= topLimit &&
-        this.gameObject.transform.y > topLimit
+        this.gameObject.transform.position.y > topLimit
       ) {
-        this.gameObject.transform.y = topLimit;
+        this.gameObject.transform.position.y = topLimit;
       }
       if (
         this.gameObject.transform.prevY >= bottomLimit &&
-        this.gameObject.transform.y < bottomLimit
+        this.gameObject.transform.position.y < bottomLimit
       ) {
-        this.gameObject.transform.y = bottomLimit;
+        this.gameObject.transform.position.y = bottomLimit;
       }
     }
   });

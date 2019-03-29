@@ -8,21 +8,21 @@ class Rollover extends Dna.Component {
   update(deltaTime) {
     let canvas = this.gameObject.getCanvas();
 
-    if (this.gameObject.transform.x < -canvas.transform.width / 2 - this.r) {
-      this.gameObject.transform.x = canvas.transform.width / 2 + this.r;
+    if (this.gameObject.transform.position.x < -canvas.transform.width / 2 - this.r) {
+      this.gameObject.transform.position.x = canvas.transform.width / 2 + this.r;
     } else if (
-      this.gameObject.transform.x >
+      this.gameObject.transform.position.x >
       canvas.transform.width / 2 + this.r
     ) {
-      this.gameObject.transform.x = -canvas.transform.width / 2;
+      this.gameObject.transform.position.x = -canvas.transform.width / 2;
     }
-    if (this.gameObject.transform.y < -canvas.transform.height / 2 - this.r) {
-      this.gameObject.transform.y = canvas.transform.height / 2 + this.r;
+    if (this.gameObject.transform.position.y < -canvas.transform.height / 2 - this.r) {
+      this.gameObject.transform.position.y = canvas.transform.height / 2 + this.r;
     } else if (
-      this.gameObject.transform.y >
+      this.gameObject.transform.position.y >
       canvas.transform.height / 2 + this.r
     ) {
-      this.gameObject.transform.y = -canvas.transform.height / 2;
+      this.gameObject.transform.position.y = -canvas.transform.height / 2;
     }
   }
 }

@@ -47,8 +47,8 @@ class Hand extends Dna.Components.Polygon {
 
   reattach() {
     this.gameObject.setParent(this.body);
-    this.gameObject.transform.x = this.handOffsets.x;
-    this.gameObject.transform.y = this.handOffsets.y;
+    this.gameObject.transform.position.x = this.handOffsets.x;
+    this.gameObject.transform.position.y = this.handOffsets.y;
     this.attached = true;
     this.target = null;
     this.callback = null;
