@@ -24,7 +24,7 @@ class Acceleration extends Component {
     } else {
       //TODO this friction value is affected for side to side even for down friction
       this.physics.velocity.x -= this.physics.velocity.x * this.friction;
-      this.physics.yv -= this.physics.velocity.y * this.friction;
+      this.physics.velocity.y -= this.physics.velocity.y * this.friction;
     }
   }
 }
