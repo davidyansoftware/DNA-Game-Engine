@@ -22,11 +22,11 @@ class GameObject extends Composite {
     this.setParent(parent);
   }
 
-  get transform() {
-    return this._transform;
-  }
   get gameObject() {
     return this;
+  }
+  get transform() {
+    return this._transform;
   }
 
   // mark for destroy, to be called at end of update

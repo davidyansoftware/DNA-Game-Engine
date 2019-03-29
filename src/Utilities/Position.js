@@ -31,6 +31,10 @@ class Position {
     this.x += position.x;
     this.y += position.y;
   }
+  subtract(position) {
+    this.x -= position.x;
+    this.y -= position.y;
+  }
 
   //TODO need to check if angle is dirty too
   get x() {

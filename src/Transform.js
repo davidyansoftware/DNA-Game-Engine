@@ -39,6 +39,9 @@ class Transform {
   get gameObject() {
     return this._gameObject;
   }
+  get transform() {
+    return this;
+  }
 
   update(deltaTime) {
     //TODO also want to keep track of absolute positions here???? many extra computations per frame
@@ -47,7 +50,44 @@ class Transform {
     this.prevPosition.y = this.position.y;
   }
 
-  //TODO consolidate these to GetVectorToTransform?
+  getAbsoluteRotation() {
+    return this.gameObject.parent.transform
+      .getAbsoluteRotation()
+      .addDegrees(this.rotation.degrees);
+  }
+  setAbsoluteRotation(rotation) {
+    this.rotation = rotation.addDegrees(
+      -this.gameObject.parent.transform.getAbsoluteRotation().degrees
+    );
+  }
+
+  getAbsoluteCenter() {
+    let parentCenter = this.gameObject.parent.transform.getAbsoluteCenter();
+    let parentRotation = this.gameObject.parent.transform.getAbsoluteRotation();
+    let rad = parentRotation.radians;
+
+    let x = this.position.x * this.xScale;
+    let y = this.position.y * this.yScale;
+
+    return {
+      x: parentCenter.x + x * Math.cos(rad) - y * Math.sin(rad),
+      y: parentCenter.y + x * Math.sin(rad) + y * Math.cos(rad)
+    };
+  }
+  //TODO handle scale, reference above
+  setAbsoluteCenter(center) {
+    let parentCenter = this.gameObject.parent.transform.getAbsoluteCenter();
+    let parentRotation = this.gameObject.parent.transform.getAbsoluteRotation();
+    let rad = new Radians(-parentRotation.radians).radians; // negative to negate rotation
+
+    center.x -= parentCenter.x;
+    center.y -= parentCenter.y;
+
+    this.position.x = center.x * Math.cos(rad) - center.y * Math.sin(rad);
+    this.position.y = center.x * Math.sin(rad) + center.y * Math.cos(rad);
+  }
+
+  //TODO consolidate these to GetVectorToTransform? - will generate garbage
   getAngleToTransform(other) {
     let thisCenter = this.getAbsoluteCenter();
     let otherCenter = other.getAbsoluteCenter();
@@ -67,10 +107,15 @@ class Transform {
     );
   }
 
-  getAbsoluteRotation() {
-    return this.gameObject.parent.transform
-      .getAbsoluteRotation()
-      .addDegrees(this.rotation.degrees);
+  getAbsolutePosition(x, y) {
+    let center = this.getAbsoluteCenter();
+    let rotation = this.getAbsoluteRotation();
+    let rad = rotation.radians;
+
+    this.globalPosition.x = center.x + x * Math.cos(rad) - y * Math.sin(rad);
+    this.globalPosition.y = center.y + x * Math.sin(rad) + y * Math.cos(rad);
+
+    return this.globalPosition;
   }
 
   //TODO should use physics
@@ -90,50 +135,6 @@ class Transform {
       this.position.y += distance * -Math.cos(angle);
       return false;
     }
-  }
-
-  setAbsoluteRotation(rotation) {
-    this.rotation = rotation.addDegrees(
-      -this.gameObject.parent.transform.getAbsoluteRotation().degrees
-    );
-  }
-
-  getAbsolutePosition(x, y) {
-    let center = this.getAbsoluteCenter();
-    let rotation = this.getAbsoluteRotation();
-    let rad = rotation.radians;
-
-    this.globalPosition.x = center.x + x * Math.cos(rad) - y * Math.sin(rad);
-    this.globalPosition.y = center.y + x * Math.sin(rad) + y * Math.cos(rad);
-
-    return this.globalPosition;
-  }
-
-  getAbsoluteCenter() {
-    let parentCenter = this.gameObject.parent.transform.getAbsoluteCenter();
-    let parentRotation = this.gameObject.parent.transform.getAbsoluteRotation();
-    let rad = parentRotation.radians;
-
-    let x = this.position.x * this.xScale;
-    let y = this.position.y * this.yScale;
-
-    return {
-      x: parentCenter.x + x * Math.cos(rad) - y * Math.sin(rad),
-      y: parentCenter.y + x * Math.sin(rad) + y * Math.cos(rad)
-    };
-  }
-
-  //TODO handle scale, reference above
-  setAbsoluteCenter(center) {
-    let parentCenter = this.gameObject.parent.transform.getAbsoluteCenter();
-    let parentRotation = this.gameObject.parent.transform.getAbsoluteRotation();
-    let rad = new Radians(-parentRotation.radians).radians; // negative to negate rotation
-
-    center.x -= parentCenter.x;
-    center.y -= parentCenter.y;
-
-    this.position.x = center.x * Math.cos(rad) - center.y * Math.sin(rad);
-    this.position.y = center.x * Math.sin(rad) + center.y * Math.cos(rad);
   }
 }
 
