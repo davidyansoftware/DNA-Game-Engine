@@ -20,7 +20,7 @@ class ImageAngle extends Dna.Component {
 
     this.image.updateOptions(this.options[index]);
 
-    this.image.gameObject.transform.xScale =
+    this.image.transform.xScale =
       angle < Math.PI ? this.defaultXScale : -this.defaultXScale;
   }
 }

@@ -29,8 +29,8 @@ class Hitcircle extends HitEntity {
 
   //TODO handle rotation??
   collidingWithHitbox(hitbox) {
-    let thisCenter = this.gameObject.transform.getAbsoluteCenter();
-    let hitboxCenter = hitbox.gameObject.transform.getAbsoluteCenter();
+    let thisCenter = this.transform.getAbsoluteCenter();
+    let hitboxCenter = hitbox.transform.getAbsoluteCenter();
     if (thisCenter.x < hitboxCenter.x - hitbox.width / 2 - this.radius)
       return false;
     if (thisCenter.x > hitboxCenter.x + hitbox.width / 2 + this.radius)
@@ -44,8 +44,8 @@ class Hitcircle extends HitEntity {
   }
 
   collidingWithHitcircle(hitcircle) {
-    let thisCenter = this.gameObject.transform.getAbsoluteCenter();
-    let hitcircleCenter = hitcircle.gameObject.transform.getAbsoluteCenter();
+    let thisCenter = this.transform.getAbsoluteCenter();
+    let hitcircleCenter = hitcircle.transform.getAbsoluteCenter();
     let distanceBetween = Math.sqrt(
       Math.pow(thisCenter.x - hitcircleCenter.x, 2) +
         Math.pow(thisCenter.y - hitcircleCenter.y, 2)

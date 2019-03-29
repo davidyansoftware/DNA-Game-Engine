@@ -30,8 +30,8 @@ class Hitbox extends HitEntity {
 
   //TODO handle rotation?? use absoluteposition(x,y)
   collidingWithHitbox(hitbox) {
-    let thisCenter = this.gameObject.transform.getAbsoluteCenter();
-    let hitboxCenter = hitbox.gameObject.transform.getAbsoluteCenter();
+    let thisCenter = this.transform.getAbsoluteCenter();
+    let hitboxCenter = hitbox.transform.getAbsoluteCenter();
     if (thisCenter.x < hitboxCenter.x - hitbox.width / 2 - this.width / 2)
       return false;
     if (thisCenter.x > hitboxCenter.x + hitbox.width / 2 + this.width / 2)
@@ -45,8 +45,8 @@ class Hitbox extends HitEntity {
   }
 
   collidingWithHitcircle(hitcircle) {
-    let thisCenter = this.gameObject.transform.getAbsoluteCenter();
-    let hitcircleCenter = hitcircle.gameObject.transform.getAbsoluteCenter();
+    let thisCenter = this.transform.getAbsoluteCenter();
+    let hitcircleCenter = hitcircle.transform.getAbsoluteCenter();
     if (thisCenter.x < hitcircleCenter.x - hitcircle.radius - this.width / 2)
       return false;
     if (thisCenter.x > hitcircleCenter.x + hitcircle.radius + this.width / 2)

@@ -24,7 +24,7 @@ class Ai extends Dna.Component {
     if (this.cooldown > 0 || this.range <= 0) return false;
 
     return (
-      this.gameObject.transform.getDistanceToTransform(this.hero.transform) <=
+      this.transform.getDistanceToTransform(this.hero.transform) <=
       this.range
     );
   }

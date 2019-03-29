@@ -44,10 +44,10 @@ class Body extends Dna.Components.Polygon {
   }
 
   render(ctx) {
-    let absoluteCenter = this.gameObject.transform.getAbsoluteCenter();
+    let absoluteCenter = this.transform.getAbsoluteCenter();
     let dx = this.mouse.x - absoluteCenter.x;
     let dy = this.mouse.y - absoluteCenter.y;
-    this.gameObject.transform.rotation = new Dna.Utilities.Radians(
+    this.transform.rotation = new Dna.Utilities.Radians(
       Math.atan2(dy, dx) + Math.PI / 2
     );
 

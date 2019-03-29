@@ -8,7 +8,7 @@ class UnitAngle extends Dna.Component {
   }
 
   update(deltaTime) {
-    this.angle.radians = this.gameObject.transform.getAngleToTransform(
+    this.angle.radians = this.transform.getAngleToTransform(
       this.target.transform
     );
   }

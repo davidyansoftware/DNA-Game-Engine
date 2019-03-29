@@ -8,8 +8,8 @@ class CrosshairComponent extends Dna.Component {
   }
 
   update(deltaTime) {
-    this.gameObject.transform.position.x = this.mouse.x;
-    this.gameObject.transform.position.y = this.mouse.y;
+    this.transform.position.x = this.mouse.x;
+    this.transform.position.y = this.mouse.y;
   }
 }
 

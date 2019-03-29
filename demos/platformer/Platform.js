@@ -13,10 +13,10 @@ class Platform extends Dna.GameObject {
       hurtboxes: hurtboxes,
       onCollision: function(hurtbox) {
         let hurtboxOffset = hurtbox.radius || hurtbox.height / 2;
-        let yOffset = this.gameObject.transform.position.y - HEIGHT / 2 - hurtboxOffset;
+        let yOffset = this.transform.position.y - HEIGHT / 2 - hurtboxOffset;
         //TODO this should be less than, but is still affected by gravity????
-        if (hurtbox.gameObject.transform.prevPosition.y <= yOffset) {
-          hurtbox.gameObject.transform.position.y = yOffset;
+        if (hurtbox.transform.prevPosition.y <= yOffset) {
+          hurtbox.transform.position.y = yOffset;
           hurtbox.gameObject.ground();
         }
       },

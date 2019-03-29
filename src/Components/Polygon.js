@@ -41,23 +41,23 @@ class Polygon extends Component {
       ctx.moveTo(
         this.options.radius *
           this.vertOffset[0] *
-          Math.cos(this.gameObject.transform.rotation.degrees),
+          Math.cos(this.transform.rotation.degrees),
         this.options.radius *
           this.vertOffset[0] *
-          Math.sin(this.gameObject.transform.rotation.degrees)
+          Math.sin(this.transform.rotation.degrees)
       );
       for (let i = 1; i < this.options.vert; i++) {
         ctx.lineTo(
           this.options.radius *
             this.vertOffset[i] *
             Math.cos(
-              this.gameObject.transform.rotation.degrees +
+              this.transform.rotation.degrees +
                 (i * Math.PI * 2) / this.options.vert
             ),
           this.options.radius *
             this.vertOffset[i] *
             Math.sin(
-              this.gameObject.transform.rotation.degrees +
+              this.transform.rotation.degrees +
                 (i * Math.PI * 2) / this.options.vert
             )
         );

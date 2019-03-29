@@ -8,8 +8,8 @@ class WorldCenter extends Dna.Components.Polygon {
 
   render(ctx) {
     let absoluteCenter = this.target.transform.getAbsoluteCenter();
-    this.gameObject.transform.position.x = absoluteCenter.x;
-    this.gameObject.transform.position.y = absoluteCenter.y;
+    this.transform.position.x = absoluteCenter.x;
+    this.transform.position.y = absoluteCenter.y;
 
     super.render(ctx);
   }

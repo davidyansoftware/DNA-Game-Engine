@@ -54,35 +54,35 @@ function start() {
     onCollision: function(hurtbox) {
       //TODO these should be using absolute positions
       let xOffset = this.radius + hurtbox.width / 2;
-      let leftLimit = hurtbox.gameObject.transform.position.x - xOffset;
-      let rightLimit = hurtbox.gameObject.transform.position.x + xOffset;
+      let leftLimit = hurtbox.transform.position.x - xOffset;
+      let rightLimit = hurtbox.transform.position.x + xOffset;
       if (
-        this.gameObject.transform.prevPosition.x <= leftLimit &&
-        this.gameObject.transform.position.x > leftLimit
+        this.transform.prevPosition.x <= leftLimit &&
+        this.transform.position.x > leftLimit
       ) {
-        this.gameObject.transform.position.x = leftLimit;
+        this.transform.position.x = leftLimit;
       }
       if (
-        this.gameObject.transform.prevPosition.x >= rightLimit &&
-        this.gameObject.transform.position.x < rightLimit
+        this.transform.prevPosition.x >= rightLimit &&
+        this.transform.position.x < rightLimit
       ) {
-        this.gameObject.transform.position.x = rightLimit;
+        this.transform.position.x = rightLimit;
       }
 
       let yOffset = this.radius + hurtbox.height / 2;
-      let topLimit = hurtbox.gameObject.transform.position.y - yOffset;
-      let bottomLimit = hurtbox.gameObject.transform.position.y + yOffset;
+      let topLimit = hurtbox.transform.position.y - yOffset;
+      let bottomLimit = hurtbox.transform.position.y + yOffset;
       if (
-        this.gameObject.transform.prevPosition.y <= topLimit &&
-        this.gameObject.transform.position.y > topLimit
+        this.transform.prevPosition.y <= topLimit &&
+        this.transform.position.y > topLimit
       ) {
-        this.gameObject.transform.position.y = topLimit;
+        this.transform.position.y = topLimit;
       }
       if (
-        this.gameObject.transform.prevPosition.y >= bottomLimit &&
-        this.gameObject.transform.position.y < bottomLimit
+        this.transform.prevPosition.y >= bottomLimit &&
+        this.transform.position.y < bottomLimit
       ) {
-        this.gameObject.transform.position.y = bottomLimit;
+        this.transform.position.y = bottomLimit;
       }
     }
   });

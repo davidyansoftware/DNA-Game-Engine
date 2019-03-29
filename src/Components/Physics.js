@@ -17,7 +17,7 @@ class Physics extends Component {
   }
 
   update(deltaTime) {
-    this.gameObject.transform.position.add(this.velocity);
+    this.transform.position.add(this.velocity);
 
     //TODO do we also want to track max x or max y?
     // this wont account for boundaries or other forces

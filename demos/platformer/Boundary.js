@@ -25,8 +25,8 @@ let Alignments = {
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.height / 2;
-      hurtbox.gameObject.transform.position.y =
-        this.gameObject.transform.position.y + this.height / 2 + offset;
+      hurtbox.transform.position.y =
+        this.transform.position.y + this.height / 2 + offset;
       console.log("collision detected");
     }
   },
@@ -37,8 +37,8 @@ let Alignments = {
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.height / 2;
-      hurtbox.gameObject.transform.position.y =
-        this.gameObject.transform.position.y - this.height / 2 - offset;
+      hurtbox.transform.position.y =
+        this.transform.position.y - this.height / 2 - offset;
       hurtbox.gameObject.ground();
     },
     onCollisionExit: hurtbox => {
@@ -53,8 +53,8 @@ let Alignments = {
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.width / 2;
-      hurtbox.gameObject.transform.position.x =
-        this.gameObject.transform.position.x + this.width / 2 + offset;
+      hurtbox.transform.position.x =
+        this.transform.position.x + this.width / 2 + offset;
     }
   },
   RIGHT: {
@@ -64,8 +64,8 @@ let Alignments = {
     onCollision: function(hurtbox) {
       //TODO set absolute
       let offset = hurtbox.radius || hurtbox.width / 2;
-      hurtbox.gameObject.transform.position.x =
-        this.gameObject.transform.position.x - this.width / 2 - offset;
+      hurtbox.transform.position.x =
+        this.transform.position.x - this.width / 2 - offset;
     }
   }
 };

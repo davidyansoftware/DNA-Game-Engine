@@ -62,7 +62,7 @@ class Hero extends Dna.Component {
       this.announcer.gameObject.setActive(true);
     }
 
-    let angle = source.transform.getAngleToTransform(this.gameObject.transform);
+    let angle = source.transform.getAngleToTransform(this.transform);
 
     //TODO angle should be based on the angle the monster hit
     let knockbackPhysics = new Dna.Components.Physics({
