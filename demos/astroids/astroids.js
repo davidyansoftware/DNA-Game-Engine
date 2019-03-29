@@ -40,7 +40,7 @@ function start() {
     astroids = [];
     //astroidsTotal = (NUM_ASTROIDS + level) * 7;
     //astroidsLeft = astroidsTotal;
-    let domCanvas = canvas.getContext().canvas;
+    let domCanvas = canvas.ctx.canvas;
     let x, y;
     let dist;
 
@@ -49,7 +49,12 @@ function start() {
         x = Math.random() * domCanvas.width - domCanvas.width / 2;
         y = Math.random() * domCanvas.height - domCanvas.height / 2;
         //TODO should use absolute distance
-        dist = distBetweenPoints(ship.transform.position.x, ship.transform.position.y, x, y);
+        dist = distBetweenPoints(
+          ship.transform.position.x,
+          ship.transform.position.y,
+          x,
+          y
+        );
       } while (dist < ASTROID_SIZE + ship.r);
       astroids.push(
         new AstroidPrefab(

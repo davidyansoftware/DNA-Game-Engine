@@ -10,9 +10,7 @@ class Triangle extends Dna.Component {
     this.radius = this.size / 2;
   }
 
-  render() {
-    let ctx = this.gameObject.getContext();
-
+  render(ctx) {
     ctx.strokeStyle = this.stroke;
     ctx.lineWidth = this.size / 20;
     ctx.beginPath();

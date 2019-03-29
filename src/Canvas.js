@@ -24,10 +24,6 @@ class StaticCanvas extends Composite {
     return this;
   }
 
-  getContext() {
-    return this.ctx;
-  }
-
   //TODO this wont work when objects are added to the composites directly
   addGameObject(gameObject) {
     super.addGameObject(gameObject);
@@ -82,10 +78,6 @@ class Canvas extends Composite {
 
   getCanvas() {
     return this;
-  }
-
-  getContext() {
-    return this.ctx;
   }
 }
 

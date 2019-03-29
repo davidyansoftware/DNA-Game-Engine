@@ -98,10 +98,6 @@ class GameObject extends Composite {
   getCanvas() {
     return this.parent.getCanvas();
   }
-
-  getContext() {
-    return this.parent.getContext();
-  }
 }
 
 export { GameObject };
