@@ -9,6 +9,8 @@ class Scene {
     this.assets = assets || new Assets();
 
     this.start = start;
+
+    this.prevTime;
   }
 
   addAssets(key, asset) {
@@ -20,15 +22,29 @@ class Scene {
     this.canvases.push(canvas);
   }
 
-  //TODO handle gameloop from here
   load() {
     this.assets.load.then(() => {
       this.start();
       window.requestAnimationFrame(currTime => {
-        for (let canvas of this.canvases) {
-          canvas.gameLoop(currTime);
-        }
+        this.gameLoop(currTime);
       });
+    });
+  }
+
+  gameLoop(currTime) {
+    console.log(this);
+    if (!this.prevTime) this.prevTime = currTime;
+    let deltaTime = (currTime - this.prevTime) / 1000;
+    this.prevTime = currTime;
+
+    for (let canvas of this.canvases) {
+      canvas.clear();
+      canvas.updateAll(deltaTime);
+      canvas.renderAll(canvas.ctx);
+    }
+
+    window.requestAnimationFrame(currTime => {
+      this.gameLoop(currTime);
     });
   }
 }

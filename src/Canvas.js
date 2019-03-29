@@ -36,40 +36,14 @@ class StaticCanvas extends Composite {
 class Canvas extends Composite {
   constructor(domCanvas) {
     super();
-    //TODO probably dont need to reference game here, just handle canvases from the game itself
-    //this.game = game;
-    //this.scene = scene;
+
     this.ctx = domCanvas.getContext("2d");
 
     this.transform = new CanvasTransform(domCanvas);
-
-    //this.prevTime;
-
-    //let self = this;
-    //window.requestAnimationFrame(function(currTime) {
-    //  self.gameLoop(currTime);
-    //});
   }
 
   clear() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-  }
-
-  //TODO move this out of this class (game class?)
-  //TODO handle static canvas
-  gameLoop(currTime) {
-    if (!this.prevTime) this.prevTime = currTime;
-    let deltaTime = (currTime - this.prevTime) / 1000;
-    this.prevTime = currTime;
-
-    this.clear();
-    this.updateAll(deltaTime);
-    this.renderAll(this.ctx);
-
-    let self = this;
-    window.requestAnimationFrame(function(currTime) {
-      self.gameLoop(currTime);
-    });
   }
 
   getScene() {
