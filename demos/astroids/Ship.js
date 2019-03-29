@@ -8,16 +8,20 @@ class Ship extends Dna.Component {
 
     this.shootCooldownMax = shootCooldown;
     this.shootCooldown = 0;
+
+    this.turningAngle = new Dna.Utilities.Degrees(0);
   }
 
   update(deltaTime) {
     this.shootCooldown -= deltaTime;
 
+    this.turningAngle.degrees = TURN_SPEED * deltaTime;
+
     if (this.keyboard.left) {
-      this.shipPrefab.transform.rotation.addDegrees(-TURN_SPEED * deltaTime);
+      this.shipPrefab.transform.rotation.subtract(this.turningAngle);
     }
     if (this.keyboard.right) {
-      this.shipPrefab.transform.rotation.addDegrees(TURN_SPEED * deltaTime);
+      this.shipPrefab.transform.rotation.add(this.turningAngle);
     }
     if (this.keyboard.up) {
       this.shipPrefab.toggleThruster(true);

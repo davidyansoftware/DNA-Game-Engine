@@ -53,11 +53,11 @@ class Transform {
   getAbsoluteRotation() {
     return this.gameObject.parent.transform
       .getAbsoluteRotation()
-      .addDegrees(this.rotation.degrees);
+      .add(this.rotation);
   }
   setAbsoluteRotation(rotation) {
-    this.rotation = rotation.addDegrees(
-      -this.gameObject.parent.transform.getAbsoluteRotation().degrees
+    this.rotation = rotation.add(
+      -this.gameObject.parent.transform.getAbsoluteRotation()
     );
   }
 

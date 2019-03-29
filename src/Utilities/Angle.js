@@ -1,5 +1,3 @@
-//import { Coordinates } from "./Position";
-
 function degreesToRadians(degrees) {
   return (degrees * Math.PI) / 180;
 }
@@ -9,13 +7,6 @@ function radiansToDegrees(radians) {
 }
 
 class Angle {
-  constructor(degrees, radians) {
-    this._degrees = degrees;
-    this._radians = radians;
-
-    //TODO dirty flags
-  }
-
   get degrees() {
     return this._degrees;
   }
@@ -36,14 +27,8 @@ class Angle {
     this.radians += angle.radians;
     return this;
   }
-
-  addRadians(radians) {
-    this.radians += radians;
-    return this;
-  }
-
-  addDegrees(degrees) {
-    this.degrees += degrees;
+  subtract(angle) {
+    this.radians -= angle.radians;
     return this;
   }
 
@@ -53,15 +38,6 @@ class Angle {
     radians += Math.random() * spread.radians;
     return new Radians(radians);
   }
-
-  /*
-  getUnitCoordinates(scale = 1) {
-    return new Coordinates(
-      Math.sin(this.radians) * scale,
-      -Math.cos(this.radians) * scale
-    );
-  }
-  */
 
   static get UP() {
     return UP;
@@ -79,15 +55,15 @@ class Angle {
 
 class Degrees extends Angle {
   constructor(degrees) {
-    //return new Angle(degrees, degreesToRadians(degrees));
-    super(degrees, degreesToRadians(degrees));
+    super();
+    this.degrees = degrees;
   }
 }
 
 class Radians extends Angle {
   constructor(radians) {
-    //return new Angle(radiansToDegrees(radians), radians);
-    super(radiansToDegrees(radians), radians);
+    super();
+    this.radians = radians;
   }
 }
 
