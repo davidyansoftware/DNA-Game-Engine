@@ -106,7 +106,7 @@ let Pistol = {
   spread: new Dna.Utilities.Radians(Math.PI / 16),
   generateBullets(gun, hurtboxes) {
     new Bullet(
-      gun.getCanvas(),
+      gun.canvas,
       gun.transform.getAbsoluteCenter(),
       bullet,
       gun.angle.getNewAngle(this.spread),
@@ -186,7 +186,7 @@ let Shotgun = {
   generateBullets(gun, hurtboxes) {
     for (let i = 0; i < 4; i++) {
       new Bullet(
-        gun.getCanvas(),
+        gun.canvas,
         gun.transform.getAbsoluteCenter(),
         bullet,
         gun.angle.getNewAngle(this.spread),
@@ -269,7 +269,7 @@ let Flamethrower = {
     //let spread = new Dna.Utilities.Radians(Math.PI / 4);
     //for (let i = 0; i < 4; i++) {
     new Bullet(
-      gun.getCanvas(),
+      gun.canvas,
       gun.transform.getAbsoluteCenter(),
       new Dna.Components.Image({
         width: 13,

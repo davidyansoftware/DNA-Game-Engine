@@ -20,7 +20,7 @@ class StaticCanvas extends Composite {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
   }
 
-  getCanvas() {
+  get canvas() {
     return this;
   }
 
@@ -76,7 +76,7 @@ class Canvas extends Composite {
     return this.scene;
   }
 
-  getCanvas() {
+  get canvas() {
     return this;
   }
 }

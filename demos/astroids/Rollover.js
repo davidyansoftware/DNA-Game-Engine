@@ -6,7 +6,7 @@ class Rollover extends Dna.Component {
   }
 
   update(deltaTime) {
-    let canvas = this.gameObject.getCanvas();
+    let canvas = this.gameObject.canvas;
 
     if (this.transform.position.x < -canvas.transform.width / 2 - this.r) {
       this.transform.position.x = canvas.transform.width / 2 + this.r;

@@ -40,9 +40,13 @@ class Position {
     this.y *= scalar;
   }
 
+  get _dirtyAngle() {
+    return this._angle.radians != this._prevRadians;
+  }
+
   //TODO need to check if angle is dirty too
   get x() {
-    if (this._dirtyCoordinates || this._angle.radians != this._prevRadians) {
+    if (this._dirtyCoordinates || this._dirtyAngle) {
       recalculateCoordinates(this);
     }
     return this._x;
@@ -53,7 +57,7 @@ class Position {
   }
 
   get y() {
-    if (this._dirtyCoordinates || this._angle.radians != this._prevRadians) {
+    if (this._dirtyCoordinates || this._dirtyAngle) {
       recalculateCoordinates(this);
     }
     return this._y;
