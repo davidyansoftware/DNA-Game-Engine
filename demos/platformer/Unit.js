@@ -9,8 +9,10 @@ class Unit extends Dna.GameObject {
     this.addComponent(this.physics);
 
     this.gravity = new Dna.Components.Acceleration(this.physics, {
-      angle: Dna.Utilities.Degrees.DOWN,
-      accel: GRAVITY
+      acceleration: new Dna.Utilities.Vector(
+        Dna.Utilities.Degrees.DOWN,
+        GRAVITY
+      )
     });
     this.addComponent(this.gravity);
   }

@@ -26,8 +26,10 @@ class ShipPrefab extends Dna.GameObject {
     this.addComponent(physics);
 
     this.acceleration = new Dna.Components.Acceleration(physics, {
-      accel: SHIP_THRUST,
-      //ya: SHIP_THRUST,
+      acceleration: new Dna.Utilities.Vector(
+        Dna.Utilities.Degrees.DOWN,
+        SHIP_THRUST
+      ),
       friction: FRICTION
     });
     this.addComponent(this.acceleration);
@@ -58,7 +60,8 @@ class ShipPrefab extends Dna.GameObject {
     let bullet = new BulletPrefab(
       this.parent,
       {
-        x: this.transform.position.x + (4 / 3) * SHIP_RADIUS * Math.sin(radians),
+        x:
+          this.transform.position.x + (4 / 3) * SHIP_RADIUS * Math.sin(radians),
         y: this.transform.position.y - (4 / 3) * SHIP_RADIUS * Math.cos(radians)
       },
       new Dna.Utilities.Radians(this.transform.rotation.radians),

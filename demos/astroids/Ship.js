@@ -32,7 +32,8 @@ class Ship extends Dna.Component {
 
     if (this.shipPrefab.thrusting) {
       this.shipPrefab.acceleration.active = true;
-      this.shipPrefab.acceleration.angle = new Dna.Utilities.Radians(
+      console.log(this.shipPrefab.transform.rotation.radians);
+      this.shipPrefab.acceleration.acceleration.angle = new Dna.Utilities.Radians(
         this.shipPrefab.transform.rotation.radians
       );
     } else {
