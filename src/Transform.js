@@ -16,6 +16,8 @@ const defaults = {
 class Transform {
   //TODO setup anchors, base center and origin on these
   constructor(options = {}) {
+    //this._gameObject - set in GameObject constructor
+
     //TODO probably dont want to take in redundant params, pass position in as object
     this.position =
       options.position ||
@@ -32,6 +34,10 @@ class Transform {
 
     //TODO this is used to avoid generating garbage, should properly cache
     this.globalPosition = new Coordinates(0, 0);
+  }
+
+  get gameObject() {
+    return this._gameObject;
   }
 
   update(deltaTime) {

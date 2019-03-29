@@ -12,7 +12,7 @@ class GameObject extends Composite {
     //this.dirty = false;
 
     this.transform = new Transform(transform);
-    this.transform.gameObject = this;
+    this.transform._gameObject = this;
 
     this.components = [];
     for (let i = 0; i < components.length; i++) {
@@ -35,7 +35,7 @@ class GameObject extends Composite {
   }
 
   addComponent(component) {
-    component.gameObject = this;
+    component._gameObject = this;
     this.components.push(component);
   }
 

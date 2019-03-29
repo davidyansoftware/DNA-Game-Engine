@@ -30,9 +30,6 @@ class Polygon extends Component {
   }
 
   render(ctx) {
-    //TODO cache with dirty flag
-    //let ctx = this.gameObject.getContext();
-
     ctx.save();
     ctx.strokeStyle = this.options.strokeStyle;
     ctx.fillStyle = this.options.fillStyle;

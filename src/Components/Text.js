@@ -21,8 +21,6 @@ class Text extends Component {
   }
 
   render(ctx) {
-    //let ctx = this.gameObject.getContext();
-
     ctx.save();
     ctx.font = this.font;
     ctx.fillStyle = this.fillStyle;
