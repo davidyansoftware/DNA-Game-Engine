@@ -4,7 +4,7 @@ function updateContext(drawSettings) {
   let context = drawSettings.context;
   context.save();
 
-  context.translate(drawSettings.x, drawSettings.y);
+  context.translate(drawSettings.position.x, drawSettings.position.y);
   context.rotate(drawSettings.rotation.radians);
   context.scale(drawSettings.xScale, drawSettings.yScale);
 }
@@ -16,6 +16,8 @@ function restoreContext(drawSettings) {
 class Composite {
   constructor() {
     this.gameObjects = [];
+
+    this._currDraw = {};
   }
 
   //TODO these shouldn't be exposed to user, use setParent
@@ -55,25 +57,20 @@ class Composite {
   */
 
   renderAll(context) {
-    let currDraw = {
-      context: context,
-
-      x: this.transform.position.x,
-      y: this.transform.position.y,
-
-      rotation: this.transform.rotation || new Degrees(0),
-
-      xScale: this.transform.xScale || 1,
-      yScale: this.transform.yScale || 1
-    };
-    updateContext(currDraw);
+    //TODO since all of these are reference types now, could probably just set once and forget
+    this._currDraw.context = context;
+    this._currDraw.position = this.transform.position;
+    this._currDraw.rotation = this.transform.rotation || Degrees.ZERO;
+    this._currDraw.xScale = this.transform.xScale || 1;
+    this._currDraw.yScale = this.transform.yScale || 1;
+    updateContext(this._currDraw);
 
     this.render(context);
     this.gameObjects.forEach(function(gameObject) {
       gameObject.renderAll(context);
     });
 
-    restoreContext(currDraw);
+    restoreContext(this._currDraw);
   }
 }
 

@@ -26,7 +26,6 @@ class Scene {
   }
 
   gameLoop(currTime) {
-    console.log(this);
     if (!this.prevTime) this.prevTime = currTime;
     let deltaTime = (currTime - this.prevTime) / 1000;
     this.prevTime = currTime;

@@ -39,6 +39,9 @@ class Angle {
     return new Radians(radians);
   }
 
+  static get ZERO() {
+    return ZERO;
+  }
   static get UP() {
     return UP;
   }
@@ -67,6 +70,8 @@ class Radians extends Angle {
   }
 }
 
+//TODO these are mutable
+const ZERO = new Radians(0);
 const UP = new Radians(0);
 const LEFT = new Radians(Math.PI / 2);
 const DOWN = new Radians(Math.PI);
