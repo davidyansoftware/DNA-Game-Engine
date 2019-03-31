@@ -10,7 +10,8 @@
     "platformer": "parcel demos/platformer/platformer.html --out-dir local",
     "astroids": "parcel demos/astroids/astroids.html --out-dir local",
     "collisions": "parcel demos/collisions/collisions.html --out-dir local",
-    "hitboxing": "parcel demos/hitboxing/hitboxing.html --out-dir local"
+    "hitboxing": "parcel demos/hitboxing/hitboxing.html --out-dir local",
+    "camera": "parcel demos/camera/camera.html --out-dir local"
   },
   "author": "David Yan",
   "license": "ISC",

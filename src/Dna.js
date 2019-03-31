@@ -14,6 +14,7 @@ import { Hitbox } from "./Components/Hitbox";
 import { Text } from "./Components/Text";
 import { Audio } from "./Components/Audio";
 import { Slider } from "./Components/Slider";
+import { Camera } from "./Components/Camera";
 
 //import { Vector } from "./Utilities/Vector";
 //import { Coordinates } from "./Utilities/Coordinates";
@@ -47,7 +48,8 @@ let Dna = {
     Hitbox: Hitbox,
     Text: Text,
     Audio: Audio,
-    Slider: Slider
+    Slider: Slider,
+    Camera: Camera
   },
   Utilities: {
     Degrees: Degrees,
