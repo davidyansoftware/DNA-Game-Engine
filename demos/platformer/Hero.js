@@ -171,9 +171,9 @@ class HeroComponent extends Dna.Component {
     this.physics.velocity.x = x * SPEED;
 
     if (x < 0) {
-      this.transform.xScale = -1;
+      this.transform.scale.x = -1;
     } else if (x > 0) {
-      this.transform.xScale = 1;
+      this.transform.scale.x = 1;
     }
 
     if (!this.gameObject.attacking && this.gameObject.grounded) {

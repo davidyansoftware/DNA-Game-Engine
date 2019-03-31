@@ -44,7 +44,7 @@ class Facing extends Dna.Component {
   update() {
     //console.log(this.transform);
     let distance = this.transform.position.x - this.hero.transform.position.x;
-    this.imageObject.transform.xScale = distance > 0 ? -1 : 1;
+    this.imageObject.transform.scale.x = distance > 0 ? -1 : 1;
   }
 }
 

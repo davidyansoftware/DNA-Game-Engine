@@ -20,7 +20,7 @@ class ImageAngle extends Dna.Component {
 
     this.image.updateOptions(this.options[index]);
 
-    this.image.transform.xScale =
+    this.image.transform.scale.x =
       angle < Math.PI ? this.defaultXScale : -this.defaultXScale;
   }
 }

@@ -27,8 +27,14 @@ class Transform {
 
     this.rotation = options.rotation || new Radians(0);
 
-    this.xScale = options.xScale || defaults.xScale;
-    this.yScale = options.yScale || defaults.yScale;
+    //this.xScale = options.xScale || defaults.xScale;
+    //this.yScale = options.yScale || defaults.yScale;
+    this.scale =
+      options.scale ||
+      new Coordinates(
+        options.xScale || defaults.xScale,
+        options.yScale || defaults.yScale
+      );
 
     this.prevPosition = new Coordinates(this.position.x, this.position.y);
 
@@ -66,8 +72,8 @@ class Transform {
     let parentRotation = this.gameObject.parent.transform.getAbsoluteRotation();
     let rad = parentRotation.radians;
 
-    let x = this.position.x * this.xScale;
-    let y = this.position.y * this.yScale;
+    let x = this.position.x * this.scale.x;
+    let y = this.position.y * this.scale.y;
 
     return {
       x: parentCenter.x + x * Math.cos(rad) - y * Math.sin(rad),

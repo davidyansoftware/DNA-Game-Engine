@@ -6,7 +6,7 @@ function updateContext(drawSettings) {
 
   context.translate(drawSettings.position.x, drawSettings.position.y);
   context.rotate(drawSettings.rotation.radians);
-  context.scale(drawSettings.xScale, drawSettings.yScale);
+  context.scale(drawSettings.scale.x, drawSettings.scale.y);
 }
 
 function restoreContext(drawSettings) {
@@ -60,9 +60,8 @@ class Composite {
     //TODO since all of these are reference types now, could probably just set once and forget
     this._currDraw.context = context;
     this._currDraw.position = this.transform.position;
-    this._currDraw.rotation = this.transform.rotation || Degrees.ZERO;
-    this._currDraw.xScale = this.transform.xScale || 1;
-    this._currDraw.yScale = this.transform.yScale || 1;
+    this._currDraw.rotation = this.transform.rotation;
+    this._currDraw.scale = this.transform.scale;
     updateContext(this._currDraw);
 
     this.render(context);
