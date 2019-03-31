@@ -91,8 +91,8 @@ class GameObject extends Composite {
     }
   }
 
-  getScene() {
-    return this.parent.getScene();
+  get scene() {
+    return this.parent.scene;
   }
 
   get canvas() {

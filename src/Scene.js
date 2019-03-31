@@ -1,24 +1,18 @@
 class Scene {
-  constructor(canvases, assets, start) {
-    //this.canvases = canvases || [];
+  constructor(canvases, assets = new Assets(), start = () => {}) {
     this.canvases = [];
     for (let canvas of canvases) {
       this.addCanvas(canvas);
     }
 
-    this.assets = assets || new Assets();
-
+    this.assets = assets;
     this.start = start;
 
     this.prevTime;
   }
 
-  addAssets(key, asset) {
-    this.assets.key = asset;
-  }
-
   addCanvas(canvas) {
-    canvas.scene = this;
+    canvas._scene = this;
     this.canvases.push(canvas);
   }
 

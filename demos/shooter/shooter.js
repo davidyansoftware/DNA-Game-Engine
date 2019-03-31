@@ -15,14 +15,14 @@ import rSprite from "./assets/controls/r.png";
 import mouseSprite from "./assets/controls/mouse.png";
 import leftClickSprite from "./assets/controls/leftclick.png";
 
-let floorImage = new Dna.Asset.Image(tileSet);
+let tileSetAsset = new Dna.Asset.Image(tileSet);
 let background = new Dna.StaticCanvas(
   document.getElementById("background"),
-  [floorImage.load],
+  tileSetAsset,
   background => {
     new Dna.GameObject(background, {}, [
       new Dna.Components.Image({
-        image: floorImage,
+        image: tileSetAsset,
         type: Dna.Components.Image.types.randomTiled,
         width: 40,
         height: 8,
@@ -44,18 +44,19 @@ let tabImage = new Dna.Asset.Image(tabSprite);
 let rImage = new Dna.Asset.Image(rSprite);
 let mouseImage = new Dna.Asset.Image(mouseSprite);
 let leftClickImage = new Dna.Asset.Image(leftClickSprite);
+let controlAssets = new Dna.Assets({
+  wImage: wImage,
+  aImage: aImage,
+  sImage: sImage,
+  dImage: dImage,
+  tabImage: tabImage,
+  rImage: rImage,
+  mouseImage: mouseImage,
+  leftClickImage: leftClickImage
+});
 let foreground = new Dna.StaticCanvas(
   document.getElementById("foreground"),
-  [
-    wImage.load,
-    aImage.load,
-    sImage.load,
-    dImage.load,
-    tabImage.load,
-    rImage.load,
-    mouseImage.load,
-    leftClickImage.load
-  ],
+  controlAssets,
   foreground => {
     console.log(wImage);
 
