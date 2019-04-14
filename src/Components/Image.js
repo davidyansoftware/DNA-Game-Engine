@@ -34,6 +34,7 @@ class Image extends Component {
     super();
 
     this.active = true;
+    this.play = true;
 
     this.image = new window.Image();
 
@@ -70,6 +71,7 @@ class Image extends Component {
   updateOptions(options = {}) {
     //TODO generalize this to a property of component? distinguish updates from composite
     if (options.active !== undefined) this.active = options.active;
+    if (options.play !== undefined) this.play = options.play;
 
     // checking for undefined to account for 0 values
     if (options.image !== undefined) this.image = options.image;
@@ -106,6 +108,8 @@ class Image extends Component {
   }
 
   update(deltaTime) {
+    if (!this.play) return;
+
     this.tickCount++;
     if (this.tickCount > this.ticksPerFrame) {
       this.tickCount = 0;

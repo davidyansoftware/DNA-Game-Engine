@@ -96,7 +96,12 @@ class Hero extends Dna.Component {
     //TODO control this from gun class, but also disable when dead
     if (this.mouse.leftClick) this.gun.gun.shoot();
 
-    if (this.coordinates.magnitude > 0) this.coordinates.magnitude = SPEED;
+    if (this.coordinates.magnitude > 0) {
+      this.coordinates.magnitude = SPEED;
+      this.image.play = true;
+    } else {
+      this.image.play = false;
+    }
     this.physics.velocity.x = this.coordinates.x;
     this.physics.velocity.y = this.coordinates.y;
 
@@ -104,11 +109,12 @@ class Hero extends Dna.Component {
     this.emptyCooldown -= deltaTime;
     this.invulnerable -= deltaTime;
 
+    //TODO use enable/disable for this?
     if (this.invulnerable > 0) {
       let show = this.invulnerable % 0.2 > 0.1;
-      this.image.active = show;
+      this.image.gameObject.active = show;
     } else {
-      this.image.active = true;
+      this.image.gameObject.active = true;
     }
   }
 

@@ -77,7 +77,7 @@ class HeroPrefab extends Dna.GameObject {
 
     let image = new Dna.Components.Image(hero_default);
     image.updateOptions(heroDown);
-    let heroImage = new Dna.GameObject(this, {}, [image]);
+    new Dna.GameObject(this, {}, [image]);
 
     let reloadingText = new Dna.GameObject(this, { y: -20 }, [
       new Dna.Components.Text({ text: "RELOADING" })
@@ -113,7 +113,7 @@ class HeroPrefab extends Dna.GameObject {
     this.addComponent(audio);
 
     this.unit = new Hero(
-      heroImage,
+      image,
       announcer,
       hpBar,
       mouse,
