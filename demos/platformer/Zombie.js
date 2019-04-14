@@ -10,8 +10,8 @@ let zombieAssets = new Dna.Assets({
   walk: girlWalkImage
 });
 
-const WIDTH = 521 / 6;
-const HEIGHT = 576 / 6;
+const WIDTH = 521 / 12;
+const HEIGHT = 576 / 12;
 
 const ZOMBIE_DEFAULT = {
   type: Dna.Components.Image.types.stretched,
