@@ -1,11 +1,11 @@
 import { Composite } from "./Composite";
-import { CanvasTransform } from "./Transform";
+import { SceneTransform } from "./Transform";
 
 class Scene extends Composite {
   constructor(canvases, assets = new Assets(), start = () => {}) {
     super();
 
-    this.transform = new CanvasTransform();
+    this.transform = new SceneTransform();
 
     this.canvases = [];
     for (let canvas of canvases) {

@@ -148,11 +148,29 @@ class CanvasTransform extends Transform {
   constructor(domCanvas) {
     super();
 
-    //this.width = domCanvas.width;
-    //this.height = domCanvas.height;
+    this.width = domCanvas.width;
+    this.height = domCanvas.height;
 
-    //this.position.x = this.width / 2;
-    //this.position.y = this.height / 2;
+    this.position.x = this.width / 2;
+    this.position.y = this.height / 2;
+  }
+
+  //TODO return this as a const position
+  getAbsoluteCenter() {
+    return {
+      x: 0,
+      y: 0
+    };
+  }
+
+  getAbsoluteRotation() {
+    return new Radians(0);
+  }
+}
+
+class SceneTransform extends Transform {
+  constructor() {
+    super();
   }
 
   getAbsoluteCenter() {
@@ -167,4 +185,4 @@ class CanvasTransform extends Transform {
   }
 }
 
-export { Transform, CanvasTransform };
+export { Transform, CanvasTransform, SceneTransform };
