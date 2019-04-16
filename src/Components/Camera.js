@@ -6,6 +6,7 @@ function reverseContext(drawSettings) {
   let context = drawSettings.context;
   context.save();
 
+  context.translate(context.canvas.width / 2, context.canvas.height / 2);
   context.translate(-drawSettings.position.x, -drawSettings.position.y);
   context.rotate(-drawSettings.rotation.radians);
   context.scale(1 / drawSettings.scale.x, 1 / drawSettings.scale.y);
@@ -36,7 +37,6 @@ class Camera extends Component {
     this._currDraw.scale = this.transform.scale;
     reverseContext(this._currDraw);
 
-    //TODO shouldn't render this, but some "root?"
     this.root.renderAll(this.ctx);
 
     restoreContext(this._currDraw);

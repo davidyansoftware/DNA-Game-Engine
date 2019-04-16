@@ -1,5 +1,12 @@
-class Scene {
+import { Composite } from "./Composite";
+import { CanvasTransform } from "./Transform";
+
+class Scene extends Composite {
   constructor(canvases, assets = new Assets(), start = () => {}) {
+    super();
+
+    this.transform = new CanvasTransform();
+
     this.canvases = [];
     for (let canvas of canvases) {
       this.addCanvas(canvas);
@@ -35,6 +42,8 @@ class Scene {
       canvas.updateAll(deltaTime);
       canvas.renderAll(canvas.ctx);
     }
+
+    this.updateAll(deltaTime);
 
     window.requestAnimationFrame(currTime => {
       this.gameLoop(currTime);

@@ -148,11 +148,11 @@ class CanvasTransform extends Transform {
   constructor(domCanvas) {
     super();
 
-    this.width = domCanvas.width;
-    this.height = domCanvas.height;
+    //this.width = domCanvas.width;
+    //this.height = domCanvas.height;
 
-    this.position.x = this.width / 2;
-    this.position.y = this.height / 2;
+    //this.position.x = this.width / 2;
+    //this.position.y = this.height / 2;
   }
 
   getAbsoluteCenter() {

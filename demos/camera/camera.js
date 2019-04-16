@@ -1,6 +1,7 @@
 let domCanvas = document.getElementById("canvas");
 let canvas = new Dna.Canvas(domCanvas);
 
+//TODO remove dependence on otehr canvas
 let realCanvas = document.getElementById("realcanvas");
 
 const SPEED = 5;
@@ -32,21 +33,22 @@ class Controls extends Dna.Component {
   }
 }
 
+//TODO make scene not depend on "canvas" component, just composite gameobjects
+let scene = new Dna.Scene([], undefined, start);
+scene.load();
+
 function start() {
-  new Dna.GameObject(canvas, {}, [
+  new Dna.GameObject(scene, {}, [
     new Dna.Components.Text({ text: "Hello world!" })
   ]);
 
   let physics = new Dna.Components.Physics();
-  new Dna.GameObject(canvas, {}, [
+  new Dna.GameObject(scene, {}, [
     new Dna.Components.Camera({
-      root: canvas,
+      root: scene,
       domCanvas: realCanvas
     }),
     physics,
     new Controls(physics)
   ]);
 }
-
-let scene = new Dna.Scene([canvas], undefined, start);
-scene.load();
