@@ -45,8 +45,8 @@ class Body extends Dna.Components.Polygon {
 
   render(ctx) {
     let absoluteCenter = this.transform.getAbsoluteCenter();
-    let dx = this.mouse.x - absoluteCenter.x;
-    let dy = this.mouse.y - absoluteCenter.y;
+    let dx = this.mouse.position.x - absoluteCenter.x;
+    let dy = this.mouse.position.y - absoluteCenter.y;
     this.transform.rotation = new Dna.Utilities.Radians(
       Math.atan2(dy, dx) + Math.PI / 2
     );

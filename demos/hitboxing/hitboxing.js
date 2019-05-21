@@ -16,10 +16,10 @@ function start() {
   let keyboard = new Dna.Input.Keyboard(input);
 
   function onLeftClick(mouse) {
-    player.leftHand.moveTo(mouse.x, mouse.y);
+    player.leftHand.moveTo(mouse.position.x, mouse.position.y);
   }
   function onRightClick(mouse) {
-    player.rightHand.moveTo(mouse.x, mouse.y);
+    player.rightHand.moveTo(mouse.position.x, mouse.position.y);
   }
   let mouse = new Dna.Input.Mouse(canvas, onLeftClick, onRightClick);
 
