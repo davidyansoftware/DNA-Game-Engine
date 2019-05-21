@@ -1,6 +1,6 @@
-import { HitEntity } from "./HitEntity";
+import { Hitentity } from "./Hitentity";
 
-class Hitbox extends HitEntity {
+class Hitbox extends Hitentity {
   constructor(options) {
     super(options);
 

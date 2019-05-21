@@ -7,18 +7,19 @@ const defaults = {
   depth: 0,
 
   //TODO having a default as a reference object is problematic
+  //TODO can use getter as part of object? (return new Degrees(0));
   //rotation: new Degrees(0),
 
   xScale: 1,
   yScale: 1
 };
 
+//TODO can extend to incorporate shape? will need to check valid shapes within components
 class Transform {
   //TODO setup anchors, base center and origin on these
   constructor(options = {}) {
     //this._gameObject - set in GameObject constructor
 
-    //TODO probably dont want to take in redundant params, pass position in as object
     this.position =
       options.position ||
       new Coordinates(options.x || defaults.x, options.y || defaults.y);
@@ -27,8 +28,6 @@ class Transform {
 
     this.rotation = options.rotation || new Radians(0);
 
-    //this.xScale = options.xScale || defaults.xScale;
-    //this.yScale = options.yScale || defaults.yScale;
     this.scale =
       options.scale ||
       new Coordinates(
@@ -84,7 +83,7 @@ class Transform {
   setAbsoluteCenter(center) {
     let parentCenter = this.gameObject.parent.transform.getAbsoluteCenter();
     let parentRotation = this.gameObject.parent.transform.getAbsoluteRotation();
-    let rad = new Radians(-parentRotation.radians).radians; // negative to negate rotation
+    let rad = -parentRotation.radians; // negative to negate rotation
 
     center.x -= parentCenter.x;
     center.y -= parentCenter.y;

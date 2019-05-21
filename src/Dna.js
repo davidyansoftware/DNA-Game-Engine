@@ -11,6 +11,7 @@ import { Physics } from "./Components/Physics";
 import { Acceleration } from "./Components/Acceleration";
 import { Hitcircle } from "./Components/Hitcircle";
 import { Hitbox } from "./Components/Hitbox";
+import { Hitpoint } from "./Components/Hitpoint";
 import { Text } from "./Components/Text";
 import { Audio } from "./Components/Audio";
 import { Slider } from "./Components/Slider";
@@ -46,6 +47,7 @@ let Dna = {
     Acceleration: Acceleration,
     Hitcircle: Hitcircle,
     Hitbox: Hitbox,
+    Hitpoint: Hitpoint,
     Text: Text,
     Audio: Audio,
     Slider: Slider,

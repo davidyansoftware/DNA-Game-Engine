@@ -1,6 +1,6 @@
 import { Component } from "../Component";
 
-class HitEntity extends Component {
+class Hitentity extends Component {
   constructor(options) {
     super();
 
@@ -26,4 +26,4 @@ class HitEntity extends Component {
   }
 }
 
-export { HitEntity };
+export { Hitentity };

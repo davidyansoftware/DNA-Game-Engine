@@ -44,7 +44,6 @@ class Position {
     return this._angle.radians != this._prevRadians;
   }
 
-  //TODO need to check if angle is dirty too
   get x() {
     if (this._dirtyCoordinates || this._dirtyAngle) {
       recalculateCoordinates(this);
