@@ -18,7 +18,6 @@ class Keyboard {
         event.preventDefault();
         if (event.repeat) return;
         this.activeInputs[this.registeredInputs[event.keyCode]] = true;
-        //handler(this.activeInputs);
       }
       if (this.onKeyDown[event.keyCode]) {
         event.preventDefault();
@@ -30,7 +29,6 @@ class Keyboard {
       if (this.registeredInputs[event.keyCode]) {
         event.preventDefault();
         this.activeInputs[this.registeredInputs[event.keyCode]] = false;
-        //handler(this.activeInputs);
       }
       if (this.onKeyUp[event.keyCode]) {
         event.preventDefault();
@@ -38,8 +36,6 @@ class Keyboard {
       }
     });
 
-    //console.log(this.registeredInputs);
-    //console.log(this.activeInputs);
     return this.activeInputs;
   }
 

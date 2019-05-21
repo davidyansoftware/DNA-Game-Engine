@@ -24,7 +24,7 @@ class Physics extends Component {
     this.transform.position.add(this.velocity);
 
     //TODO do we also want to track max x or max y?
-    // this wont account for boundaries or other forces
+    // this wont account for boundaries or other forces, may want to reference prev position in transform
     this.distanceTraveled += this.velocity.magnitude;
     if (this.distanceTraveled >= this.maxDistance) {
       this.callback();

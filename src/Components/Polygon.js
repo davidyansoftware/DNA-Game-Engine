@@ -10,8 +10,6 @@ class Polygon extends Component {
   }
 
   updateOptions(opts) {
-    //TODO strokestyle
-
     opts.radius = opts.radius || 10;
     opts.vert = opts.vert || 0;
     opts.jaggedness = opts.jaggedness || 0;

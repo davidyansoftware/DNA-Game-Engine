@@ -45,6 +45,7 @@ class Scene extends Composite {
 
     this.updateAll(deltaTime);
 
+    //TODO toggle random sleep here to simulate bad hardware
     window.requestAnimationFrame(currTime => {
       this.gameLoop(currTime);
     });

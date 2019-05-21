@@ -15,10 +15,12 @@ class Acceleration extends Component {
       options.acceleration ||
       new Vector(options.angle || new Degrees(0), options.accel || 0);
 
-    this._scaledAcceleration = new Vector(new Degrees(0), 0);
+    this._scaledAcceleration = new Vector(
+      this.acceleration.angle,
+      this.acceleration.magnitude
+    );
   }
 
-  //TODO this needs to scale with deltaTime
   update(deltaTime) {
     if (this.active) {
       //TODO find a way to set equal

@@ -13,7 +13,7 @@ class Canvas extends Component {
       options.maxFrameRate !== undefined ? options.maxFrameRate : -1;
   }
 
-  update() {
+  update(deltaTime) {
     //TODO need to pass this in
     //TODO may want to only renderall children
     this.gameObject.renderAll();
