@@ -7,6 +7,8 @@ class Physics extends Component {
 
     this.velocity = options.velocity || new Coordinates(0, 0);
 
+    this.drag = options.drag || 0;
+
     this.distanceTraveled = 0;
     this.maxDistance = options.maxDistance || Infinity;
     this.callback =
@@ -17,6 +19,8 @@ class Physics extends Component {
   }
 
   update(deltaTime) {
+    this.velocity.scale(1 - this.drag * deltaTime);
+
     this.transform.position.add(this.velocity);
 
     //TODO do we also want to track max x or max y?

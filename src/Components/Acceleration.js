@@ -14,14 +14,12 @@ class Acceleration extends Component {
     this.acceleration =
       options.acceleration ||
       new Vector(options.angle || new Degrees(0), options.accel || 0);
-    this.drag = options.drag || 0;
 
     this._scaledAcceleration = new Vector(new Degrees(0), 0);
   }
 
   //TODO this needs to scale with deltaTime
   update(deltaTime) {
-    console.log(deltaTime);
     if (this.active) {
       //TODO find a way to set equal
       this._scaledAcceleration.angle = this.acceleration.angle;
@@ -29,7 +27,6 @@ class Acceleration extends Component {
       this._scaledAcceleration.scale(deltaTime);
       this.physics.velocity.add(this._scaledAcceleration);
     }
-    this.physics.velocity.scale(1 - this.drag * deltaTime);
   }
 }
 
