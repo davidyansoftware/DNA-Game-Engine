@@ -3,7 +3,7 @@ import { Vector } from "../Utilities/Position";
 import { Degrees } from "../Utilities/Angle";
 
 //TODO could be a subcomponent of physics??
-//TODO could also be handled as a position within physics
+//TODO could also be handled as a position within physics, but may want multiple sources of acceleration (ex. movement + gravity)
 class Acceleration extends Component {
   constructor(physics, options = {}) {
     super();
@@ -14,16 +14,14 @@ class Acceleration extends Component {
     this.acceleration =
       options.acceleration ||
       new Vector(options.angle || new Degrees(0), options.accel || 0);
-    //TODO rename to drag
-    this.friction = options.friction || 0;
+    this.drag = options.drag || 0;
   }
 
   update(deltaTime) {
     if (this.active) {
       this.physics.velocity.add(this.acceleration);
-    } else {
-      this.physics.velocity.scale(1 - this.friction);
     }
+    this.physics.velocity.scale(1 - this.drag);
   }
 }
 

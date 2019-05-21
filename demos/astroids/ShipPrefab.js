@@ -5,7 +5,7 @@ import { BulletPrefab } from "./BulletPrefab";
 
 const SHIP_COLOR = "black";
 const SHIP_SIZE = 30;
-const FRICTION = 0.01;
+const SHIP_DRAG = 0.01;
 const TURN_SPEED = 360; // degrees per second
 const SHIP_RADIUS = SHIP_SIZE / 2;
 const SHIP_THRUST = 0.1;
@@ -30,7 +30,7 @@ class ShipPrefab extends Dna.GameObject {
         Dna.Utilities.Degrees.DOWN,
         SHIP_THRUST
       ),
-      friction: FRICTION
+      drag: SHIP_DRAG
     });
     this.addComponent(this.acceleration);
 
