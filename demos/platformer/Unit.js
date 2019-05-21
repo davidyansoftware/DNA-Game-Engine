@@ -1,4 +1,4 @@
-const GRAVITY = 0.5;
+const GRAVITY = 25;
 
 // these function are handled as part of the game object for easy access from boundary onCollisions. May want to refactor
 class Unit extends Dna.GameObject {
