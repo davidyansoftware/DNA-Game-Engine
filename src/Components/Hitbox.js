@@ -58,6 +58,23 @@ class Hitbox extends HitEntity {
 
     return true;
   }
+
+  collidingWithHitpoint(hitpoint) {
+    let thisCenter = this.transform.getAbsoluteCenter();
+    let hitpointCenter = hitpoint.transform.getAbsoluteCenter();
+
+    let topBound = thisCenter.y + this.height / 2;
+    if (hitpointCenter.y > topBound) return false;
+    let bottomBound = thisCenter.y - this.height / 2;
+    if (hitpointCenter.y > bottomBound) return false;
+
+    let leftBound = thisCenter.x - this.width / 2;
+    if (hitpointCenter.x < leftBound) return false;
+    let rightBound = thisCenter.x + this.width / 2;
+    if (hitpointCenter.x > rightBound) return false;
+
+    return true;
+  }
 }
 
 export { Hitbox };

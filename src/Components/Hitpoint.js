@@ -1,10 +1,10 @@
 import { HitEntity } from "./HitEntity";
 
-class Hitcircle extends HitEntity {
+class Hitpoint extends HitEntity {
   constructor(options) {
     super(options);
 
-    this.radius = options.radius || 10;
+    // depends on transform for positional information
   }
 
   update(deltaTime) {
@@ -12,7 +12,7 @@ class Hitcircle extends HitEntity {
     for (let i = 0; i < num; i++) {
       let hurtbox = this.hurtboxes[i];
       let prevColliding = this.collidingWith[hurtbox];
-      if (hurtbox.collidingWithHitcircle(this)) {
+      if (hurtbox.collidingWithHitpoint(this)) {
         if (!prevColliding) {
           this.collidingWith[hurtbox] = true;
           this.onCollisionEnter(hurtbox);
@@ -28,17 +28,20 @@ class Hitcircle extends HitEntity {
   }
 
   //TODO handle rotation??
+  //TODO double check boundaries touching
   collidingWithHitbox(hitbox) {
     let thisCenter = this.transform.getAbsoluteCenter();
     let hitboxCenter = hitbox.transform.getAbsoluteCenter();
-    if (thisCenter.x < hitboxCenter.x - hitbox.width / 2 - this.radius)
-      return false;
-    if (thisCenter.x > hitboxCenter.x + hitbox.width / 2 + this.radius)
-      return false;
-    if (thisCenter.y < hitboxCenter.y - hitbox.height / 2 - this.radius)
-      return false;
-    if (thisCenter.y > hitboxCenter.y + hitbox.height / 2 + this.radius)
-      return false;
+
+    let topBound = hitboxCenter.y + hitbox.height / 2;
+    if (thisCenter.y > topBound) return false;
+    let bottomBound = hitboxCenter.y - hitbox.height / 2;
+    if (thisCenter.y < bottomBound) return false;
+
+    let leftBound = hitboxCenter.x - hitbox.width / 2;
+    if (thisCenter.x < leftBound) return false;
+    let rightBound = hitboxCenter.x + hitbox.width / 2;
+    if (thisCenter.x > rightBound) return false;
 
     return true;
   }
@@ -50,17 +53,13 @@ class Hitcircle extends HitEntity {
       Math.pow(thisCenter.x - hitcircleCenter.x, 2) +
         Math.pow(thisCenter.y - hitcircleCenter.y, 2)
     );
-    return distanceBetween < this.radius + hitcircle.radius;
+    return distanceBetween < hitcircle.radius;
   }
 
   collidingWithHitpoint(hitpoint) {
-    let thisCenter = this.transform.getAbsoluteCenter();
     let hitpointCenter = hitpoint.transform.getAbsoluteCenter();
-    let distanceBetween = Math.sqrt(
-      Math.pow(thisCenter.x - hitpointCenter.x, 2) +
-        Math.pow(thisCenter.y - hitpointCenter.y, 2)
-    );
-    return distanceBetween < this.radius;
+    let thisCenter = this.transform.getAbsoluteCenter();
+    return thisCenter.x == hitpointCenter.x && thisCenter.y == hitpointCenter.y;
   }
 }
 
